@@ -1,14 +1,5 @@
-let canvas;
-let ctx;
-
-// Estado del juego
-let eddie = 0;
-let subroutines = 0;
-let daemons = 0;
-let data = 0;
-let netrunners = 0;
-let implants = 0;
-let engrams = 0;
+// Recursos del juego
+export const resource = { eddie: 0, subroutines: 0, daemons: 0, data: 0, netrunners: 0, implants: 0, engrams: 0 };
 
 let enableBuilding = false;
 
@@ -30,12 +21,6 @@ window.onload = function() {
     document.getElementById('resourcesBtn').addEventListener('click', () => {
         window.location.href = "./resources.html";
         // window.location.replace("./resources.html");
-    });
-
-    document.getElementById('test').addEventListener('click', () => {
-        canvas = createCanvas(250, 250, "testCanvas", document.getElementById('canvasPanel'));
-        ctx = canvas.getContext("2d");
-        ctx.fillRect(50, 50, 100, 100);
     });
     
     /*
@@ -68,34 +53,35 @@ window.onload = function() {
 
 // Funciones de actualización de UI
 function updateUI() {
-    document.getElementById('eddie').textContent = eddie;
+    document.getElementById('eddie').textContent = resource.eddie;
     if (document.getElementById('subroutines') !== null)
-        document.getElementById('subroutines').textContent = subroutines;
+        document.getElementById('subroutines').textContent = resource.subroutines;
     if (document.getElementById('daemons') !== null)
-        document.getElementById('daemons').textContent = daemons;
+        document.getElementById('daemons').textContent = resource.daemons;
     if (document.getElementById('data') !== null)
-        document.getElementById('data').textContent = data;
+        document.getElementById('data').textContent = resource.data;
     if (document.getElementById('netrunners') !== null)
-        document.getElementById('netrunners').textContent = netrunners;
+        document.getElementById('netrunners').textContent = resource.netrunners;
     if (document.getElementById('implants') !== null)
-        document.getElementById('implants').textContent = implants;
+        document.getElementById('implants').textContent = resource.implants;
     if (document.getElementById('engrams') !== null)
-        document.getElementById('engrams').textContent = engrams;
+        document.getElementById('engrams').textContent = resource.engrams;
 }
 
 // Función Transmute
 function startTransmute() {
     let btn = document.getElementById('transmuteBtn');
     btn.disabled = true;
-    let transmuteTimeout = 0.25 * eddie * 1000;  // Tiempo de espera según el número de eddies
+    let transmuteTimeout = 0.25 * resource.eddie * 1000;  // Tiempo de espera según el número de eddies
     setTimeout(() => {
-        eddie++;  // Crear un eddie
+        resource.eddie++;  // Crear un eddie
         updateUI();
         checkBuildingsButton();
         btn.disabled = false;
     }, transmuteTimeout);
+    console.log(resource)
 }
-
+/*
 function createCanvas(width, height, id, padre) {
     let canvas = document.createElement("canvas");
     canvas.setAttribute("id", id);
@@ -104,10 +90,10 @@ function createCanvas(width, height, id, padre) {
     padre.appendChild(canvas);
     return canvas;
 }
-
+*/
 // Comprobar si el botón de edificios debe habilitarse
 function checkBuildingsButton() {
-    if (eddie >= 2 && !enableBuilding) {  // El botón de edificios se habilita si el jugador tiene al menos 2 eddies
+    if (resource.eddie >= 2 && !enableBuilding) {  // El botón de edificios se habilita si el jugador tiene al menos 2 eddies
         let buildingsBtn = document.createElement("button");
         buildingsBtn.setAttribute("id", "buildingsBtn");
         buildingsBtn.setAttribute("class", "button");
@@ -124,14 +110,14 @@ function checkBuildingsButton() {
 // Función para gestionar la construcción de edificios
 function buildBuilding(building) {
     if (building === 'netrunnerDen' && eddie >= buildingCost.netrunnerDen.eddie) {
-        eddie -= buildingCost.netrunnerDen.eddie;
+        resource.eddie -= buildingCost.netrunnerDen.eddie;
         document.getElementById('netrunner_den_Btn').disabled = false;
         updateUI();
     }
     
     // Condición para habilitar más botones de edificios
     if (building === 'dataFarm' && eddie >= buildingCost.dataFarm.eddie && subroutines >= buildingCost.dataFarm.subroutines) {
-        eddie -= buildingCost.dataFarm.eddie;
+        resource.eddie -= buildingCost.dataFarm.eddie;
         subroutines -= buildingCost.dataFarm.subroutines;
         netrunners += 5;  // Generar netrunners
         updateUI();
