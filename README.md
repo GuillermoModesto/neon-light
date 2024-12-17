@@ -86,8 +86,8 @@ I decided to change the setting of the project from the predefined (dark victori
 <table>
     <thead>
         <tr>
-            <td>Resource</td>
-            <td>Explanation</td>
+            <th>Resource</th>
+            <th>Explanation</th>
         </tr>
     </thead>
     <tbody>
