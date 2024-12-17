@@ -138,9 +138,9 @@ Today I decided to start from scratch and use canvas to avoid Satan (CSS). I wil
 I also decided that, because of the nature of this mini game, this is not OK, so I reverted back to using normal JS, HTML and CSS. ~~I hate this so much you have no idea.~~
 I have segmented my work into smaller tasks to try and make the progress smoother:
 1. Initial Project Setup
-- [x]Create the base structure of the project in JavaScript, HTML, and CSS.
-- [x]Configure a state management system to store player data (eddies, resources, buildings, etc.).
-- [x]Create a basic interface for the main game panel.
+- [x] Create the base structure of the project in JavaScript, HTML, and CSS.
+- [x] Configure a state management system to store player data (eddies, resources, buildings, etc.).
+- [x] Create a basic interface for the main game panel.
 2. Basic Functionality of the "Transmute" Button
 - [x] Implement a "Transmute" button on the main panel.
 - [x] Program the generation of eddies when the button is clicked, considering the dynamic time calculation based on the number of eddies (0.25 sec × number of eddies).
