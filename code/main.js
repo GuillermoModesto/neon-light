@@ -23,6 +23,11 @@ const buildingCost = {
 window.onload = function() {
 
     document.getElementById('transmuteBtn').addEventListener('click', startTransmute);
+
+    document.getElementById('resourcesBtn').addEventListener('click', () => {
+        window.location.href = "./resources.html";
+        // window.location.replace("./resources.html");
+    });
     
     /*
     document.getElementById('buildingsBtn').addEventListener('click', () => {
@@ -90,16 +95,19 @@ function checkBuildingsButton() {
         buildingsBtn.setAttribute("class", "button");
         buildingsBtn.appendChild(document.createTextNode("Buildings"));
         document.getElementById("mainPanel").appendChild(buildingsBtn);
+        buildingsBtn.addEventListener("click", () => {
+            window.location.href = "./buildings.html";
+            // window.location.replace("./buildings.html");
+        });
         enableBuilding = true;
     }
 }
 
 // Función para gestionar la construcción de edificios
 function buildBuilding(building) {
-    if (building === 'netrunnerDen' && eddie >= buildingCost.netrunnerDen) {
-        eddie -= buildingCost.netrunnerDen;
-        document.getElementById('buildingsPanel').style.display = 'block';
-        document.getElementById('cabinBtn').disabled = false;
+    if (building === 'netrunnerDen' && eddie >= buildingCost.netrunnerDen.eddie) {
+        eddie -= buildingCost.netrunnerDen.eddie;
+        document.getElementById('netrunner_den_Btn').disabled = false;
         updateUI();
     }
     
