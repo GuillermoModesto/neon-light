@@ -27,7 +27,7 @@ I decided to change the setting of the project from the predefined (dark victori
     * Tavern → Construct
 
 * Resources → Resources
-    * Currency → eddie (eurodollar)
+    * Coin → eddie (eurodollar)
     * Stone → subroutines
     * Wood → daemons
     * Workers → Netrunners
