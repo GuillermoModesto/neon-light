@@ -1,5 +1,11 @@
 // Recursos del juego
-export const resource = { eddie: 0, subroutines: 0, daemons: 0, data: 0, netrunners: 0, implants: 0, engrams: 0 };
+const resource = { eddie: 0, subroutines: 0, daemons: 0, data: 0, netrunners: 0, implants: 0, engrams: 0 };
+
+const savedResource = localStorage.getItem('resource');
+if (savedResource) {
+    // If data exists, parse and load it into the resource object
+    Object.assign(resource, JSON.parse(savedResource));
+}
 
 let enableBuilding = false;
 
@@ -51,6 +57,13 @@ window.onload = function() {
     updateUI();    
 }
 
+/*
+window.addEventListener("beforeunload", function() {
+    // Clear localStorage when the page is about to unload
+    localStorage.clear();
+});
+*/
+
 // Funciones de actualización de UI
 function updateUI() {
     document.getElementById('eddie').textContent = resource.eddie;
@@ -72,14 +85,15 @@ function updateUI() {
 function startTransmute() {
     let btn = document.getElementById('transmuteBtn');
     btn.disabled = true;
-    let transmuteTimeout = 0.25 * resource.eddie * 1000;  // Tiempo de espera según el número de eddies
+    let transmuteTimeout = 250 * resource.eddie;  // Tiempo de espera según el número de eddies
     setTimeout(() => {
         resource.eddie++;  // Crear un eddie
         updateUI();
         checkBuildingsButton();
         btn.disabled = false;
+        localStorage.setItem('resource', JSON.stringify(resource));
+        console.log(resource)
     }, transmuteTimeout);
-    console.log(resource)
 }
 /*
 function createCanvas(width, height, id, padre) {
