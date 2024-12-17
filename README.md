@@ -18,23 +18,23 @@ Interestingly, I noted the difference between textContent and innerText for retr
 I decided to change the setting of the project from the predefined (dark victorian), to cyberpunk.
 
 * Building → Building
-* Alchemy → Transmute
-* Cabin → Netrunner Den
-* Farm → Data Farm
-* Market → Black Market
-* Stables → Chrome Clinic
-* Mill → Soul Killer
-* Tavern → Construct
+    * Alchemy → Transmute
+    * Cabin → Netrunner Den
+    * Farm → Data Farm
+    * Market → Black Market
+    * Stables → Chrome Clinic
+    * Mill → Soul Killer
+    * Tavern → Construct
 
 * Resources → Resources
-* Currency → eddie (eurodollar)
-* Stone → subroutines
-* Wood → daemons
-* Workers → Netrunners
-* Wheat → data
-* Leather → rare material
-* Horse → implant
-* Bread → Engram
+    * Currency → eddie (eurodollar)
+    * Stone → subroutines
+    * Wood → daemons
+    * Workers → Netrunners
+    * Wheat → data
+    * Leather → rare material
+    * Horse → implant
+    * Bread → Engram
 
 <table>
     <thead>
