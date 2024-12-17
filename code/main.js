@@ -1,3 +1,6 @@
+let canvas;
+let ctx;
+
 // Estado del juego
 let eddie = 0;
 let subroutines = 0;
@@ -27,6 +30,12 @@ window.onload = function() {
     document.getElementById('resourcesBtn').addEventListener('click', () => {
         window.location.href = "./resources.html";
         // window.location.replace("./resources.html");
+    });
+
+    document.getElementById('test').addEventListener('click', () => {
+        canvas = createCanvas(250, 250, "testCanvas", document.getElementById('canvasPanel'));
+        ctx = canvas.getContext("2d");
+        ctx.fillRect(50, 50, 100, 100);
     });
     
     /*
@@ -85,6 +94,15 @@ function startTransmute() {
         checkBuildingsButton();
         btn.disabled = false;
     }, transmuteTimeout);
+}
+
+function createCanvas(width, height, id, padre) {
+    let canvas = document.createElement("canvas");
+    canvas.setAttribute("id", id);
+    canvas.setAttribute("width", width);
+    canvas.setAttribute("height", height);
+    padre.appendChild(canvas);
+    return canvas;
 }
 
 // Comprobar si el botón de edificios debe habilitarse
