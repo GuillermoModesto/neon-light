@@ -138,48 +138,48 @@ Today I decided to start from scratch and use canvas to avoid Satan (CSS). I wil
 I also decided that, because of the nature of this mini game, this is not OK, so I reverted back to using normal JS, HTML and CSS. ~~I hate this so much you have no idea.~~
 I have segmented my work into smaller tasks to try and make the progress smoother:
 1. Initial Project Setup
--[x]Create the base structure of the project in JavaScript, HTML, and CSS.
--[x]Configure a state management system to store player data (eddies, resources, buildings, etc.).
--[x]Create a basic interface for the main game panel.
+- [x]Create the base structure of the project in JavaScript, HTML, and CSS.
+- [x]Configure a state management system to store player data (eddies, resources, buildings, etc.).
+- [x]Create a basic interface for the main game panel.
 2. Basic Functionality of the "Transmute" Button
--[x] Implement a "Transmute" button on the main panel.
--[x] Program the generation of eddies when the button is clicked, considering the dynamic time calculation based on the number of eddies (0.25 sec × number of eddies).
--[x] Display an updated eddie counter on the interface.
+- [x] Implement a "Transmute" button on the main panel.
+- [x] Program the generation of eddies when the button is clicked, considering the dynamic time calculation based on the number of eddies (0.25 sec × number of eddies).
+- [x] Display an updated eddie counter on the interface.
 3. Unlocking the "Buildings" Button
--[x] Implement the logic to unlock the "Buildings" button after obtaining 2 eddies.
--[] Create a new panel displaying the available buildings.
--[] Initially, show only the "Warehouse" building in the panel.
+- [x] Implement the logic to unlock the "Buildings" button after obtaining 2 eddies.
+- [] Create a new panel displaying the available buildings.
+- [] Initially, show only the "Warehouse" building in the panel.
 4. Building Construction
--[] Implement the logic to construct the "Warehouse" in exchange for 2 eddies:
--[] Unlock the "Collect" button.
--[] Enable the visualization of resources (daemons, subroutines).
--[] Add the "Netrunner Den," "Data Farm," and "Black Market" buildings to the panel.
--[] Create functionality for constructing each building:
--[] Netrunner Den: Add 5 netrunners per den and increase the cost progressively (5 eddies and 5 subroutines for each additional den).
--[] Data Farm: Automatically generate 1 unit of data every 25 seconds.
--[] Black Market: Create a new panel allowing the player to purchase resources (rare material, subroutines, daemons).
+- [] Implement the logic to construct the "Warehouse" in exchange for 2 eddies:
+- [] Unlock the "Collect" button.
+- [] Enable the visualization of resources (daemons, subroutines).
+- [] Add the "Netrunner Den," "Data Farm," and "Black Market" buildings to the panel.
+- [] Create functionality for constructing each building:
+- [] Netrunner Den: Add 5 netrunners per den and increase the cost progressively (5 eddies and 5 subroutines for each additional den).
+- [] Data Farm: Automatically generate 1 unit of data every 25 seconds.
+- [] Black Market: Create a new panel allowing the player to purchase resources (rare material, subroutines, daemons).
 5. "Collect" Button Functionality
--[] Program the "Collect" button to generate a random amount of daemons and subroutines (between 0 and the number of netrunners + 2).
--[] Implement a cooldown timer of 45 seconds minus the number of netrunners.
--[] Display updates of the collected resources in the resource counter.
+- [] Program the "Collect" button to generate a random amount of daemons and subroutines (between 0 and the number of netrunners + 2).
+- [] Implement a cooldown timer of 45 seconds minus the number of netrunners.
+- [] Display updates of the collected resources in the resource counter.
 6. Advanced Building Logic
--[] Implement the construction of Chrome Clinic:
--[] Allow the player to create implants in exchange for 2 rare materials and 5 data.
--[] Unlock the construction of the "Soul Killer."
--[] Implement the construction of the Soul Killer:
--[] Allow the player to transform 2 units of data into 1 engram if at least 10 netrunners are available.
--[] Add the option to sell engrams for 15 eddies in the black market.
--[] Unlock the construction of the "Construct."
--[] Implement the construction of the Construct:
--[] Set the win condition when the Construct is built.
+- [] Implement the construction of Chrome Clinic:
+- [] Allow the player to create implants in exchange for 2 rare materials and 5 data.
+- [] Unlock the construction of the "Soul Killer."
+- [] Implement the construction of the Soul Killer:
+- [] Allow the player to transform 2 units of data into 1 engram if at least 10 netrunners are available.
+- [] Add the option to sell engrams for 15 eddies in the black market.
+- [] Unlock the construction of the "Construct."
+- [] Implement the construction of the Construct:
+- [] Set the win condition when the Construct is built.
 7. Resource and Market Management
--[] Implement the market functionality for purchasing resources:
--[] Validate if the player has enough eddies to make a purchase.
--[] Update the player's resources and eddies after each transaction.
--[] Display the updated state of resources (daemons, subroutines, rare materials, etc.) in the resource counter.
+- [] Implement the market functionality for purchasing resources:
+- [] Validate if the player has enough eddies to make a purchase.
+- [] Update the player's resources and eddies after each transaction.
+- [] Display the updated state of resources (daemons, subroutines, rare materials, etc.) in the resource counter.
 8. User Interface (UI) and Design
--[] Create a cyberpunk-themed design:
--[] Main panel.
--[] Stylized buttons with names aligned to the theme.
--[] Screen and fonts with a neon, glitchy, and futuristic aesthetic.
--[] Animate buttons and panels to enhance the player's experience.
+- [] Create a cyberpunk-themed design:
+- [] Main panel.
+- [] Stylized buttons with names aligned to the theme.
+- [] Screen and fonts with a neon, glitchy, and futuristic aesthetic.
+- [] Animate buttons and panels to enhance the player's experience.
