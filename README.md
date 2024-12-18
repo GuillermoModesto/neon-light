@@ -133,3 +133,18 @@ Se pueden añadir funcionalidades adicionales como:
 * Opción de grabar y cargar partidas.
 * Zona informativa que muestra las acciones realizadas.
 * Efectos de sonido y música.
+
+### Día 1:
+
+Empecé creando los archivos HTML, CSS y JavaScript con su estructura básica.
+* HTML:
+  * Un div con el id game-area que alberga el título y la imagen interactiva.
+  * Un img con el id eddie-img, que es el elemento en el que el usuario hace clic para incrementar los eddies. Anteriormente este elemento a sido refereciado como botón Mine, pero se decidió cambiarlo por la imagen actual.
+  * Un div para mostrar el contador de recursos (eddie).
+* CSS:
+  * Animación de color: Se utiliza la propiedad @keyframes para crear un efecto de cambio de color en el título.
+  * Interactividad: Se añaden transiciones al tamaño de la imagen y efectos visuales cuando el usuario hace clic o pasa el ratón sobre la imagen.
+* JS:
+  * Inicialización: Cuando la página se carga, se asigna un "event listener" al elemento eddie-img para detectar los clics.
+  * Contador de recursos: Cada clic incrementa el valor de eddie en un objeto resources.
+  * Actualización de la UI: Después de cada clic, la función updateUI actualiza el contenido de los elementos HTML que tienen un id correspondiente al nombre de los recursos.
