@@ -1,6 +1,6 @@
-## NEON LIGHTS
+# NEON LIGHTS
 
-1. ### Funcionamiento del Juego:
+1. ## Funcionamiento del Juego:
 
 El juego sigue una temática cyberpunk.
 
@@ -11,7 +11,7 @@ El objetivo es completar una serie de edificios, incluido el "Construct", que, a
 
 <hr>
 
-2. ### Buildings:
+2. ## Buildings:
 
 Los edificios tienen un costo y desbloquean nuevas funcionalidades.
 
@@ -71,7 +71,7 @@ Los edificios tienen un costo y desbloquean nuevas funcionalidades.
 
 <hr>
 
-3. ### Resources:
+3. ## Resources:
 
 El juego incluye varios resources que el jugador debe gestionar:
 
@@ -125,7 +125,7 @@ El juego incluye varios resources que el jugador debe gestionar:
 
 <hr>
 
-4. ### Mejoras Opcionales:
+4. ## Mejoras Opcionales:
 
 Se pueden añadir funcionalidades adicionales como:
 
@@ -133,6 +133,9 @@ Se pueden añadir funcionalidades adicionales como:
 * Opción de grabar y cargar partidas.
 * Zona informativa que muestra las acciones realizadas.
 * Efectos de sonido y música.
+
+<hr>
+<hr>
 
 ### Día 1:
 
