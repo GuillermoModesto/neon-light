@@ -153,3 +153,4 @@ Empecé creando los archivos HTML, CSS y JavaScript con su estructura básica.
   * Inicialización: Cuando la página se carga, se asigna un "event listener" al elemento eddie-img para detectar los clics.
   * Contador de recursos: Cada clic incrementa el valor de eddie en un objeto resources.
   * Actualización de la UI: Después de cada clic, la función updateUI actualiza el contenido de los elementos HTML que tienen un id correspondiente al nombre de los recursos.
+  * Función para obtener tiempo de juego total y tiempo desde última llamada: usando performance.now() y almacenando el tiempo de inicio una vez, o en cada llamada, respectivamente. 
