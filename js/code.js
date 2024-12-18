@@ -1,4 +1,6 @@
 const resources = { eddie: 0 }
+const begin = performance.now();
+let start = performance.now();
 
 window.onload = function() {
     document.getElementById("eddie-img").addEventListener("click", function() {
@@ -12,6 +14,17 @@ function updateUI() {
     for (const [name, value] of resourcesObj) {
         if (document.getElementById(name) !== null)
             document.getElementById(name).innerText = value;
-        console.log(document.getElementById(name).innerText)
     }
+}
+
+function getGameTime() {
+    const end = performance.now();
+    return end - begin;
+}
+
+function getElapsedTime() {
+    const end = performance.now();
+    const elapsedTime = end - start;
+    start = end;
+    return elapsedTime;
 }
