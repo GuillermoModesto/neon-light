@@ -44,8 +44,7 @@
   aspect-ratio: 9 / 16;
   /* height: 100%;
     max-height: 640px; */
-  box-shadow: 0px 0px 100px black;
-  /* Horizontal offset, Vertical offset, Blur radius, Shadow color */
+  box-shadow: 0px 0px 100px black; /* Horizontal offset, Vertical offset, Blur radius, Shadow color */
 }
 
 .game-area {
@@ -64,7 +63,7 @@
 
 #title {
   font-family: "Cyber1";
-  font-size: 40px;
+  font-size: 35px;
   animation: cambioColor 7s ease-in-out infinite;
   -webkit-animation: cambioColor 7s ease-in-out infinite;
   margin: 20px;
@@ -97,38 +96,67 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
-
 }
 
 #eddie-img-wrapper {
-  width: 85px;
-  height: 85px;
+  width: 100px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+#loading {
+  width: 85px;
+  height: 85px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*background-color: #00FFB3;*/
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  transition: all 200ms ease;
+  -webkit-transition: all 200ms ease;
+  -moz-transition: all 200ms ease;
+  -ms-transition: all 200ms ease;
+  -o-transition: all 200ms ease;
+}
+
+#loading:hover {
+  transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
+}
+
 #eddie-img {
   width: 70px;
   height: 70px;
-  transition: width 0.3s ease, height 0.3s ease;
+  margin-right: 1px;
+  margin-top: 1px;
   border-radius: 50%;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-}
-
-#eddie-img:hover {
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
+  transition: all 100ms ease;
+  -webkit-transition: all 100ms ease;
+  -moz-transition: all 100ms ease;
+  -ms-transition: all 100ms ease;
+  -o-transition: all 100ms ease;
 }
 
 #eddie-img:active {
-  width: 80%;
-  height: 80%;
+  transform: scale(0.9);
+  -webkit-transform: scale(0.9);
+  -moz-transform: scale(0.9);
+  -ms-transform: scale(0.9);
+  -o-transform: scale(0.9);
 }
 
 #eddie-wrapper {
