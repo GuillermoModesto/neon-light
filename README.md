@@ -77,10 +77,10 @@ Los edificios tienen un costo y desbloquean nuevas funcionalidades.
 
 El juego incluye varios resources que el jugador debe gestionar:
 
-* Eddies (Eurodollars): Se generan con el botón "Mine".
-* Subroutines, Daemons, Data: Se obtienen de diferentes maneras, como a través del botón "Collect" o la construcción de la Data Farm.
-* Netrunners: Se generan construyendo Netrunner Den.
-* Implants y Engrams: Se obtienen de edificios específicos como el Chrome Clinic y el Soul Killer.
+* **Eddies (Eurodollars)**: Se generan con el botón "Mine".
+* **Subroutines, Daemons, Data**: Se obtienen de diferentes maneras, como a través del botón "Collect" o la construcción de la Data Farm.
+* **Netrunners**: Se generan construyendo Netrunner Den.
+* **Implants y Engrams**: Se obtienen de edificios específicos como el Chrome Clinic y el Soul Killer.
 <hr>
 <table>
   <thead>
