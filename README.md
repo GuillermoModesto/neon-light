@@ -160,22 +160,22 @@ Empecé creando los archivos HTML, CSS y JavaScript con su estructura básica.
   * **Actualización de la UI**: Después de cada clic, la función updateUI actualiza el contenido de los elementos HTML que tienen un id correspondiente al nombre de los recursos.
   * **Función para obtener tiempo de juego total y tiempo desde última llamada**: usando performance.now() y almacenando el tiempo de inicio una vez, o en cada llamada, respectivamente. 
 
-  ### Día 2:
+### Día 2:
 
-  * ***HTML***:
-    * Cambio el div **de imagen a button** para poder desabilitarlo a través de JS mientras se genera el recurso.
-    * Añado **una caja mas** al rededor de la imagen para evitar el movimiento de la misma al hacer el efecto zoom.
-    * Añado ***una caja mas*** con las mismas características que ID loading por encima para una cosa que explico abajo.
-  * ***CSS***:
-    * **Desgloso el ID loading a loading_empty y loading_full**, con la intención de hacer una **barra de carga circular** con la imagen del eddie en el centro. La idea es que la barra cargada vaya apareciendo por encima de la vacía en base a la cantidad de tiempo para generar el recurso (eddie). No se si voy a poder hacerlo y tengo miedo.
-    * **Cambio la forma de la animación** y sus valores.
-    * **Creo estilo y animaciones del botón de buildings**.
-    * Añado **overlay negro semitransparente** con z-index inferior, para subirlo cuando llame a paneles extra (building, minijuegos...).
-    * **Creo panel emergente** para los buildings con estilos y elementos internos que se irán desbloqueando con el avance del juego.
-  * ***JS***:
-    * **Desabilito el eddie** hasta que no se haya completado la función de generar recurso.
-    * Añado y modifico dinámicamente la propiedad de estilo **filter** para indicar visualmente que no le afectan los clicks.
-    * Habilito la aparición del **botón de buildings** con la condición de que no exista ya y que existan por lo menos 2 eddies.
-    * Habilito la aparición del panel de buildings como reacción al evento del boton.
+* ***HTML***:
+  * Cambio el div **de imagen a button** para poder desabilitarlo a través de JS mientras se genera el recurso.
+  * Añado **una caja mas** al rededor de la imagen para evitar el movimiento de la misma al hacer el efecto zoom.
+  * Añado ***una caja mas*** con las mismas características que ID loading por encima para una cosa que explico abajo.
+* ***CSS***:
+  * **Desgloso el ID loading a loading_empty y loading_full**, con la intención de hacer una **barra de carga circular** con la imagen del eddie en el centro. La idea es que la barra cargada vaya apareciendo por encima de la vacía en base a la cantidad de tiempo para generar el recurso (eddie). No se si voy a poder hacerlo y tengo miedo.
+  * **Cambio la forma de la animación** y sus valores.
+  * **Creo estilo y animaciones del botón de buildings**.
+  * Añado **overlay negro semitransparente** con z-index inferior, para subirlo cuando llame a paneles extra (building, minijuegos...).
+  * **Creo panel emergente** para los buildings con estilos y elementos internos que se irán desbloqueando con el avance del juego.
+* ***JS***:
+  * **Desabilito el eddie** hasta que no se haya completado la función de generar recurso.
+  * Añado y modifico dinámicamente la propiedad de estilo **filter** para indicar visualmente que no le afectan los clicks.
+  * Habilito la aparición del **botón de buildings** con la condición de que no exista ya y que existan por lo menos 2 eddies.
+  * Habilito la aparición del panel de buildings como reacción al evento del boton.
 
 La mayor complejidad de hoy ha sido encontrar las opacidades, z-index y positions adecuados para poner trabajar y mover varios elementos (botón de buildings, panel de buildings con sus elementos internos y su botón de cerrar, además del overlay negro para el fondo desenfocado) unos encima de otros con fluidez e independencia.
