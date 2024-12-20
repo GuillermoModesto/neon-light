@@ -1,13 +1,15 @@
-# NEON LIGHTS
+# ***NEON LIGHTS***
+
+<hr>
 
 1. ## Funcionamiento del Juego:
 
-El juego sigue una temática cyberpunk.
+Un mini-proyecto de crear un **clicker** con una **temática cyberpunk**.
 
-El jugador comienza con un botón "Mine" que genera eddies (eurodólares) con un tiempo de espera proporcional al número de eddies acumulados.
-Una vez que se obtienen dos eddies, se desbloquea el botón "Buildings", que permite construir el primer edificio, el "Warehouse", que habilita otros elementos y edificios, como el "Netrunner Den", el "Data Farm" y el "Black Market".
-El jugador puede construir edificios para obtener resources (daemons, subroutines, data, etc.) y Netrunners (empleados) que se usan para generar más resources o construir más edificios.
-El objetivo es completar una serie de edificios, incluido el "Construct", que, al ser construido, finaliza el juego.
+El jugador comienza con un botón "Mine" que **genera eddies** (eurodólares) con un tiempo de espera proporcional al número de eddies acumulados.
+Una vez que se obtienen dos eddies, se desbloquea el botón **"Buildings"**, que permite construir el primer edificio, el "Warehouse", que habilita otros elementos y edificios, como el "Netrunner Den", el "Data Farm" y el "Black Market".
+El jugador puede construir edificios para obtener **"resources"** (daemons, subroutines, data, etc.) y Netrunners (empleados) que se usan para generar más resources o construir más edificios.
+El objetivo es completar una serie de edificios, incluido el **"Construct"**, que, al ser construido, finaliza el juego.
 
 <hr>
 
@@ -15,12 +17,12 @@ El objetivo es completar una serie de edificios, incluido el "Construct", que, a
 
 Los edificios tienen un costo y desbloquean nuevas funcionalidades.
 
-* Warehouse: Desbloquea el botón "Collect" y el marcador de resources.
-* Netrunner Den: Genera Netrunners, con un costo que aumenta con cada nueva construcción.
-* Data Farm: Produce data automáticamente.
-* Black Market: Permite comprar resources como rare material, subroutines y daemons.
-* Soul Killer: Permite generar Engrams, necesarios para ganar el juego.
-* Construct: Se construye al final del juego.
+* **Warehouse**: Desbloquea el botón "Collect" y el marcador de resources.
+* **Netrunner Den**: Genera Netrunners, con un costo que aumenta con cada nueva construcción.
+* **Data Farm**: Produce data automáticamente.
+* **Black Market**: Permite comprar resources como rare material, subroutines y daemons.
+* **Soul Killer**: Permite generar Engrams, necesarios para ganar el juego.
+* **Construct**: Se construye al final del juego.
 <hr>
 <table>
   <thead>
@@ -161,8 +163,8 @@ Empecé creando los archivos HTML, CSS y JavaScript con su estructura básica.
   ### Día 2:
 
   * ***HTML***:
-    * Cambio el div *de imagen a button* para poder desabilitarlo a través de JS mientras se genera el recurso.
-    * Añado *una caja mas* al rededor de la imagen para evitar el movimiento de la misma al hacer el efecto zoom.
+    * Cambio el div **de imagen a button** para poder desabilitarlo a través de JS mientras se genera el recurso.
+    * Añado **una caja mas** al rededor de la imagen para evitar el movimiento de la misma al hacer el efecto zoom.
     * Añado ***una caja mas*** con las mismas características que ID loading por encima para una cosa que explico abajo.
   * ***CSS***:
-    * **Desgloso el ID loading a loading_empty y loading_full**, con la intención de hacer una *barra de carga circular* con la imagen del eddie en el centro. La idea es que la barra cargada vaya apareciendo por encima de la vacía en base a la cantidad de tiempo para generar el recurso (eddie). No se si voy a poder hacerlo y tengo miedo.
+    * **Desgloso el ID loading a loading_empty y loading_full**, con la intención de hacer una **barra de carga circular** con la imagen del eddie en el centro. La idea es que la barra cargada vaya apareciendo por encima de la vacía en base a la cantidad de tiempo para generar el recurso (eddie). No se si voy a poder hacerlo y tengo miedo.
