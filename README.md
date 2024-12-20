@@ -168,3 +168,6 @@ Empecé creando los archivos HTML, CSS y JavaScript con su estructura básica.
     * Añado ***una caja mas*** con las mismas características que ID loading por encima para una cosa que explico abajo.
   * ***CSS***:
     * **Desgloso el ID loading a loading_empty y loading_full**, con la intención de hacer una **barra de carga circular** con la imagen del eddie en el centro. La idea es que la barra cargada vaya apareciendo por encima de la vacía en base a la cantidad de tiempo para generar el recurso (eddie). No se si voy a poder hacerlo y tengo miedo.
+    * **Cambio la forma de la animación** y sus valores.
+  * ***JS***:
+    * **Desabilito el eddie** hasta que no se haya completado la función de generar recurso.
