@@ -34,24 +34,40 @@ function generate_eddie(button) {
 function check_building_btn() {
     if (document.getElementById("building_btn") == null && resource.eddie >= 2) {
 
-        let building_panel = document.createElement("div");
-        building_panel.setAttribute("class", "cyber_panel--hidden");
-        building_panel.setAttribute("id", "buildings_panel");
-        document.getElementsByClassName("game-area")[0].appendChild(building_panel);
-
-        let exit_building = document.createElement("button");
-        exit_building.setAttribute("class", "exit_button");
-        exit_building.setAttribute("id", "exit_building");
-        exit_building.appendChild(document.createTextNode("X"));
-        building_panel.appendChild(exit_building);
-        exit_building.addEventListener("click", function() {
-            building_panel.setAttribute("class", "cyber_panel--hidden cyber_panel--hidden--animation");
-            document.getElementById("building_btn").style.zIndex = 3;
-            document.getElementById("overlay").style.zIndex = -1;
-        });
-
+        create_building_panel();
+        create_exit_panel_btn(document.getElementById("buildings_panel"));
+        add_option_to_panel("warehouse");
         create_building_btn();
     }
+}
+
+function create_building_panel() {
+    let building_panel = document.createElement("div");
+    building_panel.setAttribute("class", "cyber_panel--hidden");
+    building_panel.setAttribute("id", "buildings_panel");
+    // building_panel.appendChild(document.createTextNode("me quiero de morí jajaj"));
+    document.getElementsByClassName("game-area")[0].appendChild(building_panel);
+}
+
+function create_exit_panel_btn(panel) {
+    let exit_building = document.createElement("button");
+    exit_building.setAttribute("class", "exit_button");
+    exit_building.setAttribute("id", "exit_building");
+    exit_building.appendChild(document.createTextNode("X"));
+    panel.appendChild(exit_building);
+    exit_building.addEventListener("click", function () {
+        panel.setAttribute("class", "cyber_panel--hidden cyber_panel--hidden--animation");
+        document.getElementById("building_btn").style.zIndex = 3;
+        document.getElementById("overlay").style.zIndex = -1;
+    });
+}
+
+function add_option_to_panel(option) {
+    let panel_option = document.createElement("div");
+    panel_option.setAttribute("id", option);
+    panel_option.setAttribute("class", "panel_option");
+    panel_option.appendChild(document.createTextNode(option));
+    document.getElementById("buildings_panel").appendChild(panel_option);
 }
 
 function create_building_btn() {

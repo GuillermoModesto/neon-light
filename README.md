@@ -178,4 +178,4 @@ Empecé creando los archivos HTML, CSS y JavaScript con su estructura básica.
     * Habilito la aparición del **botón de buildings** con la condición de que no exista ya y que existan por lo menos 2 eddies.
     * Habilito la aparición del panel de buildings como reacción al evento del boton.
 
-  La mayor complejidad de hoy ha sido encontrar las opacidades, z-index y positions adecuados para poner trabajar y mover varios elementos (botón de buildings, panel de buildings con sus elementos internos y su botón de cerrar, además del overlay negro para el fondo desenfocado) unos encima de otros con fluidez e independencia.
+La mayor complejidad de hoy ha sido encontrar las opacidades, z-index y positions adecuados para poner trabajar y mover varios elementos (botón de buildings, panel de buildings con sus elementos internos y su botón de cerrar, además del overlay negro para el fondo desenfocado) unos encima de otros con fluidez e independencia.

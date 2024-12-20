@@ -160,6 +160,7 @@
   -moz-transition: all 100ms ease;
   -ms-transition: all 100ms ease;
   -o-transition: all 100ms ease;
+  cursor: pointer;
 }
 
 #eddie-img:active {
@@ -310,8 +311,11 @@
 .panel_option {
   background-color: var(--color-azulado);
   width: 42.3%;
+  max-height: 30%;
   padding: 5px;
   margin: 8px;
+  box-shadow: 0 0 15px var(--color-cromo), 0 0 25px var(--color-rojizo-brillante);
+  cursor: pointer;
   text-align: center;
   align-content: center;
   transition: all 200ms ease;
@@ -323,6 +327,7 @@
   -moz-transform: scale(1.1);
   -ms-transform: scale(1.1);
   -o-transform: scale(1.1);
+  box-shadow: 0 0 20px var(--color-cromo), 0 0 30px var(--color-rojizo-brillante);
 }
 
 .exit_button {
