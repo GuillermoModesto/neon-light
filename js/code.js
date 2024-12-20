@@ -1,4 +1,7 @@
-const resources = { eddie: 0 }
+const resource = { eddie: 0 };
+const building = {
+    warehouse: { cost: 2, built: false }
+};
 
 /* Usado en getElapsedTime */
 let start = performance.now();
@@ -17,17 +20,29 @@ window.onload = function() {
 
 function generate_eddie(button) {
     button.disabled = true;
-    let eddie_timer = 250 * resources.eddie;
+    button.style.filter = "invert(41%) sepia(36%) saturate(19%) hue-rotate(314deg) brightness(95%) contrast(98%)";
+    let eddie_timer = 250 * resource.eddie;
     setTimeout(function() {
-        resources.eddie++;
+        resource.eddie++;
+        check_building_btn();
         updateUI();
         button.disabled = false;
+        button.style.filter = "";
     }, eddie_timer);
+}
+
+function check_building_btn() {
+    if (document.getElementById("building_btn") == null && resource.eddie >= 2) {
+        let building_btn = document.createElement("div");
+        building_btn.appendChild(document.createTextNode("Buildings"));
+        building_btn.setAttribute("id", "building_btn");
+        document.getElementsByClassName("game-area")[0].appendChild(building_btn);
+    }
 }
 
 /* Update all editable HTML tags. All IDs should match variable name to work on loop */
 function updateUI() {
-    let resourcesObj = Object.entries(resources);
+    let resourcesObj = Object.entries(resource);
     for (const [name, value] of resourcesObj) {
         if (document.getElementById(name) !== null)
             document.getElementById(name).innerText = value;

@@ -20,8 +20,11 @@
   --color-black: #1B1B2A;
   --color-rojizo: #FF007A;
   --color-verdoso: #00FFB3;
+  --color-verdoso-brillante: #4dffca;
   --color-morado: #A700FF;
+  --color-morado-brillante: #b937ff;
   --color-amarillento: #fffb00;
+  --color-azulado: #18dcff;
   --color-cromo: #BDC3C7;
 }
 
@@ -187,4 +190,39 @@
 
 #eddie {
   margin-top: 6px;
+}
+
+#building_btn {
+  background: linear-gradient(145deg, var(--color-verdoso), var(--color-morado));
+  font-family: 'Cyber2', sans-serif;
+  text-transform: uppercase;
+  padding: 15px 30px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: all 300ms ease;
+  box-shadow: 0 0 10px var(--color-black), 0 0 20px var(--color-azulado);
+  opacity: 0;
+  transform: translateX(-100px);
+  animation: slideInFade 1s ease forwards;
+  -webkit-transition: all 300ms ease;
+  -moz-transition: all 300ms ease;
+  -ms-transition: all 300ms ease;
+  -o-transition: all 300ms ease;
+}
+
+#building_btn:hover {
+  background: linear-gradient(145deg, var(--color-verdoso-brillante), var(--color-morado-brillante));
+  box-shadow: 0 0 20px var(--color-black), 0 0 30px var(--color-azulado);
+  transform: scale(1.1);
+}
+
+@keyframes slideInFade {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
