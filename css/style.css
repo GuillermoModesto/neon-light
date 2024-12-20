@@ -106,7 +106,7 @@
   align-items: center;
 }
 
-#loading {
+#loading_empty, #loading_full {
   width: 85px;
   height: 85px;
   display: flex;
@@ -123,9 +123,14 @@
   -moz-transition: all 200ms ease;
   -ms-transition: all 200ms ease;
   -o-transition: all 200ms ease;
+  border: 2px solid black;
 }
 
-#loading:hover {
+#loading_full {
+  background-color: #00FFB3;
+}
+
+#loading_full:hover {
   transform: scale(1.2);
   -webkit-transform: scale(1.2);
   -moz-transform: scale(1.2);

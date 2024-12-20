@@ -139,18 +139,30 @@ Se pueden añadir funcionalidades adicionales como:
 
 ### Día 1:
 
+Este proyecto tiene el potencial de matarme. Lo he reiniciado varias veces por puro odio y desesperación. Este proyecto me hace decir cosas que harían llorar a Dios. Odio CSS. No existen palabras en el lenguaje castellano para expresar el desprecio que siento hacia él. Habiendo dicho eso, es un proyecto que tengo que hacer y voy a hacerlo bien, joder. Asi que aquí está mi diario de desarrollo.
+
 Empecé creando los archivos HTML, CSS y JavaScript con su estructura básica.
-* HTML:
-  * Un div con el id game-area que alberga el título y la imagen interactiva.
-  * Un img con el id eddie-img, que es el elemento en el que el usuario hace clic para incrementar los eddies. Anteriormente este elemento a sido refereciado como botón Mine, pero se decidió cambiarlo por la imagen actual.
-  * Un div para mostrar el contador de recursos (eddie).
-  * He tenido que ir jugando con contenedores dentro de contenedores dentro de contenedores dentro de contenedores dentro de contenedores ... para que las cosas estén donde yo las quiero.
-* CSS:
-  * Animación de color: Se utiliza la propiedad @keyframes para crear un efecto de cambio de color en el título.
-  * Interactividad: Se añaden transiciones al tamaño de la imagen y efectos visuales cuando el usuario hace clic o pasa el ratón sobre la imagen.
-  * Imagen de fondo.
-* JS:
-  * Inicialización: Cuando la página se carga, se asigna un "event listener" al elemento eddie-img para detectar los clics.
-  * Contador de recursos: Cada clic incrementa el valor de eddie en un objeto resources.
-  * Actualización de la UI: Después de cada clic, la función updateUI actualiza el contenido de los elementos HTML que tienen un id correspondiente al nombre de los recursos.
-  * Función para obtener tiempo de juego total y tiempo desde última llamada: usando performance.now() y almacenando el tiempo de inicio una vez, o en cada llamada, respectivamente. 
+* ***HTML***:
+  * Un div con el id **game-area** que alberga el título y la imagen interactiva.
+  * Un img con el id **eddie-img**, que es el elemento en el que el usuario hace **clic** para incrementar los eddies. Anteriormente este elemento a sido refereciado como botón Mine, pero se decidió cambiarlo por la imagen actual.
+  * Un div para mostrar el **contador de recursos** (eddie).
+  * He tenido que ir jugando con *contenedores dentro de contenedores dentro de contenedores dentro de contenedores dentro de contenedores* ... para que las cosas estén donde yo las quiero. ~~A sido un proceso frustrante e innecesario, que podría hacer una IA con resultados iguales o mejores que el mio y en una fracción de segundo. Pero en fin.~~
+* ***CSS***:
+  * **Animación de color**: Se utiliza la propiedad @keyframes para crear un efecto de cambio de color en el título.
+  * **Interactividad**: Se añaden transiciones al tamaño de la imagen y efectos visuales cuando el usuario hace clic o pasa el ratón sobre la imagen.
+  * **Imagen de fondo**.
+  * Se inicia el proceso de **prueba y error para el diseño**. Aunque tengo una idea de cómo quiero que acabe el producto, la realidad es que voy probando hasta que algo encaja como a mi me gusta. Es lento e ineficiente, pero no soy diseñador y no se hacerlo mejor.
+* ***JS***:
+  * **Inicialización**: Cuando la página se carga, se asigna un "event listener" al elemento eddie-img para detectar los clics.
+  * **Contador de recursos**: Cada clic incrementa el valor de eddie en un objeto resources.
+  * **Actualización de la UI**: Después de cada clic, la función updateUI actualiza el contenido de los elementos HTML que tienen un id correspondiente al nombre de los recursos.
+  * **Función para obtener tiempo de juego total y tiempo desde última llamada**: usando performance.now() y almacenando el tiempo de inicio una vez, o en cada llamada, respectivamente. 
+
+  ### Día 2:
+
+  * ***HTML***:
+    * Cambio el div *de imagen a button* para poder desabilitarlo a través de JS mientras se genera el recurso.
+    * Añado *una caja mas* al rededor de la imagen para evitar el movimiento de la misma al hacer el efecto zoom.
+    * Añado ***una caja mas*** con las mismas características que ID loading por encima para una cosa que explico abajo.
+  * ***CSS***:
+    * **Desgloso el ID loading a loading_empty y loading_full**, con la intención de hacer una *barra de carga circular* con la imagen del eddie en el centro. La idea es que la barra cargada vaya apareciendo por encima de la vacía en base a la cantidad de tiempo para generar el recurso (eddie). No se si voy a poder hacerlo y tengo miedo.
