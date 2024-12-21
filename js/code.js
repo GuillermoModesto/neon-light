@@ -44,7 +44,7 @@ function create_building_panel() {
     let building_panel = document.createElement("div");
     building_panel.setAttribute("class", "cyber_panel--hidden");
     building_panel.setAttribute("id", "buildings_panel");
-    document.getElementsByClassName("game-area")[0].appendChild(building_panel);
+    document.getElementsByClassName("resources")[0].appendChild(building_panel);
 }
 
 function create_exit_panel_btn(panel) {
