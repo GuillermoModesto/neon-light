@@ -1,4 +1,13 @@
-const resource = { eddie: 0 };
+const resource = { 
+    eddie: 0,
+    subroutines: 0,
+    daemons: 0,
+    netrunners: 0,
+    implants: 0,
+    engrams: 0,
+    data: 0,
+    rare_materials: 0
+};
 const building = {
     warehouse: { cost: 2, built: false }
 };
@@ -37,6 +46,12 @@ function check_building_btn() {
         add_option_to_panel("warehouse");
         create_exit_panel_btn(document.getElementById("buildings_panel"));
         create_building_btn();
+    }
+}
+
+function check_resources_panel() {
+    if (document.getElementById("resource_list").hidden && building.warehouse.built) {
+        document.getElementById("resource_list").hidden = false;
     }
 }
 
@@ -80,6 +95,9 @@ function add_option_to_panel(option) {
             visual_disable(panel_option);
             updateUI();
         }
+
+        if (option === "warehouse")
+            check_resources_panel();
     });
 }
 
