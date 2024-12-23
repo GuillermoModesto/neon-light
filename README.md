@@ -17,7 +17,7 @@ El objetivo es completar una serie de edificios, incluido el **"Construct"**, qu
 
 Los edificios tienen un costo y desbloquean nuevas funcionalidades.
 
-* **Warehouse**: Desbloquea el botón "Collect" y el marcador de resources.
+* **Warehouse**: Desbloquea el botón "Work" y el marcador de resources.
 * **Netrunner Den**: Genera Netrunners, con un costo que aumenta con cada nueva construcción.
 * **Data Farm**: Produce data automáticamente.
 * **Black Market**: Permite comprar resources como rare material, subroutines y daemons.
@@ -179,3 +179,9 @@ Empecé creando los archivos HTML, CSS y JavaScript con su estructura básica.
   * Habilito la aparición del panel de buildings como reacción al evento del boton.
 
 La mayor complejidad de hoy ha sido encontrar las opacidades, z-index y positions adecuados para poner trabajar y mover varios elementos (botón de buildings, panel de buildings con sus elementos internos y su botón de cerrar, además del overlay negro para el fondo desenfocado) unos encima de otros con fluidez e independencia.
+
+### Día 3:
+
+* ***JS***:
+  * Habilito la aparición del **botón Work** e implemento su funcionalidad.
+  * Surge un bug que no tengo tiempo de arreglar. Necesito controlar la correcta habilitación de los edificios Netrunner den, Data Farm y Black Market en el panel de edificios cuando se construye el warehouse.

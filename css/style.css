@@ -263,6 +263,11 @@
     -webkit-animation: slideInFade 600ms ease forwards;
 }
 
+#work_btn {
+  top: 380px;
+  z-index: 1;
+}
+
 #building_btn {
   top: 300px;
 }
@@ -299,11 +304,11 @@
   display: flex;
   flex-wrap: wrap;
   background: var(--color-azulado-oscuro);
-  width: 300px;
+  width: 350px;
   height: 300px;
   font-family: 'Cyber2', sans-serif;
   text-transform: uppercase;
-  padding: 15px 30px;
+  padding: 15px;
   margin-top: 10px;
   transition: all 200ms ease;
   box-shadow: 0 0 20px var(--color-black), 0 0 30px var(--color-azulado);
@@ -322,12 +327,12 @@
   display: flex;
   flex-wrap: wrap;
   background: var(--color-azulado-oscuro);
-  width: 300px;
-  height: 300px;
+  width: 0px;
+  height: 0px;
   font-family: 'Cyber2', sans-serif;
   text-transform: uppercase;
-  padding: 15px 30px;
-  margin-top: 10px;
+  padding: 15px;
+  margin: 20%;
   transition: all 200ms ease;
   box-shadow: 0 0 20px var(--color-black), 0 0 30px var(--color-azulado);
   opacity: 0;
@@ -349,6 +354,9 @@
     -ms-transform: translateX(0);
     -o-transform: translateX(0);
 }
+30% {
+  opacity: 0;
+}
   50% {
     opacity: 0;
   }
@@ -364,7 +372,7 @@
 
 .panel_option {
   background-color: var(--color-azulado);
-  width: 42.3%;
+  width: 45%;
   max-height: 30%;
   padding: 5px;
   margin: 8px;
