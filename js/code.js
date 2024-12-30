@@ -14,7 +14,8 @@ const building = {
         built: false 
     },
     netrunner_den: { 
-        cost: { eddies: 6, subroutines: 6, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 }, 
+        cost: { eddies: 6, subroutines: 6, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
+        built: false,
         amount: 0 
     },
 };
@@ -50,7 +51,7 @@ function generate_eddie(button) {
 function check_building_btn() {
     if (document.getElementById("building_btn") == null && resource.eddie >= 2) {
         create_building_panel();
-        add_option_to_panel("warehouse");
+        add_option_and_function_to_panel("warehouse");
         create_exit_panel_btn(document.getElementById("buildings_panel"));
         create_building_btn();
     }
@@ -87,7 +88,7 @@ function create_exit_panel_btn(panel) {
     });
 }
 
-function add_option_to_panel(option) {
+function add_option_and_function_to_panel(option) {
     let panel_option = document.createElement("div");
     panel_option.setAttribute("id", option);
     panel_option.setAttribute("class", "panel_option");
@@ -98,15 +99,25 @@ function add_option_to_panel(option) {
         let selectedBuilding = building[option];
         if (enough_resources(selectedBuilding) && !selectedBuilding.built) {
             substract_resources(selectedBuilding);
-            selectedBuilding.built = true;
-            visual_disable(panel_option);
+            if (option !== "netrunner_den") {
+                selectedBuilding.built = true;
+                visual_disable(panel_option);
+            }
             updateUI();
-        }
 
-        if (option === "warehouse") {
-            check_enable_resources_panel();
-            check_enable_work_btn();
-            add_option_to_panel("netrunner_den")
+            switch (option) {
+                case "warehouse":
+                    check_enable_resources_panel();
+                    check_enable_work_btn();
+                    add_option_and_function_to_panel("netrunner_den");
+                    break;
+                case "netrunner_den":
+                    resource.netrunners += 5;
+                    building.netrunner_den.cost.eddies += 5;
+                    building.netrunner_den.cost.subroutines += 5;
+                    building.netrunner_den.amount++;
+                    updateUI();
+            }
         }
     });
 }
@@ -129,6 +140,8 @@ function work_event() {
     updateUI();
     visual_disable(work_btn);
     let work_timer = (45 - resource.netrunners) * 1000;
+    if (work_timer < 0)
+        work_timer = 0;
     work_btn.removeEventListener("click", work_event);
     setTimeout(function() {
         work_btn.style.filter = "";

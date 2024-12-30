@@ -185,3 +185,7 @@ La mayor complejidad de hoy ha sido encontrar las opacidades, z-index y position
 * ***JS***:
   * Habilito la aparición del **botón Work** e implemento su funcionalidad.
   * Surge un bug que no tengo tiempo de arreglar. Necesito controlar la correcta habilitación de los edificios Netrunner den, Data Farm y Black Market en el panel de edificios cuando se construye el warehouse.
+
+### Día 4:
+* ***JS***:
+  * Habilito la creación del edificio Netrunner Den,
