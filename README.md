@@ -184,8 +184,15 @@ La mayor complejidad de hoy ha sido encontrar las opacidades, z-index y position
 
 * ***JS***:
   * Habilito la aparición del **botón Work** e implemento su funcionalidad.
+  * Intento abstraer las funciones del programa con funciones como "enough_resources", "substract_resources", "create_building_btn" con la intención de facilitar el desarrollo. El 99% de las veces que hago esto, termino dedicando mas tiempo a modificar las funciones que a desarrollar la aplicación, al final NO uso las funciones porque malinterpreto la especificidad de las acciones y me siento chiquitito y estúpido. Lo mejor es hacer un boceto del programa rápido y feo pero funcional, y una vez se sabe mas o menos la forma que va a tener, se hace bien con todas estas pijadas y tal. No voy a hacer lo mejor y me conformaré con la mediocridad, como de costumbre.
   * Surge un bug que no tengo tiempo de arreglar. Necesito controlar la correcta habilitación de los edificios Netrunner den, Data Farm y Black Market en el panel de edificios cuando se construye el warehouse.
 
 ### Día 4:
+
+Hoy se me a ocurrido crear un **contenedor circular** que aparezca con **hover** diciendo el **CC** del botón si lo tiene. Esto se me ha ocurrido porque odio la vida, y lo voy a implementar porque me odio a mi mismo.
 * ***JS***:
-  * Habilito la creación del edificio Netrunner Den,
+  * Habilito la creación del edificio Netrunner Den.
+  * Arreglo bug. El botón para cerrar la ventana de edificios no funcionaba correctamente sin crear previamente el botón de trabajo.
+  * Arreglo bug. Los botones de data farm y black market se crean correctamente junto al de netrunner den.
+* ***CSS***:
+  * Arreglo la posición de los botones de edificios y trabajo.
