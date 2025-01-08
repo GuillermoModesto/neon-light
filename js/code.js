@@ -26,6 +26,15 @@ const building = {
         cost: { eddies: 0, subroutines: 8, daemons: 9, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
         built: false
     },
+    chrome_clinic: { 
+        cost: { eddies: 8, subroutines: 0, daemons: 10, netrunners: 0, implants: 0, engrams: 0, data: 5, rare_materials: 0 },
+        built: false
+    }
+};
+const CC = {
+    eddie: 250 * resource.eddie,
+    work: (45 - resource.netrunners) * 1000,
+    data: 20000
 };
 
 /* for getElapsedTime */
@@ -46,14 +55,14 @@ window.onload = function () {
 function generate_eddie(button) {
     button.disabled = true;
     visual_disable(button);
-    let eddie_timer = 250 * resource.eddie;
+    CC.eddie = 250 * resource.eddie;
     setTimeout(function () {
         resource.eddie++;
         check_building_btn();
         updateUI();
         button.disabled = false;
         button.style.filter = "";
-    }, eddie_timer);
+    }, CC.eddie);
 }
 
 function check_building_btn() {
@@ -126,10 +135,18 @@ function add_option_and_function_to_panel(option) {
                     building.netrunner_den.cost.eddies += 5;
                     building.netrunner_den.cost.subroutines += 5;
                     building.netrunner_den.amount++;
+                    break;
+                case "data_farm":
+                    setInterval(function() {
+                        resource.data++;
+                        updateUI();
+                    }, CC.data);
+                    add_option_and_function_to_panel("chrome_clinic");
+                    break;
             }
+            updateUI();
         }
     });
-    updateUI();
 }
 
 function check_enable_work_btn() {
@@ -147,16 +164,16 @@ function check_enable_work_btn() {
 function work_event() {
     updateUI();
     visual_disable(work_btn);
-    let work_timer = (45 - resource.netrunners) * 1000;
-    if (work_timer < 0)
-        work_timer = 0;
+    CC.work = (0 - resource.netrunners) * 1000;
+    if (CC.work < 0)
+        CC.work = 0;
     work_btn.removeEventListener("click", work_event);
     setTimeout(function() {
         work_btn.style.filter = "";
         resource.subroutines += random(0, (resource.netrunners + 2));
         resource.daemons += random(0, (resource.netrunners + 2));
         work_btn.addEventListener("click", work_event);
-    }, work_timer);
+    }, CC.work);
 }
 
 function random(min, max) {

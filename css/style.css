@@ -263,13 +263,13 @@
     -webkit-animation: slideInFade 600ms ease forwards;
 }
 
-#work_btn {
-  top: 52%;
-  z-index: 1;
+#building_btn {
+  top: 43.5%;
 }
 
-#building_btn {
-  top: 43%;
+#work_btn {
+  top: 54.5%;
+  z-index: 1;
 }
 
 .cyber_btn:hover {
