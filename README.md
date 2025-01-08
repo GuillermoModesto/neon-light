@@ -192,6 +192,8 @@ La mayor complejidad de hoy ha sido encontrar las opacidades, z-index y position
 Hoy se me a ocurrido crear un **contenedor circular** que aparezca con **hover** diciendo el **CC** del botón si lo tiene. Esto se me ha ocurrido porque odio la vida, y lo voy a implementar porque me odio a mi mismo.
 * ***JS***:
   * Habilito la creación del edificio Netrunner Den.
+  * Habilito la creación del data farm y su funcionalidad.
+  * Habilito el botón del chrome clinic.
   * Arreglo bug. El botón para cerrar la ventana de edificios no funcionaba correctamente sin crear previamente el botón de trabajo.
   * Arreglo bug. Los botones de data farm y black market se crean correctamente junto al de netrunner den.
 * ***CSS***:
