@@ -18,6 +18,14 @@ const building = {
         built: false,
         amount: 0 
     },
+    data_farm: { 
+        cost: { eddies: 8, subroutines: 9, daemons: 5, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
+        built: false
+    },
+    black_market: { 
+        cost: { eddies: 0, subroutines: 8, daemons: 9, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
+        built: false
+    },
 };
 
 /* for getElapsedTime */
@@ -80,7 +88,8 @@ function create_exit_panel_btn(panel) {
     exit_building.addEventListener("click", function () {
         panel.setAttribute("class", "cyber_panel--hidden cyber_panel--hidden--animation");
         document.getElementById("building_btn").style.zIndex = 3;
-        document.getElementById("work_btn").style.zIndex = 3;
+        if (document.getElementById("work_btn") !== null)
+            document.getElementById("work_btn").style.zIndex = 3;
         document.getElementById("overlay").style.zIndex = -1;
         for (const child of panel.children) {
             total_disable(child);
@@ -103,23 +112,24 @@ function add_option_and_function_to_panel(option) {
                 selectedBuilding.built = true;
                 visual_disable(panel_option);
             }
-            updateUI();
 
             switch (option) {
                 case "warehouse":
                     check_enable_resources_panel();
                     check_enable_work_btn();
                     add_option_and_function_to_panel("netrunner_den");
+                    add_option_and_function_to_panel("data_farm");
+                    add_option_and_function_to_panel("black_market");
                     break;
                 case "netrunner_den":
                     resource.netrunners += 5;
                     building.netrunner_den.cost.eddies += 5;
                     building.netrunner_den.cost.subroutines += 5;
                     building.netrunner_den.amount++;
-                    updateUI();
             }
         }
     });
+    updateUI();
 }
 
 function check_enable_work_btn() {
@@ -135,8 +145,6 @@ function check_enable_work_btn() {
 }
 
 function work_event() {
-    resource.subroutines += random(0, (resource.netrunners + 2));
-    resource.daemons += random(0, (resource.netrunners + 2));
     updateUI();
     visual_disable(work_btn);
     let work_timer = (45 - resource.netrunners) * 1000;
@@ -145,6 +153,8 @@ function work_event() {
     work_btn.removeEventListener("click", work_event);
     setTimeout(function() {
         work_btn.style.filter = "";
+        resource.subroutines += random(0, (resource.netrunners + 2));
+        resource.daemons += random(0, (resource.netrunners + 2));
         work_btn.addEventListener("click", work_event);
     }, work_timer);
 }
