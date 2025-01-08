@@ -264,12 +264,12 @@
 }
 
 #work_btn {
-  top: 380px;
+  top: 52%;
   z-index: 1;
 }
 
 #building_btn {
-  top: 300px;
+  top: 43%;
 }
 
 .cyber_btn:hover {
