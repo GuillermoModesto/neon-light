@@ -198,3 +198,10 @@ Hoy se me a ocurrido crear un **contenedor circular** que aparezca con **hover**
   * Arreglo bug. Los botones de data farm y black market se crean correctamente junto al de netrunner den.
 * ***CSS***:
   * Arreglo la posición de los botones de edificios y trabajo.
+
+### Día 5:
+
+* ***JS***:
+  * Abstraigo mas la generación y el almacenamiento de los CC. Esto es totalmente innecesario, pero lo hago igualmente.
+* ***CSS***:
+  * Muevo un poco los botones de trabajo y edificios. Esta frase va a ser repetida muy a menudo.
