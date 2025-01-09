@@ -1,4 +1,3 @@
-/* reseteamos estilos */
 html, body {
     height: 100%;
     margin: 0;
@@ -16,9 +15,9 @@ html, body {
     -moz-box-sizing: border-box;
 }
 body{
-    min-height: 100vh; /* ocupa el 100% de la altura vertical que tiene el navegador */
-    scroll-behavior: smooth; /* scroll suavizado */
-    text-rendering: optimizeSpeed; /* renderice fuentes de forma más rápida */
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
     line-height: 1.5;
 }
 ul, ol{
@@ -32,7 +31,7 @@ a{
     color: inherit;
 }
 p a{
-    display: inline; /* esos enlaces dentro de un párrafo que se presenten en línea para que no se produzca un salto de línea */
+    display: inline;
 }
 
 img, video, iframe, picture, figure{
@@ -46,4 +45,3 @@ form, input, select, textarea, button, label{
     font-size: inherit;
     color: inherit;
 } 
-/* fin de reseteo de estilos */

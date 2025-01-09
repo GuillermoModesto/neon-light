@@ -32,8 +32,8 @@ const building = {
     }
 };
 const CC = {
-    eddie: 250 * resource.eddie,
-    work: (45 - resource.netrunners) * 1000,
+    eddie: get_eddieCC(),
+    work: get_workCC(),
     data: 20000
 };
 
@@ -55,7 +55,7 @@ window.onload = function () {
 function generate_eddie(button) {
     button.disabled = true;
     visual_disable(button);
-    CC.eddie = 250 * resource.eddie;
+    CC.eddie = get_eddieCC();
     setTimeout(function () {
         resource.eddie++;
         check_building_btn();
@@ -63,6 +63,10 @@ function generate_eddie(button) {
         button.disabled = false;
         button.style.filter = "";
     }, CC.eddie);
+}
+
+function get_eddieCC() {
+    return 250 * resource.eddie;
 }
 
 function check_building_btn() {
@@ -164,7 +168,7 @@ function check_enable_work_btn() {
 function work_event() {
     updateUI();
     visual_disable(work_btn);
-    CC.work = (0 - resource.netrunners) * 1000;
+    CC.work = get_workCC();
     if (CC.work < 0)
         CC.work = 0;
     work_btn.removeEventListener("click", work_event);
@@ -174,6 +178,10 @@ function work_event() {
         resource.daemons += random(0, (resource.netrunners + 2));
         work_btn.addEventListener("click", work_event);
     }, CC.work);
+}
+
+function get_workCC() {
+    return (0 - resource.netrunners) * 1000;
 }
 
 function random(min, max) {
