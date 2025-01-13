@@ -111,13 +111,13 @@ function create_building_panel() {
 
 function create_black_market_panel() {
 
-    let building_panel = document.createElement("div");
-    building_panel.setAttribute("class", "cyber_panel--hidden");
-    building_panel.setAttribute("id", "black_market_panel");
-    document.getElementsByClassName("resources")[0].appendChild(building_panel);
-    create_exit_panel_btn(building_panel);
+    let black_market_panel = document.createElement("div");
+    black_market_panel.setAttribute("class", "cyber_panel--hidden");
+    black_market_panel.setAttribute("id", "black_market_panel");
+    document.getElementsByClassName("resources")[0].appendChild(black_market_panel);
+    create_exit_panel_btn(black_market_panel);
     
-    building_panel.appendChild()
+    
 }
 
 function create_exit_panel_btn(panel) {
