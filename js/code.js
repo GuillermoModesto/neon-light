@@ -121,6 +121,7 @@ function create_exit_panel_btn(panel) {
 
 function add_option_and_function_to_panel(option) {
     let panel_option = document.createElement("div");
+    let panel_option_price = document.createElement("div");
     panel_option.setAttribute("id", option);
     panel_option.setAttribute("class", "panel_option");
     panel_option.appendChild(document.createTextNode(option));
