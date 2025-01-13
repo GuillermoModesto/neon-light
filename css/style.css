@@ -427,3 +427,7 @@
 .exit_button:active {
   transform: scale(0.9);
 }
+
+#black_market_panel {
+  position: absolute;
+}

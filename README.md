@@ -197,7 +197,7 @@ Hoy se me a ocurrido crear un **contenedor circular** que aparezca con **hover**
   * Arreglo bug. El botón para cerrar la ventana de edificios no funcionaba correctamente sin crear previamente el botón de trabajo.
   * Arreglo bug. Los botones de data farm y black market se crean correctamente junto al de netrunner den.
 * ***CSS***:
-  * Arreglo la posición de los botones de edificios y trabajo.
+  * Modifico un poco la posición de los botones de edificios y trabajo.
 
 ### Día 5:
 

@@ -23,7 +23,7 @@ const building = {
         built: false
     },
     black_market: { 
-        cost: { eddies: 0, subroutines: 8, daemons: 9, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
+        cost: { eddies: 0, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 }, // 0 8 9 0 0 0 0 0
         built: false
     },
     chrome_clinic: { 
@@ -91,6 +91,15 @@ function create_building_panel() {
     document.getElementsByClassName("resources")[0].appendChild(building_panel);
 }
 
+function create_black_market_panel() {
+    let building_panel = document.createElement("div");
+    building_panel.setAttribute("class", "cyber_panel--hidden");
+    building_panel.setAttribute("id", "black_market_panel");
+    document.getElementsByClassName("resources")[0].appendChild(building_panel);
+    
+    building_panel.appendChild()
+}
+
 function create_exit_panel_btn(panel) {
     let exit_building = document.createElement("button");
     exit_building.setAttribute("class", "exit_button");
@@ -147,6 +156,8 @@ function add_option_and_function_to_panel(option) {
                     }, CC.data);
                     add_option_and_function_to_panel("chrome_clinic");
                     break;
+                case "black_market":
+                    create_black_market_panel();
             }
             updateUI();
         }
