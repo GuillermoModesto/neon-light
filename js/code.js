@@ -187,6 +187,7 @@ function add_option_and_function_to_panel(option) {
                     add_option_and_function_to_panel("chrome_clinic");
                     break;
                 case "black_market":
+                    check_enable_black_market_btn();
                     create_black_market_panel();
             }
             updateUI();
@@ -205,6 +206,22 @@ function check_enable_work_btn() {
         document.getElementsByClassName("game-area")[0].appendChild(work_btn);
 
         work_btn.addEventListener("click", work_event);
+    }
+}
+
+function check_enable_black_market_btn() {
+
+    if (document.getElementById("black_market_panel") == null) {
+
+        let black_market_btn = document.createElement("div");
+        black_market_btn.setAttribute("class", "cyber_btn");
+        black_market_btn.setAttribute("id", "black_market_btn");
+        black_market_btn.appendChild(document.createTextNode("black_market"));
+        document.getElementsByClassName("game-area")[0].appendChild(black_market_btn);
+
+        black_market_btn.addEventListener("click", function() {
+
+        });
     }
 }
 
