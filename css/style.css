@@ -431,3 +431,8 @@
 #black_market_panel {
   position: absolute;
 }
+
+#black_market_btn {
+  position: absolute;
+  top: 61%;
+}

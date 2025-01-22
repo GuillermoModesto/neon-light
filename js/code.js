@@ -70,54 +70,45 @@ function generate_eddie(button) {
     setTimeout(function () {
 
         resource.eddie++;
-        check_building_btn();
+
+        // check and enable building button if possible
+        if (document.getElementById("building_btn") == null && resource.eddie >= 2) {
+
+            // create building panel
+            let building_panel = document.createElement("div");
+            building_panel.setAttribute("class", "cyber_panel--hidden");
+            building_panel.setAttribute("id", "buildings_panel");
+            document.getElementsByClassName("resources")[0].appendChild(building_panel);
+    
+            add_option_and_function_to_panel("warehouse");
+            create_exit_panel_btn(document.getElementById("buildings_panel"));
+    
+            // create building button
+            let building_btn = document.createElement("div");
+            building_btn.appendChild(document.createTextNode("Buildings"));
+            building_btn.setAttribute("id", "building_btn");
+            building_btn.setAttribute("class", "cyber_btn");
+            document.getElementsByClassName("game-area")[0].appendChild(building_btn);
+    
+            building_btn.addEventListener("click", function () {
+    
+                let panel = document.getElementById("buildings_panel");
+                document.getElementById("buildings_panel").setAttribute("class", "cyber_panel");
+                building_btn.style.zIndex = 1;
+                if (document.getElementById("work_btn") != null)
+                    document.getElementById("work_btn").style.zIndex = 1;
+                document.getElementById("overlay").style.zIndex = 0;
+                for (const child of panel.children) {
+    
+                    total_enable(child);
+                }
+            });
+        }
+
         updateUI();
         button.disabled = false;
         button.style.filter = "";
     }, CC.eddie);
-}
-
-function get_eddieCC() {
-
-    return 250 * resource.eddie;
-}
-
-function check_building_btn() {
-
-    if (document.getElementById("building_btn") == null && resource.eddie >= 2) {
-
-        create_building_panel();
-        add_option_and_function_to_panel("warehouse");
-        create_exit_panel_btn(document.getElementById("buildings_panel"));
-        create_building_btn();
-    }
-}
-
-function check_enable_resources_panel() {
-
-    if (document.getElementById("resource_list").hidden && building.warehouse.built) {
-
-        document.getElementById("resource_list").hidden = false;
-    }
-}
-
-function create_building_panel() {
-
-    let building_panel = document.createElement("div");
-    building_panel.setAttribute("class", "cyber_panel--hidden");
-    building_panel.setAttribute("id", "buildings_panel");
-    document.getElementsByClassName("resources")[0].appendChild(building_panel);
-}
-
-function create_black_market_panel() {
-
-    let black_market_panel = document.createElement("div");
-    black_market_panel.setAttribute("class", "cyber_panel--hidden");
-    black_market_panel.setAttribute("id", "black_market_panel");
-    document.getElementsByClassName("resources")[0].appendChild(black_market_panel);
-    create_exit_panel_btn(black_market_panel);
-    
-    
 }
 
 function create_exit_panel_btn(panel) {
@@ -166,8 +157,39 @@ function add_option_and_function_to_panel(option) {
             switch (option) {
 
                 case "warehouse":
-                    check_enable_resources_panel();
-                    check_enable_work_btn();
+
+                    // check and enable resources panel if possible
+                    if (document.getElementById("resource_list").hidden && building.warehouse.built) {
+
+                        document.getElementById("resource_list").hidden = false;
+                    }
+                    
+                    // check and enable work button if possible
+                    if (document.getElementById("work_btn") == null) {
+
+                        let work_btn = document.createElement("div");
+                        work_btn.setAttribute("class", "cyber_btn");
+                        work_btn.setAttribute("id", "work_btn");
+                        work_btn.appendChild(document.createTextNode("work"));
+                        document.getElementsByClassName("game-area")[0].appendChild(work_btn);
+                
+                        work_btn.addEventListener("click", function() {
+                            updateUI();
+                            visual_disable(work_btn);
+                            CC.work = get_workCC();
+                            if (CC.work < 0)
+                                CC.work = 0;
+                            work_btn.removeEventListener("click", work_event);
+                            setTimeout(function() {
+
+                                work_btn.style.filter = "";
+                                resource.subroutines += random(0, (resource.netrunners + 2));
+                                resource.daemons += random(0, (resource.netrunners + 2));
+                                work_btn.addEventListener("click", work_event);
+                            }, CC.work);
+                        });
+                    }
+
                     add_option_and_function_to_panel("netrunner_den");
                     add_option_and_function_to_panel("data_farm");
                     add_option_and_function_to_panel("black_market");
@@ -187,64 +209,42 @@ function add_option_and_function_to_panel(option) {
                     add_option_and_function_to_panel("chrome_clinic");
                     break;
                 case "black_market":
-                    check_enable_black_market_btn();
-                    create_black_market_panel();
+
+                    // check and enable black market button if possible
+                    if (document.getElementById("black_market_panel") == null) {
+
+                        let black_market_btn = document.createElement("div");
+                        black_market_btn.setAttribute("class", "cyber_btn");
+                        black_market_btn.setAttribute("id", "black_market_btn");
+                        black_market_btn.appendChild(document.createTextNode("black_market"));
+                        document.getElementsByClassName("game-area")[0].appendChild(black_market_btn);
+                
+                        black_market_btn.addEventListener("click", function() {
+                            
+                        });
+                    }
+
+                    // black market panel
+                    let black_market_panel = document.createElement("div");
+                    black_market_panel.setAttribute("class", "cyber_panel--hidden");
+                    black_market_panel.setAttribute("id", "black_market_panel");
+                    document.getElementsByClassName("resources")[0].appendChild(black_market_panel);
+                    create_exit_panel_btn(black_market_panel);
+                    break;
             }
             updateUI();
         }
     });
 }
 
-function check_enable_work_btn() {
+function get_eddieCC() {
 
-    if (document.getElementById("work_btn") == null) {
-
-        let work_btn = document.createElement("div");
-        work_btn.setAttribute("class", "cyber_btn");
-        work_btn.setAttribute("id", "work_btn");
-        work_btn.appendChild(document.createTextNode("work"));
-        document.getElementsByClassName("game-area")[0].appendChild(work_btn);
-
-        work_btn.addEventListener("click", work_event);
-    }
-}
-
-function check_enable_black_market_btn() {
-
-    if (document.getElementById("black_market_panel") == null) {
-
-        let black_market_btn = document.createElement("div");
-        black_market_btn.setAttribute("class", "cyber_btn");
-        black_market_btn.setAttribute("id", "black_market_btn");
-        black_market_btn.appendChild(document.createTextNode("black_market"));
-        document.getElementsByClassName("game-area")[0].appendChild(black_market_btn);
-
-        black_market_btn.addEventListener("click", function() {
-
-        });
-    }
-}
-
-function work_event() {
-
-    updateUI();
-    visual_disable(work_btn);
-    CC.work = get_workCC();
-    if (CC.work < 0)
-        CC.work = 0;
-    work_btn.removeEventListener("click", work_event);
-    setTimeout(function() {
-
-        work_btn.style.filter = "";
-        resource.subroutines += random(0, (resource.netrunners + 2));
-        resource.daemons += random(0, (resource.netrunners + 2));
-        work_btn.addEventListener("click", work_event);
-    }, CC.work);
+    return 250 * resource.eddie;
 }
 
 function get_workCC() {
 
-    return (0 - resource.netrunners) * 1000;
+    return (0 - resource.netrunners) * 1000; // -------------------------------------------------------------------------------
 }
 
 function random(min, max) {
@@ -274,29 +274,6 @@ function substract_resources(selectedBuilding) {
     resource.engrams -= selectedBuilding.cost.engrams;
     resource.data -= selectedBuilding.cost.data;
     resource.rare_materials -= selectedBuilding.cost.rare_materials;
-}
-
-function create_building_btn() {
-
-    let building_btn = document.createElement("div");
-    building_btn.appendChild(document.createTextNode("Buildings"));
-    building_btn.setAttribute("id", "building_btn");
-    building_btn.setAttribute("class", "cyber_btn");
-    document.getElementsByClassName("game-area")[0].appendChild(building_btn);
-
-    building_btn.addEventListener("click", function () {
-
-        let panel = document.getElementById("buildings_panel");
-        document.getElementById("buildings_panel").setAttribute("class", "cyber_panel");
-        building_btn.style.zIndex = 1;
-        if (document.getElementById("work_btn") != null)
-            document.getElementById("work_btn").style.zIndex = 1;
-        document.getElementById("overlay").style.zIndex = 0;
-        for (const child of panel.children) {
-
-            total_enable(child);
-        }
-    });
 }
 
 function total_enable(element) {

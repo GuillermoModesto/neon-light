@@ -205,3 +205,9 @@ Hoy se me a ocurrido crear un **contenedor circular** que aparezca con **hover**
   * Abstraigo mas la generación y el almacenamiento de los CC. Esto es totalmente innecesario, pero lo hago igualmente.
 * ***CSS***:
   * Muevo un poco los botones de trabajo y edificios. Esta frase va a ser repetida muy a menudo.
+
+### Día 6:
+
+Pensamientos generales de suicidio. Deseos a nivel intermedio/avanzado.
+* ***JS***:
+  * Refactorización. Recuerdas cuando dije que quería abstraer funciones? Y que era muy mala idea en este punto del desarrollo? Pues eso.
