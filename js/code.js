@@ -202,8 +202,11 @@ function add_option_and_function_to_panel(option) {
                     }
 
                     add_option_and_function_to_panel("netrunner_den");
+                    create_price_tag(document.getElementById("netrunner_den"));
                     add_option_and_function_to_panel("data_farm");
+                    create_price_tag(document.getElementById("data_farm"));
                     add_option_and_function_to_panel("black_market");
+                    create_price_tag(document.getElementById("black_market"));
                     break;
                 case "netrunner_den":
                     resource.netrunners += 5;

@@ -433,10 +433,10 @@
   top: -5px;
   right: -5px;
   background: var(--color-amarillento);
-  color: white;
+  color: black;
   font-family: 'Cyber2', sans-serif;
-  font-size: 18px;
-  width: 30px;
+  font-size: 12px;
+  width: 60px;
   height: 30px;
   border: none;
   box-shadow: 0 0 10px var(--color-black), 0 0 15px var(--color-amarillento);;
