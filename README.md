@@ -211,3 +211,9 @@ Hoy se me a ocurrido crear un **contenedor circular** que aparezca con **hover**
 Pensamientos generales de suicidio. Deseos a nivel intermedio/avanzado.
 * ***JS***:
   * Refactorización. Recuerdas cuando dije que quería abstraer funciones? Y que era muy mala idea en este punto del desarrollo? Pues eso.
+
+### Día 7:
+
+"Si quieres brillar como el sol, primero debes arder como él." -Adolf Hitler
+* ***JS***:
+  * Termino de crear y arreglar el boton y el panel del black market con su funcionalidad y animación de aparecer y desaparecer. Si tubiera que elegir entre perder un huevo en un ataque de jabalí salvaje con rabia o trabajar con CSS, ya sabes lo que eligiría.

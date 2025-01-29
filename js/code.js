@@ -97,6 +97,10 @@ function generate_eddie(button) {
                 building_btn.style.zIndex = 1;
                 if (document.getElementById("work_btn") != null)
                     document.getElementById("work_btn").style.zIndex = 1;
+                if (document.getElementById("building_btn") != null)
+                    document.getElementById("building_btn").style.zIndex = 1;
+                if (document.getElementById("black_market_btn") != null)
+                    document.getElementById("black_market_btn").style.zIndex = 1;
                 document.getElementById("overlay").style.zIndex = 0;
                 for (const child of panel.children) {
     
@@ -123,12 +127,17 @@ function create_exit_panel_btn(panel) {
 
         panel.setAttribute("class", "cyber_panel--hidden cyber_panel--hidden--animation");
         document.getElementById("building_btn").style.zIndex = 3;
-        if (document.getElementById("work_btn") !== null)
+        if (document.getElementById("work_btn") != null)
             document.getElementById("work_btn").style.zIndex = 3;
+        if (document.getElementById("building_btn") != null)
+            document.getElementById("building_btn").style.zIndex = 3;
+        if (document.getElementById("black_market_btn") != null)
+            document.getElementById("black_market_btn").style.zIndex = 3;
         document.getElementById("overlay").style.zIndex = -1;
         for (const child of panel.children) {
 
-            total_disable(child);
+            if (child.getAttribute("id") != "exit_building")
+                total_disable(child);
         }
     });
 }
@@ -173,21 +182,7 @@ function add_option_and_function_to_panel(option) {
                         work_btn.appendChild(document.createTextNode("work"));
                         document.getElementsByClassName("game-area")[0].appendChild(work_btn);
                 
-                        work_btn.addEventListener("click", function() {
-                            updateUI();
-                            visual_disable(work_btn);
-                            CC.work = get_workCC();
-                            if (CC.work < 0)
-                                CC.work = 0;
-                            work_btn.removeEventListener("click", work_event);
-                            setTimeout(function() {
-
-                                work_btn.style.filter = "";
-                                resource.subroutines += random(0, (resource.netrunners + 2));
-                                resource.daemons += random(0, (resource.netrunners + 2));
-                                work_btn.addEventListener("click", work_event);
-                            }, CC.work);
-                        });
+                        work_btn.addEventListener("click", work_event);
                     }
 
                     add_option_and_function_to_panel("netrunner_den");
@@ -209,32 +204,63 @@ function add_option_and_function_to_panel(option) {
                     add_option_and_function_to_panel("chrome_clinic");
                     break;
                 case "black_market":
-
-                    // check and enable black market button if possible
-                    if (document.getElementById("black_market_panel") == null) {
-
-                        let black_market_btn = document.createElement("div");
-                        black_market_btn.setAttribute("class", "cyber_btn");
-                        black_market_btn.setAttribute("id", "black_market_btn");
-                        black_market_btn.appendChild(document.createTextNode("black_market"));
-                        document.getElementsByClassName("game-area")[0].appendChild(black_market_btn);
-                
-                        black_market_btn.addEventListener("click", function() {
-                            
-                        });
-                    }
-
                     // black market panel
                     let black_market_panel = document.createElement("div");
                     black_market_panel.setAttribute("class", "cyber_panel--hidden");
                     black_market_panel.setAttribute("id", "black_market_panel");
                     document.getElementsByClassName("resources")[0].appendChild(black_market_panel);
                     create_exit_panel_btn(black_market_panel);
+
+                    // check and enable black market button if possible
+                    if (document.getElementById("black_market_btn") == null) {
+
+                        let black_market_btn = document.createElement("div");
+                        black_market_btn.setAttribute("class", "cyber_btn");
+                        black_market_btn.setAttribute("id", "black_market_btn");
+                        black_market_btn.style.zIndex = 1;
+                        black_market_btn.appendChild(document.createTextNode("black_market"));
+                        document.getElementsByClassName("game-area")[0].appendChild(black_market_btn);
+                
+                        black_market_btn.addEventListener("click", function() {
+                            
+                            let panel = document.getElementById("buildings_panel");
+                            document.getElementById("black_market_panel").setAttribute("class", "cyber_panel");
+                            black_market_btn.style.zIndex = 1;
+                            if (document.getElementById("work_btn") != null)
+                                document.getElementById("work_btn").style.zIndex = 1;
+                            if (document.getElementById("building_btn") != null)
+                                document.getElementById("building_btn").style.zIndex = 1;
+                            if (document.getElementById("black_market_btn") != null)
+                                document.getElementById("black_market_btn").style.zIndex = 1;
+                            document.getElementById("overlay").style.zIndex = 0;
+                            for (const child of panel.children) {
+                
+                                total_enable(child);
+                            }
+                        });
+                    }
                     break;
             }
             updateUI();
         }
     });
+}
+
+function work_event() {
+
+    updateUI();
+    visual_disable(work_btn);
+    CC.work = get_workCC();
+    if (CC.work < 0)
+        CC.work = 0;
+    work_btn.removeEventListener("click", work_event);
+    setTimeout(function() {
+
+        work_btn.style.filter = "";
+        resource.subroutines += random(0, (resource.netrunners + 2));
+        resource.daemons += random(0, (resource.netrunners + 2));
+        work_btn.addEventListener("click", work_event);
+    }, CC.work);
 }
 
 function get_eddieCC() {
