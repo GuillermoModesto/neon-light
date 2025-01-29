@@ -30,6 +30,10 @@
   --color-cromo: #BDC3C7;
 }
 
+* {
+  font-weight: 400;
+}
+
 .container {
   position: relative;
   display: flex;
@@ -371,6 +375,10 @@
 }
 
 .panel_option {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   background-color: var(--color-azulado);
   width: 45%;
   max-height: 30%;
@@ -429,18 +437,18 @@
 }
 
 .price_tag_button {
-  position: absolute;
-  top: -5px;
-  right: -5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: var(--color-amarillento);
   color: black;
   font-family: 'Cyber2', sans-serif;
-  font-size: 12px;
-  width: 60px;
-  height: 30px;
+  font-size: 10px;
+  text-align: center;
+  width: 70px;
+  height: 45px;
   border: none;
   box-shadow: 0 0 10px var(--color-black), 0 0 15px var(--color-amarillento);;
-  transition: all 200ms ease;
   z-index: 3;
 }
 

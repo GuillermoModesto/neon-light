@@ -152,7 +152,7 @@ function create_price_tag(element) {
     let element_cost = building[element.getAttribute("id")]["cost"];
     for (const resource in element_cost) {
         if (element_cost[resource] != 0) {
-            cost_text = `${cost_text}\n${resource}: ${element_cost[resource]}`;
+            cost_text = `${cost_text}\n${resource}:${element_cost[resource]}`;
         }
     }
     price_tag.appendChild(document.createTextNode(cost_text));
