@@ -218,3 +218,6 @@ Pensamientos generales de suicidio. Deseos a nivel intermedio/avanzado.
 * ***JS***:
   * Termino de crear y arreglar el boton y el panel del black market con su funcionalidad y animación de aparecer y desaparecer. Si tubiera que elegir entre perder un huevo en un ataque de jabalí salvaje con rabia o trabajar con CSS, ya sabes lo que eligiría.
   * Estoy intentando añadir el precio a cada elemento que lo tenga de forma dinámica. Después de eso voy a depilarme los ojos.
+  * Termino de desarrollar la función de arriba.
+* ***CSS***:
+  * Tube que crear una nueva clase para los precios de los elementos. Siento ira y sufrimiento.
