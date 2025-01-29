@@ -227,3 +227,4 @@ Pensamientos generales de suicidio. Deseos a nivel intermedio/avanzado.
 Ingredientes: un coche antiguo de gasolina, cinta de carrocero, una manguera, un sitio tranquilo.
 * ***JS***:
   * Termino de implementar el black market con sus precios.
+  * Me doy cuenta de que tengo que actualizar visualmente el precio del netrunner den.

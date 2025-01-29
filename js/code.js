@@ -29,7 +29,7 @@ const building = {
     },
     black_market: { 
 
-        cost: { eddies: 0, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 }, // 0 8 9 0 0 0 0 0
+        cost: { eddies: 0, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 }, // 0 8 9 0 0 0 0 0 -------------------------------------
         built: false
     },
     chrome_clinic: { 
@@ -317,7 +317,7 @@ function get_eddieCC() {
 
 function get_workCC() {
 
-    return (0 - resource.netrunners) * 1000; // -------------------------------------------------------------------------------
+    return (0 - resource.netrunners) * 1000; // ------------------------------------------------------------------------------------------------------------------------
 }
 
 function random(min, max) {
