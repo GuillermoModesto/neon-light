@@ -217,3 +217,4 @@ Pensamientos generales de suicidio. Deseos a nivel intermedio/avanzado.
 "Si quieres brillar como el sol, primero debes arder como él." -Adolf Hitler
 * ***JS***:
   * Termino de crear y arreglar el boton y el panel del black market con su funcionalidad y animación de aparecer y desaparecer. Si tubiera que elegir entre perder un huevo en un ataque de jabalí salvaje con rabia o trabajar con CSS, ya sabes lo que eligiría.
+  * Estoy intentando añadir el precio a cada elemento que lo tenga de forma dinámica. Después de eso voy a depilarme los ojos.

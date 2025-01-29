@@ -81,6 +81,7 @@ function generate_eddie(button) {
             document.getElementsByClassName("resources")[0].appendChild(building_panel);
     
             add_option_and_function_to_panel("warehouse");
+            create_price_tag(document.getElementById("warehouse"));
             create_exit_panel_btn(document.getElementById("buildings_panel"));
     
             // create building button
@@ -142,10 +143,25 @@ function create_exit_panel_btn(panel) {
     });
 }
 
+function create_price_tag(element) {
+
+    let price_tag = document.createElement("div");
+    price_tag.setAttribute("class", "price_tag_button");
+
+    let cost_text = "";
+    let element_cost = building[element.getAttribute("id")]["cost"];
+    for (const resource in element_cost) {
+        if (element_cost[resource] != 0) {
+            cost_text = `${cost_text}\n${resource}: ${element_cost[resource]}`;
+        }
+    }
+    price_tag.appendChild(document.createTextNode(cost_text));
+    element.appendChild(price_tag);
+}
+
 function add_option_and_function_to_panel(option) {
 
     let panel_option = document.createElement("div");
-    let panel_option_price = document.createElement("div");
     panel_option.setAttribute("id", option);
     panel_option.setAttribute("class", "panel_option");
     panel_option.appendChild(document.createTextNode(option));
