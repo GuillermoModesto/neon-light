@@ -38,6 +38,11 @@ const building = {
         built: false
     }
 };
+const black_market = {
+    rare_materials: { eddies: 3, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
+    subroutines: { eddies: 1, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
+    daemons: { eddies: 1, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 }
+};
 const CC = {
 
     eddie: get_eddieCC(),
@@ -230,6 +235,29 @@ function add_option_and_function_to_panel(option) {
                     document.getElementsByClassName("resources")[0].appendChild(black_market_panel);
                     create_exit_panel_btn(black_market_panel);
 
+                    // black market elements and costs
+                    for (const material in black_market) {
+                        // element
+                        let tag = document.createElement("div");
+                        tag.appendChild(document.createTextNode(material));
+                        tag.setAttribute("class", "panel_option");
+                        tag.setAttribute("id", material);
+                        black_market_panel.appendChild(tag);
+                        // price tag
+                        let price_tag = document.createElement("div");
+                        price_tag.setAttribute("class", "price_tag_button");
+                        price_tag.appendChild(document.createTextNode(`eddies:${black_market[material]["eddies"]}`));
+                        tag.appendChild(price_tag);
+                        // functionality
+                        tag.addEventListener('click', function() {
+                            if (resource.eddie >= black_market[material]["eddies"]) {
+                                resource.eddie -= black_market[material]["eddies"];
+                                resource[material]++;
+                            }
+                            updateUI();
+                        });
+                    }
+
                     // check and enable black market button if possible
                     if (document.getElementById("black_market_btn") == null) {
 
@@ -242,7 +270,7 @@ function add_option_and_function_to_panel(option) {
                 
                         black_market_btn.addEventListener("click", function() {
                             
-                            let panel = document.getElementById("buildings_panel");
+                            let panel = document.getElementById("black_market_panel");
                             document.getElementById("black_market_panel").setAttribute("class", "cyber_panel");
                             black_market_btn.style.zIndex = 1;
                             if (document.getElementById("work_btn") != null)

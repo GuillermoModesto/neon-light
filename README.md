@@ -221,3 +221,9 @@ Pensamientos generales de suicidio. Deseos a nivel intermedio/avanzado.
   * Termino de desarrollar la función de arriba.
 * ***CSS***:
   * Tube que crear una nueva clase para los precios de los elementos. Siento ira y sufrimiento.
+
+### Día 8:
+
+Ingredientes: un coche antiguo de gasolina, cinta de carrocero, una manguera, un sitio tranquilo.
+* ***JS***:
+  * Termino de implementar el black market con sus precios.

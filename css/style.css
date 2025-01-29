@@ -25,7 +25,7 @@
   --color-morado: #A700FF;
   --color-morado-brillante: #b937ff;
   --color-amarillento: #fffb00;
-  --color-amarillento-secundario: #ffee00;
+  --color-amarillento-secundario: #c7ba02d0;
   --color-azulado: #01d2f7;
   --color-azulado-oscuro: #0098b3;
   --color-cromo: #BDC3C7;
@@ -377,18 +377,18 @@
 
 .panel_option {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: var(--color-azulado);
   width: 45%;
-  max-height: 30%;
+  height: 27%;
+  max-width: 100%;
+  max-height: 100%;
   padding: 5px;
   margin: 8px;
   box-shadow: 0 0 15px var(--color-cromo), 0 0 25px var(--color-rojizo-brillante);
   cursor: pointer;
-  text-align: center;
-  align-content: center;
   transition: all 200ms ease;
 }
 
@@ -455,6 +455,7 @@
 
 #black_market_panel {
   position: absolute;
+  bottom: 22%;
 }
 
 #black_market_btn {
