@@ -25,6 +25,7 @@
   --color-morado: #A700FF;
   --color-morado-brillante: #b937ff;
   --color-amarillento: #fffb00;
+  --color-amarillento-secundario: #ffee00;
   --color-azulado: #01d2f7;
   --color-azulado-oscuro: #0098b3;
   --color-cromo: #BDC3C7;
@@ -440,7 +441,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--color-amarillento);
+  background: var(--color-amarillento-secundario);
   color: black;
   font-family: 'Cyber2', sans-serif;
   font-size: 10px;
@@ -448,7 +449,7 @@
   width: 70px;
   height: 45px;
   border: none;
-  box-shadow: 0 0 10px var(--color-black), 0 0 15px var(--color-amarillento);;
+  box-shadow: 0 0 10px var(--color-black), 0 0 15px var(--color-amarillento-secundario);;
   z-index: 3;
 }
 
