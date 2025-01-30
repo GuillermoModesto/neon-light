@@ -224,7 +224,7 @@ Pensamientos generales de suicidio. Deseos a nivel intermedio/avanzado.
 
 ### Día 8:
 
-Ingredientes: un coche antiguo de gasolina, cinta de carrocero, una manguera, un sitio tranquilo.
+Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de carrocero, una manguera larga y flexible, un sitio tranquilo y apartado.
 * ***JS***:
   * Termino de implementar el black market con sus precios.
   * Me doy cuenta de que tengo que actualizar visualmente el precio del netrunner den.
