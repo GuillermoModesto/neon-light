@@ -231,6 +231,6 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 
 ### Día 8:
 
-<img src="https://fotografias.larazon.es/clipping/cmsimages02/2019/08/22/B8541FD6-9A46-44D4-A045-F6724924490D/98.jpg?crop=377,212,x0,y0&width=1900&height=1069&optimize=low&format=webply" width="100px" height="100px">
+<img src="https://fotografias.larazon.es/clipping/cmsimages02/2019/08/22/B8541FD6-9A46-44D4-A045-F6724924490D/98.jpg?crop=377,212,x0,y0&width=1900&height=1069&optimize=low&format=webply" width="150px" height="100px">
 * ***JS***:
   * Arreglo el bug y el precio del netrunner den se actualiza correctamente.
