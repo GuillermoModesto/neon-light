@@ -229,7 +229,7 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
   * Termino de implementar el black market con sus precios.
   * Me doy cuenta de que tengo que actualizar visualmente el precio del netrunner den.
 
-### Día 8:
+### Día 9:
 
 <img src="https://fotografias.larazon.es/clipping/cmsimages02/2019/08/22/B8541FD6-9A46-44D4-A045-F6724924490D/98.jpg?crop=377,212,x0,y0&width=1900&height=1069&optimize=low&format=webply" width="300px" height="200px">
 
