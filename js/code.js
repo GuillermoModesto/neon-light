@@ -218,6 +218,18 @@ function add_option_and_function_to_panel(option) {
                     building.netrunner_den.cost.eddies += 5;
                     building.netrunner_den.cost.subroutines += 5;
                     building.netrunner_den.amount++;
+
+                    //update price tag
+                    let price_tag = document.getElementById("netrunner_den").childNodes[1];
+
+                    let cost_text = "";
+                    let element_cost = building["netrunner_den"]["cost"];
+                    for (const resource in element_cost) {
+                        if (element_cost[resource] != 0) {
+                            cost_text = `${cost_text}\n${resource}:${element_cost[resource]}`;
+                        }
+                    }
+                    price_tag.innerText = cost_text;
                     break;
                 case "data_farm":
                     setInterval(function() {
@@ -226,6 +238,9 @@ function add_option_and_function_to_panel(option) {
                         updateUI();
                     }, CC.data);
                     add_option_and_function_to_panel("chrome_clinic");
+                    break;
+                case "chrome_clinic":
+
                     break;
                 case "black_market":
                     // black market panel
