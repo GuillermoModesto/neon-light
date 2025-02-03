@@ -240,7 +240,7 @@ function add_option_and_function_to_panel(option) {
                     add_option_and_function_to_panel("chrome_clinic");
                     break;
                 case "chrome_clinic":
-
+                    
                     break;
                 case "black_market":
                     // black market panel
