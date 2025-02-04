@@ -1,13 +1,13 @@
 const resource = { 
 
     eddie: 0,
-    subroutines: 0,
-    daemons: 0,
-    netrunners: 0,
-    implants: 0,
-    engrams: 0,
-    data: 0,
-    rare_materials: 0
+    subroutines: 100,
+    daemons: 100,
+    netrunners: 100,
+    implants: 100,
+    engrams: 100,
+    data: 100,
+    rare_materials: 100
 };
 const building = {
 
@@ -35,6 +35,11 @@ const building = {
     chrome_clinic: { 
 
         cost: { eddies: 8, subroutines: 0, daemons: 10, netrunners: 0, implants: 0, engrams: 0, data: 5, rare_materials: 0 },
+        built: false
+    },
+    soul_killer: { 
+
+        cost: { eddies: 5, subroutines: 8, daemons: 0, netrunners: 0, implants: 3, engrams: 0, data: 0, rare_materials: 0 },
         built: false
     }
 };
@@ -94,7 +99,7 @@ function generate_eddie(button) {
             building_btn.appendChild(document.createTextNode("Buildings"));
             building_btn.setAttribute("id", "building_btn");
             building_btn.setAttribute("class", "cyber_btn");
-            document.getElementsByClassName("game-area")[0].appendChild(building_btn);
+            document.getElementById("buttons").appendChild(building_btn);
     
             building_btn.addEventListener("click", function () {
     
@@ -201,7 +206,7 @@ function add_option_and_function_to_panel(option) {
                         work_btn.setAttribute("class", "cyber_btn");
                         work_btn.setAttribute("id", "work_btn");
                         work_btn.appendChild(document.createTextNode("work"));
-                        document.getElementsByClassName("game-area")[0].appendChild(work_btn);
+                        document.getElementById("buttons").appendChild(work_btn);
                 
                         work_btn.addEventListener("click", work_event);
                     }
@@ -238,9 +243,11 @@ function add_option_and_function_to_panel(option) {
                         updateUI();
                     }, CC.data);
                     add_option_and_function_to_panel("chrome_clinic");
+                    create_price_tag(document.getElementById("chrome_clinic"));
                     break;
                 case "chrome_clinic":
-                    
+                    add_option_and_function_to_panel("soul_killer");
+                    create_price_tag(document.getElementById("soul_killer"));
                     break;
                 case "black_market":
                     // black market panel
@@ -281,7 +288,7 @@ function add_option_and_function_to_panel(option) {
                         black_market_btn.setAttribute("id", "black_market_btn");
                         black_market_btn.style.zIndex = 1;
                         black_market_btn.appendChild(document.createTextNode("black_market"));
-                        document.getElementsByClassName("game-area")[0].appendChild(black_market_btn);
+                        document.getElementById("buttons").appendChild(black_market_btn);
                 
                         black_market_btn.addEventListener("click", function() {
                             
