@@ -276,7 +276,7 @@
 #buttons {
   position: absolute;
   top: 44%;
-  margin-top: 10px;
+  margin-top: 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
