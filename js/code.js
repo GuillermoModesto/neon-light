@@ -1,6 +1,6 @@
 const resource = { 
 
-    eddie: 0,
+    eddie: 10,
     subroutines: 100,
     daemons: 100,
     netrunners: 100,
@@ -248,6 +248,25 @@ function add_option_and_function_to_panel(option) {
                 case "chrome_clinic":
                     add_option_and_function_to_panel("soul_killer");
                     create_price_tag(document.getElementById("soul_killer"));
+
+                    // Sublimate button
+                    if (document.getElementById("sublimate_btn") == null) {
+
+                        let sublimate_btn = document.createElement("div");
+                        sublimate_btn.setAttribute("class", "cyber_btn");
+                        sublimate_btn.setAttribute("id", "sublimate_btn");
+                        sublimate_btn.style.zIndex = 1;
+                        sublimate_btn.appendChild(document.createTextNode("Sublimate"));
+                        document.getElementById("buttons").appendChild(sublimate_btn);
+
+                        sublimate_btn.addEventListener('click', function() {
+                            if (resource.data >= 2) {
+                                resource.data -= 2;
+                                resource.engrams++;
+                                updateUI();
+                            }
+                        });
+                    }
                     break;
                 case "black_market":
                     // black market panel

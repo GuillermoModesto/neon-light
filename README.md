@@ -244,4 +244,4 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
   * Modifico el código en base a los cambios de CSS reflejados en su sección.
   * Introduzco el nuevo elemento soul_killer, y lo habilito y genero visualmente con los métodos pertinentes.
 * ***CSS***:
-  * Me di cuenta de que voy a tener que hacer muchos botones, y en vez de ir poniendolos de forma manual, creé un contenedor para irlos metiendo ahí. ~~pronto todo acabará~~
+  * Me di cuenta de que voy a tener que hacer muchos botones, y en vez de ir poniendolos de forma manual, creé un contenedor para irlos metiendo ahí. ~~(pronto todo acabará)~~
