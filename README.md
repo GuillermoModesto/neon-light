@@ -238,12 +238,10 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 
 ### Día 10:
 
-<span style="font-size: 6px;"><s>pronto todo acabará</s></span>
-
 <img src="https://www.esdip.com/wp-content/uploads/2023/01/historia-de-la-animacion_la-saga-shrek.jpg" width="300px" height="200px">
 
 * ***JS***:
   * Modifico el código en base a los cambios de CSS reflejados en su sección.
   * Introduzco el nuevo elemento soul_killer, y lo habilito y genero visualmente con los métodos pertinentes.
 * ***CSS***:
-  * Me di cuenta de que voy a tener que hacer muchos botones, y en vez de ir poniendolos de forma manual, creé un contenedor para irlos metiendo ahí.
+  * Me di cuenta de que voy a tener que hacer muchos botones, y en vez de ir poniendolos de forma manual, creé un contenedor para irlos metiendo ahí. ∼∼pronto todo acabará∼∼
