@@ -237,7 +237,7 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
   * Arreglo el bug y el precio del netrunner den se actualiza correctamente.
 
 ### Día 10:
-
+<small><s>pronto todo acabará</s></small> 
 <img src="https://www.esdip.com/wp-content/uploads/2023/01/historia-de-la-animacion_la-saga-shrek.jpg" width="300px" height="200px">
 
 * ***JS***:
