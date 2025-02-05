@@ -252,6 +252,9 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 
 ### Día 11:
 
+"Llega un momento en que es necesario abandonar la ropa usada que ya tiene la forma de nuestro cuerpo y olvidar los caminos que nos llevan siempre a los mismos lugares. Es el momento de la travesía. Y, si no osamos emprenderla, habremos quedado, para siempre, al margen de nosotros mismos." - Albert Camus
+<img src="https://i.gifer.com/S8JC.gif" width="300px" height="200px">
+
 * ***JS***:
   * Arreglo un bug en el que el z-index del boton de work no se instanciaba corretamente por primera vez.
   * Introduzco el nuevo elemento construct, y lo habilito y genero visualmente con los métodos pertinentes.
@@ -259,8 +262,4 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 * ***CSS***:
   * Creo un estilo específico para el botón de construct, ya que es un botón especial.
   * Creo una nueva paleta de colores y la uso de una nueva manera. Podríamos decir que estoy refactorizando estilos. Sin comentarios.
-  * Creo nuevas clases y estilos para el texto de la chamba.
-
-"Llega un momento en que es necesario abandonar la ropa usada que ya tiene la forma de nuestro cuerpo y olvidar los caminos que nos llevan siempre a los mismos lugares. Es el momento de la travesía. Y, si no osamos emprenderla, habremos quedado, para siempre, al margen de nosotros mismos." - Albert Camus
-
-<img src="https://i.gifer.com/S8JC.gif" width="300px" height="200px">
+  * Creo nuevas clases y estilos para el texto de la chamba (trabajo).
