@@ -2,6 +2,10 @@
 
 <hr>
 
+0. ### Prefacio:
+
+Trabajo opcional de la asignatura de desarrollo en entorno cliente (2025). Quiero pensar que soy mejor programador que este proyecto. Odio JavaScript y CSS. Dame C#, Java, C, incluso Python. Pero esto no por favor. Ten piedad.
+
 1. ## Funcionamiento del Juego:
 
 Un mini-proyecto de crear un **clicker** con una **temática cyberpunk**.
