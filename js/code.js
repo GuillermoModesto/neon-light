@@ -41,6 +41,11 @@ const building = {
 
         cost: { eddies: 5, subroutines: 8, daemons: 0, netrunners: 0, implants: 3, engrams: 0, data: 0, rare_materials: 0 },
         built: false
+    },
+    construct: { 
+
+        cost: { eddies: 10, subroutines: 9, daemons: 7, netrunners: 0, implants: 3, engrams: 10, data: 0, rare_materials: 0 },
+        built: false
     }
 };
 const black_market = {
@@ -105,13 +110,13 @@ function generate_eddie(button) {
     
                 let panel = document.getElementById("buildings_panel");
                 document.getElementById("buildings_panel").setAttribute("class", "cyber_panel");
-                building_btn.style.zIndex = 1;
+                building_btn.style.zIndex = -1;
                 if (document.getElementById("work_btn") != null)
-                    document.getElementById("work_btn").style.zIndex = 1;
+                    document.getElementById("work_btn").style.zIndex = -1;
                 if (document.getElementById("building_btn") != null)
-                    document.getElementById("building_btn").style.zIndex = 1;
+                    document.getElementById("building_btn").style.zIndex = -1;
                 if (document.getElementById("black_market_btn") != null)
-                    document.getElementById("black_market_btn").style.zIndex = 1;
+                    document.getElementById("black_market_btn").style.zIndex = -1;
                 document.getElementById("overlay").style.zIndex = 0;
                 for (const child of panel.children) {
     
@@ -205,6 +210,7 @@ function add_option_and_function_to_panel(option) {
                         let work_btn = document.createElement("div");
                         work_btn.setAttribute("class", "cyber_btn");
                         work_btn.setAttribute("id", "work_btn");
+                        work_btn.style.zIndex = -1;
                         work_btn.appendChild(document.createTextNode("work"));
                         document.getElementById("buttons").appendChild(work_btn);
                 
@@ -260,6 +266,7 @@ function add_option_and_function_to_panel(option) {
                         document.getElementById("buttons").appendChild(sublimate_btn);
 
                         sublimate_btn.addEventListener('click', function() {
+
                             if (resource.data >= 2) {
                                 resource.data -= 2;
                                 resource.engrams++;
@@ -291,6 +298,7 @@ function add_option_and_function_to_panel(option) {
                         tag.appendChild(price_tag);
                         // functionality
                         tag.addEventListener('click', function() {
+
                             if (resource.eddie >= black_market[material]["eddies"]) {
                                 resource.eddie -= black_market[material]["eddies"];
                                 resource[material]++;
@@ -325,6 +333,23 @@ function add_option_and_function_to_panel(option) {
                 
                                 total_enable(child);
                             }
+                        });
+                    }
+                    break;
+                case "soul_killer":
+                    // transcend button
+                    if (document.getElementById("transcend_btn") == null) {
+
+                        let transcend_btn = document.createElement("div");
+                        transcend_btn.setAttribute("class", "cyber_btn");
+                        transcend_btn.setAttribute("id", "transcend_btn");
+                        transcend_btn.style.zIndex = 1;
+                        transcend_btn.appendChild(document.createTextNode("transcend"));
+                        document.getElementById("buttons").appendChild(transcend_btn);
+
+                        transcend_btn.addEventListener('click', function() {
+
+                            alert("cagaste wei");
                         });
                     }
                     break;

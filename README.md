@@ -245,3 +245,13 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
   * Introduzco el nuevo elemento soul_killer, y lo habilito y genero visualmente con los métodos pertinentes.
 * ***CSS***:
   * Me di cuenta de que voy a tener que hacer muchos botones, y en vez de ir poniendolos de forma manual, creé un contenedor para irlos metiendo ahí. ~~(pronto todo acabará)~~
+
+### Día 11:
+
+* ***JS***:
+  * Arreglo un bug en el que el z-index del boton de work no se instanciaba corretamente por primera vez.
+  * Introduzco el nuevo elemento construct, y lo habilito y genero visualmente con los métodos pertinentes.
+* ***CSS***:
+  * Creo un estilo específico para el botón de construct, ya que es un botón especial.
+
+"Llega un momento en que es necesario abandonar la ropa usada que ya tiene la forma de nuestro cuerpo y olvidar los caminos que nos llevan siempre a los mismos lugares. Es el momento de la travesía. Y, si no osamos emprenderla, habremos quedado, para siempre, al margen de nosotros mismos." - Albert Camus

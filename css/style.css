@@ -20,8 +20,10 @@
   --color-black: #1B1B2A;
   --color-rojizo: #c4005f;
   --color-rojizo-brillante: #FF007A;
+  --color-rojo-oscuro: rgb(120, 10, 10);
   --color-verdoso: #00FFB3;
   --color-verdoso-brillante: #4dffca;
+  --color-verde-neon: rgb(0, 255, 150);
   --color-morado: #A700FF;
   --color-morado-brillante: #b937ff;
   --color-amarillento: #fffb00;
@@ -29,6 +31,8 @@
   --color-azulado: #01d2f7;
   --color-azulado-oscuro: #0098b3;
   --color-cromo: #BDC3C7;
+  --color-negro: rgb(20, 20, 20);
+  --color-negro-intenso: rgb(5, 5, 5)
 }
 
 * {
@@ -272,6 +276,53 @@
   box-shadow: 0 0 20px var(--color-black), 0 0 30px var(--color-azulado);
   transform: scale(1.1);
 }
+
+#transcend_btn {
+  background: linear-gradient(145deg, var(--color-morado-brillante), var(--color-amarillento-secundario));
+  font-family: 'Cyber1', sans-serif;
+  text-transform: uppercase;
+  padding: 18px 35px;
+  margin-top: 15px;
+  cursor: pointer;
+  /*border: 1px solid var(--color-amarillento);*/
+  color: var(--color-black);
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px var(--color-amarillento), 0 0 20px var(--color-amarillento-secundario);
+  box-shadow: 0 0 15px var(--color-negro-intenso), 0 0 25px var(--color-rojizo-brillante);
+  transform: translateY(-50px) scale(0.8);
+  transition: all 400ms ease;
+  animation: pulseEffect 1.5s infinite alternate, slideInFade 700ms ease forwards;
+  -webkit-animation: pulseEffect 1.5s infinite alternate, slideInFade 700ms ease forwards;
+}
+
+#transcend_btn:hover {
+  background: linear-gradient(145deg, var(--color-rojizo-brillante), var(--color-amarillento));
+  box-shadow: 0 0 25px var(--color-amarillento), 0 0 40px var(--color-rojizo-brillante);
+  transform: scale(1.2) rotate(2deg);
+  border-color: var(--color-verde-neon);
+  text-shadow: 0 0 15px var(--color-verde-neon), 0 0 30px var(--color-verde-neon);
+}
+
+@keyframes slideInFade {
+  from {
+      opacity: 0;
+      transform: translateY(-50px) scale(0.8);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulseEffect {
+  0% {
+      box-shadow: 0 0 15px var(--color-rojizo-brillante), 0 0 30px var(--color-amarillento);
+  }
+  100% {
+      box-shadow: 0 0 25px var(--color-amarillento), 0 0 50px var(--color-rojizo-brillante);
+  }
+}
+
 
 #buttons {
   position: absolute;
