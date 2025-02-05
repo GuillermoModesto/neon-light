@@ -1,13 +1,13 @@
 const resource = { 
 
-    eddie: 10,
-    subroutines: 100,
-    daemons: 100,
-    netrunners: 100,
-    implants: 100,
-    engrams: 100,
-    data: 100,
-    rare_materials: 100
+    eddie: 0,
+    subroutines: 0,
+    daemons: 0,
+    netrunners: 0,
+    implants: 0,
+    engrams: 0,
+    data: 0,
+    rare_materials: 0
 };
 const building = {
 
@@ -207,13 +207,16 @@ function add_option_and_function_to_panel(option) {
                     // check and enable work button if possible
                     if (document.getElementById("work_btn") == null) {
 
+                        let work_container = document.createElement("div");
+                        work_container.setAttribute("class", "work_container");
+                        work_container.setAttribute("id", "work_container");
                         let work_btn = document.createElement("div");
                         work_btn.setAttribute("class", "cyber_btn");
                         work_btn.setAttribute("id", "work_btn");
                         work_btn.style.zIndex = -1;
                         work_btn.appendChild(document.createTextNode("work"));
-                        document.getElementById("buttons").appendChild(work_btn);
-                
+                        document.getElementById("buttons").appendChild(work_container);
+                        work_container.appendChild(work_btn);
                         work_btn.addEventListener("click", work_event);
                     }
 
@@ -363,6 +366,10 @@ function work_event() {
 
     updateUI();
     visual_disable(work_btn);
+    let loading = document.createElement("div");
+    loading.setAttribute("class", "cyber_text");
+    loading.appendChild(document.createTextNode("working"));
+    document.getElementById("work_container").appendChild(loading);
     CC.work = get_workCC();
     if (CC.work < 0)
         CC.work = 0;
@@ -370,9 +377,24 @@ function work_event() {
     setTimeout(function() {
 
         work_btn.style.filter = "";
-        resource.subroutines += random(0, (resource.netrunners + 2));
-        resource.daemons += random(0, (resource.netrunners + 2));
+        let subroutine_generated = random(0, (resource.netrunners + 2));
+        let daemons_generated = random(0, (resource.netrunners + 2));
+        resource.subroutines += subroutine_generated;
+        resource.daemons += daemons_generated;
         work_btn.addEventListener("click", work_event);
+        loading.setAttribute("class", "cyber_text--no_anim");
+        loading.innerText = `generated:\n${subroutine_generated} subroutines\n${daemons_generated} daemons`;
+        updateUI();
+
+        setTimeout(function() {
+
+            loading.setAttribute("class", "cyber_text--fade_out");
+
+            setTimeout(function() {
+
+                document.getElementById("work_container").removeChild(loading);
+            }, 1500);
+        }, 3000);
     }, CC.work);
 }
 
@@ -383,7 +405,7 @@ function get_eddieCC() {
 
 function get_workCC() {
 
-    return (45 - resource.netrunners) * 1000;
+    return (5 - resource.netrunners) * 1000; //- ------------------------------------------------------------------------------------------------------------------------------
 }
 
 function random(min, max) {
