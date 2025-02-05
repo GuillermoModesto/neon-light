@@ -374,6 +374,29 @@ function work_event() {
     if (CC.work < 0)
         CC.work = 0;
     work_btn.removeEventListener("click", work_event);
+    let i = 0;
+    let timer = setInterval(function() {
+
+        switch (i) {
+
+            case 0:
+                loading.innerText = "working";
+                break;
+            case 1:
+                loading.innerText = "working.";
+                break;
+            case 2:
+                loading.innerText = "working..";
+                break;
+            case 3:
+                loading.innerText = "working...";
+                break;
+        }
+        if (i < 3)
+            i++;
+        else
+            i = 0;
+    }, 333);
     setTimeout(function() {
 
         work_btn.style.filter = "";
@@ -385,6 +408,7 @@ function work_event() {
         loading.setAttribute("class", "cyber_text--no_anim");
         loading.innerText = `generated:\n${subroutine_generated} subroutines\n${daemons_generated} daemons`;
         updateUI();
+        clearInterval(timer);
 
         setTimeout(function() {
 
@@ -393,9 +417,10 @@ function work_event() {
             setTimeout(function() {
 
                 document.getElementById("work_container").removeChild(loading);
-            }, 1500);
+            }, 1450);
         }, 3000);
     }, CC.work);
+    
 }
 
 function get_eddieCC() {
@@ -405,7 +430,7 @@ function get_eddieCC() {
 
 function get_workCC() {
 
-    return (5 - resource.netrunners) * 1000; //- ------------------------------------------------------------------------------------------------------------------------------
+    return (45 - resource.netrunners) * 1000; //- ------------------------------------------------------------------------------------------------------------------------------
 }
 
 function random(min, max) {
