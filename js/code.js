@@ -1,12 +1,12 @@
 const resource = { 
 
-    eddie: 0,
-    subroutines: 0,
-    daemons: 0,
-    netrunners: 0,
-    implants: 0,
-    engrams: 0,
-    data: 0,
+    eddie: 10,
+    subroutines: 100,
+    daemons: 100,
+    netrunners: 100,
+    implants: 100,
+    engrams: 100,
+    data: 100,
     rare_materials: 0
 };
 const building = {

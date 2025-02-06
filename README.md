@@ -264,3 +264,10 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 "Llega un momento en que es necesario abandonar la ropa usada que ya tiene la forma de nuestro cuerpo y olvidar los caminos que nos llevan siempre a los mismos lugares. Es el momento de la travesía. Y, si no osamos emprenderla, habremos quedado, para siempre, al margen de nosotros mismos." - Albert Camus
 
 <img src="https://i.gifer.com/S8JC.gif" width="300px" height="200px">
+
+### Día 12:
+
+[![Video de Ejemplo](https://img.youtube.com/vi/JLMbpiywVxQ/maxresdefault.jpg)](https://www.youtube.com/watch?v=JLMbpiywVxQ)
+
+* ***CSS***:
+  * Toqueteo los estilos, posiciones, colores y distribución general del documento para que encaje mejor en más tamaños (especialmete los mas pequeños).
