@@ -270,7 +270,7 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 
 ### Día 12:
 
-[![Video de Ejemplo](https://img.youtube.com/vi/JLMbpiywVxQ/maxresdefault.jpg)](https://www.youtube.com/watch?v=JLMbpiywVxQ)
+[![Video de Ejemplo](https://img.youtube.com/vi/O2F0oTqfL3E/maxresdefault.jpg)](https://www.youtube.com/watch?v=O2F0oTqfL3E)
 
 * ***CSS***:
   * Toqueteo los estilos, posiciones, colores y distribución general del documento para que encaje mejor en más tamaños (especialmete los mas pequeños).
