@@ -347,7 +347,7 @@ function add_option_and_function_to_panel(option) {
                         transcend_btn.setAttribute("class", "cyber_btn");
                         transcend_btn.setAttribute("id", "transcend_btn");
                         transcend_btn.style.zIndex = 1;
-                        transcend_btn.appendChild(document.createTextNode("transcend"));
+                        transcend_btn.appendChild(document.createTextNode("_transcend_"));
                         document.getElementById("buttons").appendChild(transcend_btn);
 
                         transcend_btn.addEventListener('click', function() {

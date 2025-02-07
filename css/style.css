@@ -251,15 +251,15 @@
 }
 
 #transcend_btn {
-  background: linear-gradient(145deg, var(--color-purple), var(--color-yellow));
+  background: linear-gradient(155deg, var(--color-pink), var(--color-blue));
   font-family: 'Cyber1', sans-serif;
   text-transform: uppercase;
   padding: 18px 35px;
   margin-top: 15px;
   cursor: pointer;
-  color: var(--color-black);
-  letter-spacing: 2px;
-  text-shadow: 0 0 10px var(--color-yellow), 0 0 20px var(--color-yellow);
+  color: var(--color-white);
+  letter-spacing: 3px;
+  text-shadow: 0 0 10px var(--color-pink), 0 0 20px var(--color-cyan);
   box-shadow: 0 0 15px var(--color-black), 0 0 25px var(--color-pink);
   border-radius: 0%;
   transform: translateY(-50px) scale(0.8);
@@ -270,11 +270,11 @@
 }
 
 #transcend_btn:hover {
-  background: linear-gradient(145deg, var(--color-pink), var(--color-yellow));
+  background: linear-gradient(155deg, var(--color-purple), var(--color-orange));
   box-shadow: 0 0 25px var(--color-yellow), 0 0 40px var(--color-pink);
+  text-shadow: 0 0 15px var(--color-green), 0 0 30px var(--color-yellow);
   transform: scale(1.2) rotate(2deg);
   border-color: var(--color-green);
-  text-shadow: 0 0 15px var(--color-green), 0 0 30px var(--color-green);
 }
 
 @keyframes slideInFade {
@@ -290,10 +290,10 @@
 
 @keyframes pulseEffect {
   0% {
-    box-shadow: 0 0 15px var(--color-cyan), 0 0 30px var(--color-yellow);
+    box-shadow: 0 0 15px var(--color-purple), 0 0 30px var(--color-yellow);
   }
   100% {
-    box-shadow: 0 0 25px var(--color-yellow), 0 0 50px var(--color-cyan);
+    box-shadow: 0 0 25px var(--color-yellow), 0 0 50px var(--color-purple);
   }
 }
 

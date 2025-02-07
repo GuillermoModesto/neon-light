@@ -280,4 +280,4 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 [![Arriba Andalucía](https://img.youtube.com/vi/4xwwntp91XA/default.jpg)](https://www.youtube.com/watch?v=4xwwntp91XA)
 
 * ***CSS***:
-  * Toqueteo los estilos, posiciones, colores y distribución general del documento para que encaje mejor en más tamaños (especialmete los mas pequeños).
+  * Toqueteo las animaciones, posiciones, colores y distribución general de los elementos del documento, especialmente del botón de transmute.
