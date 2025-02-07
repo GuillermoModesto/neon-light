@@ -390,7 +390,8 @@
 
 .cyber_text--no_anim {
   font-family: 'Cyber2', sans-serif;
-  padding: 3px;
+  margin-left: 4px;
+  padding: 4px;
   color: var(--color-white);
   background-color: var(--color-black);
   border-radius: 15%;
@@ -400,11 +401,14 @@
   -ms-border-radius: 15%;
   -o-border-radius: 15%;
   box-shadow: 0 0 5px var(--color-gray), 0 0 10px var(--color-purple);
+  text-shadow: var(--color-white);
+  transform: scale(1.05);
 }
 
 .cyber_text--fade_out {
   font-family: 'Cyber2', sans-serif;
-  padding: 3px;
+  margin-left: 4px;
+  padding: 4px;
   color: var(--color-white);
   background-color: var(--color-black);
   border-radius: 15%;
@@ -416,6 +420,8 @@
   box-shadow: 0 0 5px var(--color-gray), 0 0 10px var(--color-purple);
   animation: fadeOut 1.5s infinite;
   -webkit-animation: fadeOut 1.5s infinite;
+  transform: scale(1.05);
+  text-shadow: var(--color-white);
 }
 
 @keyframes fadeOut {
@@ -424,6 +430,7 @@
   }
   100% {
     opacity: 0;
+    transform: scale(0);
   }
 }
 
@@ -439,7 +446,8 @@
   -ms-border-radius: 15%;
   -o-border-radius: 15%;
   box-shadow: 0 0 5px var(--color-gray), 0 0 10px var(--color-purple);
-  animation: loadingAnimation 1.5s infinite;
+  animation: loadingAnimation 1s infinite;
+  text-shadow: var(--color-white);
 }
 
 @keyframes loadingAnimation {
