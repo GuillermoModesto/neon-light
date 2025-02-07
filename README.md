@@ -274,3 +274,10 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 
 * ***CSS***:
   * Toqueteo los estilos, posiciones, colores y distribución general del documento para que encaje mejor en más tamaños (especialmete los mas pequeños).
+
+### Día 13:
+
+[![Video de Ejemplo](https://img.youtube.com/vi/4xwwntp91XA/maxresdefault.jpg)](https://www.youtube.com/watch?v=4xwwntp91XA)
+
+* ***CSS***:
+  * Toqueteo los estilos, posiciones, colores y distribución general del documento para que encaje mejor en más tamaños (especialmete los mas pequeños).
