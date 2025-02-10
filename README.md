@@ -283,3 +283,4 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
   * Empiezo a implementar el método verbose.
 * ***CSS***:
   * Toqueteo las animaciones, posiciones, colores y distribución general de los elementos del documento, especialmente del botón de transmute.
+  * Empiezo a crear los estilos del método verbose. Idealmente, quiero que aparezca en la parte inferior, centrado, con texto pequeño, y un máximo de 5 mensajes a la vez, uno encima del otro, el mas por encima.
