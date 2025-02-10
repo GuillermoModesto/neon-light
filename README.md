@@ -263,3 +263,9 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
   * Creo un estilo específico para el botón de construct, ya que es un botón especial.
   * Creo una nueva paleta de colores y la uso de una nueva manera. Podríamos decir que estoy refactorizando estilos. Sin comentarios.
   * Creo nuevas clases y estilos para el texto de la chamba (trabajo).
+
+### Día 12:
+
+* ***JS***:
+  * Hace tiempo implementé el método update y supongo que se me pasó decirlo. Es un método recursivo que cuenta el tiempo transcurrido desde que se inicia la aplicación. Voy a usar el valor que actualiza para informar de cuanto tiempo de juego a sido necesario para ganar.
+  * Empiezo a implementar el método verbose.

@@ -352,7 +352,7 @@ function add_option_and_function_to_panel(option) {
 
                         transcend_btn.addEventListener('click', function() {
 
-                            alert("cagaste wei");
+                            alert(`Tiempo de juego -> ${total_time / 1000} segundos`);
                         });
                     }
                     break;
