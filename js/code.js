@@ -53,11 +53,12 @@ const black_market = {
     subroutines: { eddies: 1, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
     daemons: { eddies: 1, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 }
 };
-const CC = {
+const CD = {
 
-    eddie: get_eddieCC(),
-    work: get_workCC(),
-    data: 20000
+    eddie: get_eddieCD(),
+    work: get_workCD(),
+    data: 20000,
+    verbose: 5000
 };
 
 /* for getElapsedTime */
@@ -67,12 +68,50 @@ let start = performance.now();
 let stamp = performance.now();
 let total_time = 0;
 
+const log = [];
+
 window.onload = function () {
+
+    total_disable(document.getElementById('log-box'));
+    total_disable(document.getElementById('overlay'));
+    document.getElementById('overlay').style.zIndex = -1;
 
     let eddie_img = document.getElementById("eddie-img");
     eddie_img.addEventListener("click", function () {
 
         generate_eddie(eddie_img);
+    });
+
+    // open log screen over everything
+    document.getElementById("log_btn").addEventListener("click", function() {
+        
+        const overlay = document.getElementById('overlay');
+        const logBox = document.getElementById('log-box');
+        if (overlay.style.zIndex == -1) {
+
+            // clear existing log entries
+            logBox.innerText = '';
+
+            // add log entries
+            log.forEach((entry) => {
+                const logEntry = document.createElement('div');
+                logEntry.className = 'log-entry';
+                logEntry.textContent = entry;
+                logBox.appendChild(logEntry);
+            });
+
+            // Show the overlay and log box
+            total_enable(overlay);
+            overlay.style.zIndex = 5;
+            total_enable(logBox);
+        }
+        else {
+
+            // Hide the overlay and log box
+            total_disable(overlay);
+            overlay.style.zIndex = -1;
+            total_disable(logBox);
+        }
     });
     update();
 }
@@ -81,11 +120,11 @@ function generate_eddie(button) {
 
     button.disabled = true;
     visual_disable(button);
-    CC.eddie = get_eddieCC();
+    CD.eddie = get_eddieCD();
     setTimeout(function () {
 
         resource.eddie++;
-        verbose("+1 Eddie");
+        verbose("+1 eddie");
 
         // check and enable building button if possible
         if (document.getElementById("building_btn") == null && resource.eddie >= 2) {
@@ -95,9 +134,10 @@ function generate_eddie(button) {
             building_panel.setAttribute("class", "cyber_panel--hidden");
             building_panel.setAttribute("id", "buildings_panel");
             document.getElementsByClassName("resources")[0].appendChild(building_panel);
-            verbose("Building panel created");
+            verbose("buildings enabled");
     
             add_option_and_function_to_panel("warehouse");
+            verbose("warehouse building enabled");
             create_price_tag(document.getElementById("warehouse"));
             create_exit_panel_btn(document.getElementById("buildings_panel"));
     
@@ -130,7 +170,7 @@ function generate_eddie(button) {
         updateUI();
         button.disabled = false;
         button.style.filter = "";
-    }, CC.eddie);
+    }, CD.eddie);
 }
 
 function create_exit_panel_btn(panel) {
@@ -144,7 +184,8 @@ function create_exit_panel_btn(panel) {
     exit_building.addEventListener("click", function () {
 
         panel.setAttribute("class", "cyber_panel--hidden cyber_panel--hidden--animation");
-        document.getElementById("building_btn").style.zIndex = 3;
+        if (document.getElementById("building_btn") != null)
+            document.getElementById("building_btn").style.zIndex = 3;
         if (document.getElementById("work_btn") != null)
             document.getElementById("work_btn").style.zIndex = 3;
         if (document.getElementById("building_btn") != null)
@@ -220,20 +261,27 @@ function add_option_and_function_to_panel(option) {
                         document.getElementById("buttons").appendChild(work_container);
                         work_container.appendChild(work_btn);
                         work_btn.addEventListener("click", work_event);
+                        verbose("work enabled");
                     }
 
                     add_option_and_function_to_panel("netrunner_den");
                     create_price_tag(document.getElementById("netrunner_den"));
+                    verbose("netrunner_den building enabled");
+
                     add_option_and_function_to_panel("data_farm");
                     create_price_tag(document.getElementById("data_farm"));
+                    verbose("data_farm building enabled");
+
                     add_option_and_function_to_panel("black_market");
                     create_price_tag(document.getElementById("black_market"));
+                    verbose("black_market building enabled");
                     break;
                 case "netrunner_den":
                     resource.netrunners += 5;
                     building.netrunner_den.cost.eddies += 5;
                     building.netrunner_den.cost.subroutines += 5;
                     building.netrunner_den.amount++;
+                    verbose("+5 netrunners");
 
                     //update price tag
                     let price_tag = document.getElementById("netrunner_den").childNodes[1];
@@ -252,13 +300,15 @@ function add_option_and_function_to_panel(option) {
 
                         resource.data++;
                         updateUI();
-                    }, CC.data);
+                    }, CD.data);
                     add_option_and_function_to_panel("chrome_clinic");
                     create_price_tag(document.getElementById("chrome_clinic"));
+                    verbose("chrome_clinic building enabled");
                     break;
                 case "chrome_clinic":
                     add_option_and_function_to_panel("soul_killer");
                     create_price_tag(document.getElementById("soul_killer"));
+                    verbose("soul_killer building enabled");
 
                     // Sublimate button
                     if (document.getElementById("sublimate_btn") == null) {
@@ -269,6 +319,7 @@ function add_option_and_function_to_panel(option) {
                         sublimate_btn.style.zIndex = 1;
                         sublimate_btn.appendChild(document.createTextNode("Sublimate"));
                         document.getElementById("buttons").appendChild(sublimate_btn);
+                        verbose("sublimate button enabled");
 
                         sublimate_btn.addEventListener('click', function() {
 
@@ -296,6 +347,7 @@ function add_option_and_function_to_panel(option) {
                         tag.setAttribute("class", "panel_option");
                         tag.setAttribute("id", material);
                         black_market_panel.appendChild(tag);
+                        verbose(`${material} material enabled`);
                         // price tag
                         let price_tag = document.createElement("div");
                         price_tag.setAttribute("class", "price_tag_button");
@@ -351,6 +403,7 @@ function add_option_and_function_to_panel(option) {
                         transcend_btn.style.zIndex = 1;
                         transcend_btn.appendChild(document.createTextNode("_transcend_"));
                         document.getElementById("buttons").appendChild(transcend_btn);
+                        verbose("TRANSCEND button enabled");
 
                         transcend_btn.addEventListener('click', function() {
 
@@ -372,9 +425,10 @@ function work_event() {
     loading.setAttribute("class", "cyber_text");
     loading.appendChild(document.createTextNode("working"));
     document.getElementById("work_container").appendChild(loading);
-    CC.work = get_workCC();
-    if (CC.work < 0)
-        CC.work = 0;
+    verbose("working");
+    CD.work = get_workCD();
+    if (CD.work < 0)
+        CD.work = 0;
     work_btn.removeEventListener("click", work_event);
     let i = 0;
     let timer = setInterval(function() {
@@ -421,16 +475,16 @@ function work_event() {
                 document.getElementById("work_container").removeChild(loading);
             }, 800);
         }, 1500);
-    }, CC.work);
+    }, CD.work);
     
 }
 
-function get_eddieCC() {
+function get_eddieCD() {
 
     return 250 * resource.eddie;
 }
 
-function get_workCC() {
+function get_workCD() {
 
     return (45 - resource.netrunners) * 1000; //- ------------------------------------------------------------------------------------------------------------------------------
 }
@@ -516,6 +570,7 @@ function verbose(text) {
     let verbose = document.createElement("div");
     verbose.setAttribute("class", "verbose");
     verbose.appendChild(document.createTextNode(text));
+    log.push(`${log.length+1}: ${text} @(${Math.round(total_time) / 1000}s)`);
     document.getElementById("verbose_box").appendChild(verbose);
     setTimeout(function() {
 
@@ -524,5 +579,5 @@ function verbose(text) {
 
             document.getElementById("verbose_box").removeChild(verbose);
         }, 150);
-    }, 1500);
+    }, CD.verbose);
 }

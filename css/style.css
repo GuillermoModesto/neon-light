@@ -617,7 +617,7 @@
 
 #verbose_box {
   position: absolute;
-  max-height: 30%;
+  max-height: 141px;
   overflow: hidden;
   margin: 2px;
   padding: 5px;
@@ -662,4 +662,55 @@
   to {
     opacity: 0;
 }
+}
+
+#log_btn {
+  position: absolute;
+  max-height: 141px;
+  overflow: hidden;
+  margin: 8px;
+  padding: 5px;
+  bottom: 0;
+  right: 0;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--color-white);
+  background-color: var(--color-black);
+  font-size: 12px;
+  cursor: pointer;
+  z-index: 500;
+}
+
+#log_btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px var(--color-black), 0 0 15px var(--color-cyan);
+}
+
+#log:hover {
+  transform: scale(1.3);
+  -webkit-transform: scale(1.3);
+  -moz-transform: scale(1.3);
+  -ms-transform: scale(1.3);
+  -o-transform: scale(1.3);
+} 
+
+#log-box {
+  position: absolute;
+  top: 5%;
+  left: 0;
+  width: 100%;
+  background-color: var(--color-black);
+  padding: 10px;
+  border: 2px solid var(--color-cyan);
+  color: var(--color-cyan);
+  z-index: 1001;
+  overflow-y: auto;
+  text-align: left;
+  font-family: 'Cyber2', sans-serif;
+  box-shadow: 0 0 20px var(--color-cyan), 0 0 40px var(--color-blue);
+  border-radius: 10px;
+  font-family: monospace;
+  white-space: pre-wrap;
+  line-height: 1.5;
 }
