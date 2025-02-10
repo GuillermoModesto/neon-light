@@ -347,7 +347,7 @@ function add_option_and_function_to_panel(option) {
                         transcend_btn.setAttribute("class", "cyber_btn");
                         transcend_btn.setAttribute("id", "transcend_btn");
                         transcend_btn.style.zIndex = 1;
-                        transcend_btn.appendChild(document.createTextNode("transcend"));
+                        transcend_btn.appendChild(document.createTextNode("_transcend_"));
                         document.getElementById("buttons").appendChild(transcend_btn);
 
                         transcend_btn.addEventListener('click', function() {
@@ -417,8 +417,8 @@ function work_event() {
             setTimeout(function() {
 
                 document.getElementById("work_container").removeChild(loading);
-            }, 1450);
-        }, 3000);
+            }, 800);
+        }, 1500);
     }, CC.work);
     
 }
@@ -430,7 +430,7 @@ function get_eddieCC() {
 
 function get_workCC() {
 
-    return (45 - resource.netrunners) * 1000; //- ------------------------------------------------------------------------------------------------------------------------------
+    return (1 - resource.netrunners) * 1000; //- ------------------------------------------------------------------------------------------------------------------------------
 }
 
 function random(min, max) {

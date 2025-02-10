@@ -266,6 +266,20 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 
 ### Día 12:
 
+[![Cansionsilla wena](https://img.youtube.com/vi/O2F0oTqfL3E/default.jpg)](https://www.youtube.com/watch?v=O2F0oTqfL3E)
+
 * ***JS***:
   * Hace tiempo implementé el método update y supongo que se me pasó decirlo. Es un método recursivo que cuenta el tiempo transcurrido desde que se inicia la aplicación. Voy a usar el valor que actualiza para informar de cuanto tiempo de juego a sido necesario para ganar.
+
+* ***CSS***:
+  * Toqueteo los estilos, posiciones, colores y distribución general del documento para que encaje mejor en más tamaños (especialmete los mas pequeños).
+
+### Día 13:
+
+[![Arriba Andalucía](https://img.youtube.com/vi/4xwwntp91XA/default.jpg)](https://www.youtube.com/watch?v=4xwwntp91XA)
+
+* ***JS***:
+  * Toqueteo tiempos de intervalos para el botón de trabajo. 
   * Empiezo a implementar el método verbose.
+* ***CSS***:
+  * Toqueteo las animaciones, posiciones, colores y distribución general de los elementos del documento, especialmente del botón de transmute.
