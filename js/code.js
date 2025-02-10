@@ -85,6 +85,7 @@ function generate_eddie(button) {
     setTimeout(function () {
 
         resource.eddie++;
+        verbose("+1 Eddie");
 
         // check and enable building button if possible
         if (document.getElementById("building_btn") == null && resource.eddie >= 2) {
@@ -94,6 +95,7 @@ function generate_eddie(button) {
             building_panel.setAttribute("class", "cyber_panel--hidden");
             building_panel.setAttribute("id", "buildings_panel");
             document.getElementsByClassName("resources")[0].appendChild(building_panel);
+            verbose("Building panel created");
     
             add_option_and_function_to_panel("warehouse");
             create_price_tag(document.getElementById("warehouse"));
@@ -508,4 +510,19 @@ function update() {
     total_time += dt;
     stamp = now;
     requestAnimationFrame(update);
+}
+
+function verbose(text) {
+    let verbose = document.createElement("div");
+    verbose.setAttribute("class", "verbose");
+    verbose.appendChild(document.createTextNode(text));
+    document.getElementById("verbose_box").appendChild(verbose);
+    setTimeout(function() {
+
+        verbose.setAttribute("class", "verbose--fadeout");
+        setTimeout(function() {
+
+            document.getElementById("verbose_box").removeChild(verbose);
+        }, 150);
+    }, 1500);
 }

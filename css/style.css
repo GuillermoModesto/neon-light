@@ -57,6 +57,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
   width: 100%;
   height: 100%;
   background-color: var(--color-gray);
@@ -612,4 +613,53 @@
 #black_market_panel {
   position: absolute;
   top: 40%;
+}
+
+#verbose_box {
+  position: absolute;
+  max-height: 30%;
+  overflow: hidden;
+  margin: 2px;
+  padding: 5px;
+  bottom: 0;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.verbose, .verbose--fadeout {
+  font-family: 'Cyber2', sans-serif;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-white);
+  background-color: var(--color-black);
+  font-size: 10px;
+  margin: 2px;
+  padding: 5px;
+  animation: fadeIn 150ms ease-in forwards;
+  -webkit-animation: fadeIn 150ms ease-in forwards;
+  text-align: center;
+}
+
+.verbose--fadeout {
+  animation: fadeOut 150ms ease-in forwards;
+  -webkit-animation: fadeOut 150ms ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+}
+  to {
+    opacity: 1;
+}
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+}
 }
