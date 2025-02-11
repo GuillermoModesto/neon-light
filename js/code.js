@@ -1,9 +1,10 @@
 let aux_resource;
 let aux_building;
 let aux_log;
+let saved_html = '';
 let stamp = performance.now();
 let total_time = 0;
-// localStorage.removeItem('save_file');
+localStorage.removeItem('save_file');
 if (localStorage.getItem('save_file') != null) {
 
     const save_info = JSON.parse(localStorage.getItem('save_file'));
@@ -11,6 +12,7 @@ if (localStorage.getItem('save_file') != null) {
     aux_building = save_info['building'];
     total_time = save_info['total_time'];
     aux_log = save_info['log'];
+    saved_html = save_info['html'];
 }
 else {
 
@@ -32,37 +34,44 @@ else {
         warehouse: {
     
             cost: { eddies: 2, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 }, 
+            saved: false,
             built: false 
         },
         netrunner_den: { 
     
             cost: { eddies: 6, subroutines: 6, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
+            saved: false,
             built: false,
             amount: 0 
         },
         data_farm: { 
     
             cost: { eddies: 8, subroutines: 9, daemons: 5, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
+            saved: false,
             built: false
         },
         black_market: { 
     
             cost: { eddies: 0, subroutines: 8, daemons: 9, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
+            saved: false,
             built: false
         },
         chrome_clinic: { 
     
             cost: { eddies: 8, subroutines: 0, daemons: 10, netrunners: 0, implants: 0, engrams: 0, data: 5, rare_materials: 0 },
+            saved: false,
             built: false
         },
         soul_killer: { 
     
             cost: { eddies: 5, subroutines: 8, daemons: 0, netrunners: 0, implants: 3, engrams: 0, data: 0, rare_materials: 0 },
+            saved: false,
             built: false
         },
         construct: { 
     
             cost: { eddies: 10, subroutines: 9, daemons: 7, netrunners: 0, implants: 3, engrams: 10, data: 0, rare_materials: 0 },
+            saved: false,
             built: false
         }
     }; 
@@ -72,6 +81,7 @@ else {
 const resource = JSON.parse(JSON.stringify(aux_resource));
 const building = JSON.parse(JSON.stringify(aux_building));
 const log = JSON.parse(JSON.stringify(aux_log));
+
 
 const black_market = {
     rare_materials: { eddies: 3, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
@@ -108,7 +118,22 @@ window.onload = function () {
     window.addEventListener("beforeunload", save_game); // save important info before closing window
     
     check_enable_buildings();
-    
+
+    for (const key in building) {
+
+        if (building[key]['saved']) {
+
+            add_option_and_function_to_panel(key);
+        }
+    }
+/*
+    if (saved_html != '') { 
+        
+        document.getElementsByClassName("container")[0].innerHTML = saved_html;
+        saved_html = '';
+        console.log('Game loaded');
+    }
+*/
     update(); // start running total_time 'clock'
 }
 
@@ -140,13 +165,23 @@ function add_option_and_function_to_panel(option) {
     panel_option.appendChild(document.createTextNode(option));
     document.getElementById("buildings_panel").appendChild(panel_option);
 
-    // manager
+    /*
+    This dreadful switch case is the result of a bad design decision that I made at the beginning of the project, then was too lazy to fix. Sorry.
+    Its purpose is to enable the correct building panel option (such as warehouse, black_market...) and its functionality when the player has enough resources to build them.
+    */
     panel_option.addEventListener("click", function() {
 
         let selectedBuilding = building[option];
-        if (enough_resources(selectedBuilding) && !selectedBuilding.built) {
+        if ((enough_resources(selectedBuilding) && !selectedBuilding.built) || selectedBuilding.saved) {
 
-            substract_resources(selectedBuilding);
+            if (selectedBuilding.saved)
+                selectedBuilding.saved = false;
+            else {
+                
+                selectedBuilding.saved = true;
+                substract_resources(selectedBuilding);
+            }
+
             if (option !== "netrunner_den") {
 
                 selectedBuilding.built = true;
@@ -157,6 +192,7 @@ function add_option_and_function_to_panel(option) {
 
                 case "warehouse":
 
+                console.log("warehouse");
                     // check and enable resources panel if possible
                     if (document.getElementById("resource_list").hidden && building.warehouse.built) {
 
@@ -669,7 +705,8 @@ function save_game() {
         resource: resource,
         building: building,
         total_time: total_time,
-        log: log
+        log: log,
+        html: document.getElementsByClassName("container")[0].innerHTML
     }, null, 2);
 
     localStorage.setItem('save_file', save_file);
