@@ -748,6 +748,7 @@ function reattachEventListeners() {
         document.getElementById("building_btn").addEventListener("click", building_btn_event);
     }
 
+    // exit building button event listener
     if (document.getElementsByClassName("exit_button").length != 0) {
         let exit_buttons = document.getElementsByClassName("exit_button");
         for (const button of exit_buttons) {
