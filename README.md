@@ -284,11 +284,11 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
   * Se me ocurre hacer un botón de log, que al pulsarlo se abre un panel por encima de todo el contenido del juego con una lista de todas las acciones realizadas y el tiempo de juego en el que se realizaron. 
 * ***CSS***:
   * Toqueteo las animaciones, posiciones, colores y distribución general de los elementos del documento, especialmente del botón de transmute.
-  * Empiezo a crear los estilos del método verbose. Idealmente, quiero que aparezca en la parte inferior, centrado, con texto pequeño, y un máximo de 5 mensajes a la vez, uno encima del otro, el mas por encima.
+  * Empiezo a crear los estilos del método verbose. Idealmente, quiero que aparezca en la parte inferior, centrado, con texto pequeño, y un máximo de 5 mensajes a la vez, uno encima del otro, el mas nuevo por encima.
 
 ### Día 14:
 
 <img src="https://i.imgflip.com/56p56k.jpg?a483072" width="300px" height="300px">
 
 * ***JS // HTML // CSS***
-  * Un poquito de limpieza.
+  * Un poquito de limpieza general.
