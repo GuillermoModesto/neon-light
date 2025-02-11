@@ -1,13 +1,13 @@
 const resource = { 
 
-    eddie: 0,
-    subroutines: 0,
-    daemons: 0,
-    netrunners: 0,
-    implants: 0,
-    engrams: 0,
-    data: 0,
-    rare_materials: 0
+    eddie: 20,
+    subroutines: 100,
+    daemons: 100,
+    netrunners: 100,
+    implants: 100,
+    engrams: 100,
+    data: 100,
+    rare_materials: 100
 };
 const building = {
 
@@ -70,6 +70,7 @@ let total_time = 0;
 
 const log = [];
 
+/* ------------------------------------------------------------ ENTRY POINT ------------------------------------------------------------ */
 window.onload = function () {
 
     total_disable(document.getElementById('log-box'));
@@ -83,42 +84,14 @@ window.onload = function () {
     });
 
     // open log screen over everything
-    document.getElementById("log_btn").addEventListener("click", function() {
-        
-        const overlay = document.getElementById('overlay');
-        const logBox = document.getElementById('log-box');
-        if (overlay.style.zIndex == -1) {
+    document.getElementById("log_btn").addEventListener("click", show_log);
 
-            // clear existing log entries
-            logBox.innerText = '';
-
-            // add log entries
-            log.forEach((entry) => {
-                const logEntry = document.createElement('div');
-                logEntry.className = 'log-entry';
-                logEntry.textContent = entry;
-                logBox.appendChild(logEntry);
-            });
-
-            // Show the overlay and log box
-            total_enable(overlay);
-            overlay.style.zIndex = 5;
-            total_enable(logBox);
-        }
-        else {
-
-            // Hide the overlay and log box
-            total_disable(overlay);
-            overlay.style.zIndex = -1;
-            total_disable(logBox);
-        }
-    });
     update();
 }
 
+/* ------------------------------------------------------------ GENERATE EDDIE ------------------------------------------------------------ */
 function generate_eddie(button) {
 
-    button.disabled = true;
     visual_disable(button);
     CD.eddie = get_eddieCD();
     setTimeout(function () {
@@ -148,10 +121,10 @@ function generate_eddie(button) {
             building_btn.setAttribute("class", "cyber_btn");
             document.getElementById("buttons").appendChild(building_btn);
     
+            // building button event
             building_btn.addEventListener("click", function () {
     
-                let panel = document.getElementById("buildings_panel");
-                document.getElementById("buildings_panel").setAttribute("class", "cyber_panel");
+                building_panel.setAttribute("class", "cyber_panel");
                 building_btn.style.zIndex = -1;
                 if (document.getElementById("work_btn") != null)
                     document.getElementById("work_btn").style.zIndex = -1;
@@ -160,63 +133,18 @@ function generate_eddie(button) {
                 if (document.getElementById("black_market_btn") != null)
                     document.getElementById("black_market_btn").style.zIndex = -1;
                 document.getElementById("overlay").style.zIndex = 0;
-                for (const child of panel.children) {
+                for (const child of building_panel.children) {
     
                     total_enable(child);
                 }
             });
         }
-
         updateUI();
-        button.disabled = false;
-        button.style.filter = "";
+        visual_enable(button);
     }, CD.eddie);
 }
 
-function create_exit_panel_btn(panel) {
-
-    let exit_building = document.createElement("button");
-    exit_building.setAttribute("class", "exit_button");
-    exit_building.setAttribute("id", "exit_building");
-    exit_building.appendChild(document.createTextNode("X"));
-    panel.appendChild(exit_building);
-
-    exit_building.addEventListener("click", function () {
-
-        panel.setAttribute("class", "cyber_panel--hidden cyber_panel--hidden--animation");
-        if (document.getElementById("building_btn") != null)
-            document.getElementById("building_btn").style.zIndex = 3;
-        if (document.getElementById("work_btn") != null)
-            document.getElementById("work_btn").style.zIndex = 3;
-        if (document.getElementById("building_btn") != null)
-            document.getElementById("building_btn").style.zIndex = 3;
-        if (document.getElementById("black_market_btn") != null)
-            document.getElementById("black_market_btn").style.zIndex = 3;
-        document.getElementById("overlay").style.zIndex = -1;
-        for (const child of panel.children) {
-
-            if (child.getAttribute("id") != "exit_building")
-                total_disable(child);
-        }
-    });
-}
-
-function create_price_tag(element) {
-
-    let price_tag = document.createElement("div");
-    price_tag.setAttribute("class", "price_tag_button");
-
-    let cost_text = "";
-    let element_cost = building[element.getAttribute("id")]["cost"];
-    for (const resource in element_cost) {
-        if (element_cost[resource] != 0) {
-            cost_text = `${cost_text}\n${resource}:${element_cost[resource]}`;
-        }
-    }
-    price_tag.appendChild(document.createTextNode(cost_text));
-    element.appendChild(price_tag);
-}
-
+/* ------------------------------------------------------------ ADD OPTION AND FUNCTION TO PANEL ------------------------------------------------------------ */
 function add_option_and_function_to_panel(option) {
 
     let panel_option = document.createElement("div");
@@ -327,6 +255,10 @@ function add_option_and_function_to_panel(option) {
                                 resource.data -= 2;
                                 resource.engrams++;
                                 updateUI();
+                                verbose("1 engram sublimated");
+                            }
+                            else {
+                                verbose("failed to sublimate engram");
                             }
                         });
                     }
@@ -359,6 +291,10 @@ function add_option_and_function_to_panel(option) {
                             if (resource.eddie >= black_market[material]["eddies"]) {
                                 resource.eddie -= black_market[material]["eddies"];
                                 resource[material]++;
+                                verbose(`${material} bought`);
+                            }
+                            else {
+                                verbose(`failed to buy ${material}`);
                             }
                             updateUI();
                         });
@@ -414,9 +350,13 @@ function add_option_and_function_to_panel(option) {
             }
             updateUI();
         }
+        else {
+            verbose(`failed to build ${option}`);
+        }
     });
 }
 
+/* ------------------------------------------------------------ WORK EVENT ------------------------------------------------------------ */
 function work_event() {
 
     updateUI();
@@ -425,7 +365,7 @@ function work_event() {
     loading.setAttribute("class", "cyber_text");
     loading.appendChild(document.createTextNode("working"));
     document.getElementById("work_container").appendChild(loading);
-    verbose("working");
+    verbose("started working");
     CD.work = get_workCD();
     if (CD.work < 0)
         CD.work = 0;
@@ -463,6 +403,7 @@ function work_event() {
         work_btn.addEventListener("click", work_event);
         loading.setAttribute("class", "cyber_text--no_anim");
         loading.innerText = `generated:\n${subroutine_generated} subroutines\n${daemons_generated} daemons`;
+        verbose("finished working");
         updateUI();
         clearInterval(timer);
 
@@ -477,6 +418,50 @@ function work_event() {
         }, 1500);
     }, CD.work);
     
+}
+
+/* ------------------------------------------------------------ HELPER FUNCTIONS ------------------------------------------------------------ */
+function create_exit_panel_btn(panel) {
+
+    let exit_building = document.createElement("button");
+    exit_building.setAttribute("class", "exit_button");
+    exit_building.appendChild(document.createTextNode("X"));
+    panel.appendChild(exit_building);
+
+    exit_building.addEventListener("click", function () {
+
+        panel.setAttribute("class", "cyber_panel--hidden cyber_panel--hidden--animation");
+        if (document.getElementById("building_btn") != null)
+            document.getElementById("building_btn").style.zIndex = 3;
+        if (document.getElementById("work_btn") != null)
+            document.getElementById("work_btn").style.zIndex = 3;
+        if (document.getElementById("building_btn") != null)
+            document.getElementById("building_btn").style.zIndex = 3;
+        if (document.getElementById("black_market_btn") != null)
+            document.getElementById("black_market_btn").style.zIndex = 3;
+        document.getElementById("overlay").style.zIndex = -1;
+        for (const child of panel.children) {
+
+            if (child.getAttribute("id") != "exit_building")
+                total_disable(child);
+        }
+    });
+}
+
+function create_price_tag(element) {
+
+    let price_tag = document.createElement("div");
+    price_tag.setAttribute("class", "price_tag_button");
+
+    let cost_text = "";
+    let element_cost = building[element.getAttribute("id")]["cost"];
+    for (const resource in element_cost) {
+        if (element_cost[resource] != 0) {
+            cost_text = `${cost_text}\n${resource}:${element_cost[resource]}`;
+        }
+    }
+    price_tag.appendChild(document.createTextNode(cost_text));
+    element.appendChild(price_tag);
 }
 
 function get_eddieCD() {
@@ -523,6 +508,7 @@ function total_enable(element) {
     element.hidden = false;
     element.disabled = false;
     element.style.display = "";
+    element.style.zIndex = 3;
 }
 
 function total_disable(element) {
@@ -530,11 +516,19 @@ function total_disable(element) {
     element.hidden = true;
     element.disabled = true;
     element.style.display = "none";
+    element.style.zIndex = -1;
 }
 
 function visual_disable(button) {
 
+    button.disabled = true;
     button.style.filter = "invert(41%) sepia(36%) saturate(19%) hue-rotate(314deg) brightness(95%) contrast(98%)";
+}
+
+function visual_enable(button) {
+
+    button.disabled = false;
+    button.style.filter = "";
 }
 
 /* Update all resource HTML tags. All IDs should match variable name to work on loop */
@@ -580,4 +574,34 @@ function verbose(text) {
             document.getElementById("verbose_box").removeChild(verbose);
         }, 150);
     }, CD.verbose);
+}
+
+function show_log() {
+        
+    const overlay = document.getElementById('overlay');
+    const logBox = document.getElementById('log-box');
+    if (overlay.style.zIndex == -1) {
+
+        // clear existing log entries
+        logBox.innerText = '';
+
+        // add log entries
+        log.forEach((entry) => {
+            const logEntry = document.createElement('div');
+            logEntry.textContent = entry;
+            logBox.appendChild(logEntry);
+        });
+
+        // show the overlay and log box
+        total_enable(overlay);
+        overlay.style.zIndex = 5;
+        total_enable(logBox);
+        logBox.style.zIndex = 10;
+    }
+    else {
+
+        // hide the overlay and log box
+        total_disable(overlay);
+        total_disable(logBox);
+    }
 }
