@@ -292,3 +292,7 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 
 * ***JS // HTML // CSS***
   * Un poquito de limpieza general.
+* ***JS***:
+  * Termino de implementar las funcionalidades del verbose y el log.
+* ***CSS***:
+  * Termino de implementar los estilos del verbose y el log.
