@@ -5,6 +5,7 @@ let stamp = performance.now();
 let total_time = 0;
 // localStorage.removeItem('save_file');
 if (localStorage.getItem('save_file') != null) {
+
     const save_info = JSON.parse(localStorage.getItem('save_file'));
     aux_resource = save_info['resource'];
     aux_building = save_info['building'];
@@ -12,9 +13,10 @@ if (localStorage.getItem('save_file') != null) {
     aux_log = save_info['log'];
 }
 else {
+
     aux_resource = { 
 
-        eddie: 2,
+        eddie: 0,
         subroutines: 100,
         daemons: 100,
         netrunners: 100,
@@ -25,6 +27,8 @@ else {
     };
     aux_building = {
     
+        enabled: false,
+
         warehouse: {
     
             cost: { eddies: 2, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 }, 
@@ -100,12 +104,12 @@ window.onload = function () {
         generate_eddie(eddie_img);
     });
 
-    // open log screen over everything
-    document.getElementById("log_btn").addEventListener("click", show_log);
-
-    update();
-
-    window.addEventListener("beforeunload", save_game);
+    document.getElementById("log_btn").addEventListener("click", show_log); // open log screen over everything
+    window.addEventListener("beforeunload", save_game); // save important info before closing window
+    
+    check_enable_buildings();
+    
+    update(); // start running total_time 'clock'
 }
 
 /* ------------------------------------------------------------ GENERATE EDDIE ------------------------------------------------------------ */
@@ -119,45 +123,8 @@ function generate_eddie(button) {
         verbose("+1 eddie");
 
         // check and enable building button if possible
-        if (document.getElementById("building_btn") == null && resource.eddie >= 2) {
+        check_enable_buildings();
 
-            // create building panel
-            let building_panel = document.createElement("div");
-            building_panel.setAttribute("class", "cyber_panel--hidden");
-            building_panel.setAttribute("id", "buildings_panel");
-            document.getElementsByClassName("resources")[0].appendChild(building_panel);
-            verbose("buildings enabled");
-    
-            add_option_and_function_to_panel("warehouse");
-            verbose("warehouse building enabled");
-            create_price_tag(document.getElementById("warehouse"));
-            create_exit_panel_btn(document.getElementById("buildings_panel"));
-    
-            // create building button
-            let building_btn = document.createElement("div");
-            building_btn.appendChild(document.createTextNode("Buildings"));
-            building_btn.setAttribute("id", "building_btn");
-            building_btn.setAttribute("class", "cyber_btn");
-            document.getElementById("buttons").appendChild(building_btn);
-    
-            // building button event
-            building_btn.addEventListener("click", function () {
-    
-                building_panel.setAttribute("class", "cyber_panel");
-                building_btn.style.zIndex = -1;
-                if (document.getElementById("work_btn") != null)
-                    document.getElementById("work_btn").style.zIndex = -1;
-                if (document.getElementById("building_btn") != null)
-                    document.getElementById("building_btn").style.zIndex = -1;
-                if (document.getElementById("black_market_btn") != null)
-                    document.getElementById("black_market_btn").style.zIndex = -1;
-                document.getElementById("overlay").style.zIndex = 0;
-                for (const child of building_panel.children) {
-    
-                    total_enable(child);
-                }
-            });
-        }
         updateUI();
         visual_enable(button);
     }, CD.eddie);
@@ -440,6 +407,50 @@ function work_event() {
 }
 
 /* ------------------------------------------------------------ HELPER FUNCTIONS ------------------------------------------------------------ */
+function check_enable_buildings() {
+
+    if (document.getElementById("building_btn") == null && (resource.eddie >= 2 || building.enabled)) {
+
+        building.enabled = true;
+        // create building panel
+        let building_panel = document.createElement("div");
+        building_panel.setAttribute("class", "cyber_panel--hidden");
+        building_panel.setAttribute("id", "buildings_panel");
+        document.getElementsByClassName("resources")[0].appendChild(building_panel);
+        verbose("buildings enabled");
+
+        add_option_and_function_to_panel("warehouse");
+        verbose("warehouse building enabled");
+        create_price_tag(document.getElementById("warehouse"));
+        create_exit_panel_btn(document.getElementById("buildings_panel"));
+
+        // create building button
+        let building_btn = document.createElement("div");
+        building_btn.appendChild(document.createTextNode("Buildings"));
+        building_btn.setAttribute("id", "building_btn");
+        building_btn.setAttribute("class", "cyber_btn");
+        document.getElementById("buttons").appendChild(building_btn);
+
+        // building button event
+        building_btn.addEventListener("click", function () {
+
+            building_panel.setAttribute("class", "cyber_panel");
+            building_btn.style.zIndex = -1;
+            if (document.getElementById("work_btn") != null)
+                document.getElementById("work_btn").style.zIndex = -1;
+            if (document.getElementById("building_btn") != null)
+                document.getElementById("building_btn").style.zIndex = -1;
+            if (document.getElementById("black_market_btn") != null)
+                document.getElementById("black_market_btn").style.zIndex = -1;
+            document.getElementById("overlay").style.zIndex = 0;
+            for (const child of building_panel.children) {
+
+                total_enable(child);
+            }
+        });
+    }
+}
+
 function create_exit_panel_btn(panel) {
 
     let exit_building = document.createElement("button");
@@ -475,7 +486,9 @@ function create_price_tag(element) {
     let cost_text = "";
     let element_cost = building[element.getAttribute("id")]["cost"];
     for (const resource in element_cost) {
+        
         if (element_cost[resource] != 0) {
+
             cost_text = `${cost_text}\n${resource}:${element_cost[resource]}`;
         }
     }
@@ -555,6 +568,7 @@ function updateUI() {
 
     let resourcesObj = Object.entries(resource);
     for (const [name, value] of resourcesObj) {
+
         if (document.getElementById(name) !== null)
             document.getElementById(name).innerText = value;
     }
@@ -652,10 +666,8 @@ function save_game() {
 
     localStorage.setItem('save_file', save_file);
 
-    console.log(localStorage.getItem('save_file'))
-
     /*
-    Esto funciona, pero descarga en la carpeta que tenga seleccionada el navegador. JavaScript no tiene acceso.
+    Esto funciona, pero descarga en la carpeta que tenga seleccionada el navegador. JavaScript es mierda.
     // create a Blob (raw data container) with JSON data
     const blob = new Blob([save_file], { type: "application/json" });
 
