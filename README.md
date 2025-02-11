@@ -312,4 +312,4 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 - **_JS_**:
   - La funcionalidad de guardar la partida, en un html dinámico, sin backend, con JS vanilla, manteniendo todos los cambios realizados en el arbol DOM hasta el punto de guardado, está haciendo que me quiera meter una ortiga por la uretra, sin dilatar primero.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://ih1.redbubble.net/image.3127748554.3337/raf,360x360,075,t,fafafa:ca443f4786.u1.jpg" width="200px" height="200px">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://ih1.redbubble.net/image.3127748554.3337/raf,360x360,075,t,fafafa:ca443f4786.u1.jpg" width="200px" height="200px">
