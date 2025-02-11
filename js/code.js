@@ -133,12 +133,14 @@ function generate_eddie(button) {
 /* ------------------------------------------------------------ ADD OPTION AND FUNCTION TO PANEL ------------------------------------------------------------ */
 function add_option_and_function_to_panel(option) {
 
+    // create and append new option
     let panel_option = document.createElement("div");
     panel_option.setAttribute("id", option);
     panel_option.setAttribute("class", "panel_option");
     panel_option.appendChild(document.createTextNode(option));
     document.getElementById("buildings_panel").appendChild(panel_option);
 
+    // manager
     panel_option.addEventListener("click", function() {
 
         let selectedBuilding = building[option];
@@ -177,6 +179,8 @@ function add_option_and_function_to_panel(option) {
                         work_btn.addEventListener("click", work_event);
                         verbose("work enabled");
                     }
+
+                    verbose("warehouse building enabled");
 
                     add_option_and_function_to_panel("netrunner_den");
                     create_price_tag(document.getElementById("netrunner_den"));
@@ -406,6 +410,11 @@ function work_event() {
     
 }
 
+/* ------------------------------------------------------------ LOAD OPTIONS TO BUILDINGS PANEL ------------------------------------------------------------ */
+function load_options_to_buildings_panel() {
+    
+}
+
 /* ------------------------------------------------------------ HELPER FUNCTIONS ------------------------------------------------------------ */
 function check_enable_buildings() {
 
@@ -420,7 +429,6 @@ function check_enable_buildings() {
         verbose("buildings enabled");
 
         add_option_and_function_to_panel("warehouse");
-        verbose("warehouse building enabled");
         create_price_tag(document.getElementById("warehouse"));
         create_exit_panel_btn(document.getElementById("buildings_panel"));
 
