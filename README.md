@@ -294,5 +294,7 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
   * Un poquito de limpieza general.
 * ***JS***:
   * Termino de implementar las funcionalidades del verbose y el log.
+  * Empiezo a desarrollar una manera de guardar. JavaScript vanilla no tiene acceso a el sistema, por lo que crear un fichero queda descartado. Podría descargar un archivo JSON pero no tengo manera de mover ese fichero de forma automática a la carpeta correcta. Debido a eso, me voy a conformar con el localStorage. Por ahora voy a guardar los resources, buildings, tiempo total de juego y el log.
+  * Continuando lo de arriba, aparece un bug. Tengo almacenada la propiedad 'built' de cada edificio, pero ninguna función que genere el DOM al cargar la partida.
 * ***CSS***:
   * Termino de implementar los estilos del verbose y el log.

@@ -17,9 +17,9 @@
   --color-black: #0d0d0d; /* Fondo oscuro */
   --color-pink: #ff3d81; /* Rosa neón */
   --color-red: #ff0040; /* Rojo neón */
-  --color-cyan: #00fffff1; /* Cian brillante */
-  --color-purple: #9b59b6; /* Morado vibrante */
-  --color-blue: #3498dbec; /* Azul claro */
+  --color-cyan: #00fffff8; /* Cian brillante */
+  --color-purple: #9c59b6fa; /* Morado vibrante */
+  --color-blue: #3498dbf5; /* Azul claro */
   --color-yellow: #f1c40f; /* Amarillo neón */
   --color-green: #2ecc71; /* Verde neón */
   --color-orange: #e67e22; /* Naranja vibrante */
@@ -80,7 +80,7 @@
   font-family: "Cyber2";
   box-shadow: 0 0 5px var(--color-black), 0 0 15px var(--color-blue);
   opacity: 0.95;
-  width: 168px;
+  width: 172px;
   height: 185px;
   margin: 5px;
   padding: 10px;
@@ -735,4 +735,15 @@
   vertical-align: center;
   padding: 2px;
   border: 1px solid var(--color-cyan);
+}
+
+#test {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  background-color: #0d0d0d;
+  color: white;
 }

@@ -1,53 +1,74 @@
-const resource = { 
+let aux_resource;
+let aux_building;
+let aux_log;
+let stamp = performance.now();
+let total_time = 0;
+// localStorage.removeItem('save_file');
+if (localStorage.getItem('save_file') != null) {
+    const save_info = JSON.parse(localStorage.getItem('save_file'));
+    aux_resource = save_info['resource'];
+    aux_building = save_info['building'];
+    total_time = save_info['total_time'];
+    aux_log = save_info['log'];
+}
+else {
+    aux_resource = { 
 
-    eddie: 2,
-    subroutines: 100,
-    daemons: 100,
-    netrunners: 100,
-    implants: 100,
-    engrams: 100,
-    data: 100,
-    rare_materials: 100
-};
-const building = {
+        eddie: 2,
+        subroutines: 100,
+        daemons: 100,
+        netrunners: 100,
+        implants: 100,
+        engrams: 100,
+        data: 100,
+        rare_materials: 100
+    };
+    aux_building = {
+    
+        warehouse: {
+    
+            cost: { eddies: 2, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 }, 
+            built: false 
+        },
+        netrunner_den: { 
+    
+            cost: { eddies: 6, subroutines: 6, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
+            built: false,
+            amount: 0 
+        },
+        data_farm: { 
+    
+            cost: { eddies: 8, subroutines: 9, daemons: 5, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
+            built: false
+        },
+        black_market: { 
+    
+            cost: { eddies: 0, subroutines: 8, daemons: 9, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
+            built: false
+        },
+        chrome_clinic: { 
+    
+            cost: { eddies: 8, subroutines: 0, daemons: 10, netrunners: 0, implants: 0, engrams: 0, data: 5, rare_materials: 0 },
+            built: false
+        },
+        soul_killer: { 
+    
+            cost: { eddies: 5, subroutines: 8, daemons: 0, netrunners: 0, implants: 3, engrams: 0, data: 0, rare_materials: 0 },
+            built: false
+        },
+        construct: { 
+    
+            cost: { eddies: 10, subroutines: 9, daemons: 7, netrunners: 0, implants: 3, engrams: 10, data: 0, rare_materials: 0 },
+            built: false
+        }
+    }; 
+    aux_log = [];
+}
 
-    warehouse: {
+const resource = JSON.parse(JSON.stringify(aux_resource));
+const building = JSON.parse(JSON.stringify(aux_building));
+const log = JSON.parse(JSON.stringify(aux_log));
 
-        cost: { eddies: 2, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 }, 
-        built: false 
-    },
-    netrunner_den: { 
-
-        cost: { eddies: 6, subroutines: 6, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
-        built: false,
-        amount: 0 
-    },
-    data_farm: { 
-
-        cost: { eddies: 8, subroutines: 9, daemons: 5, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
-        built: false
-    },
-    black_market: { 
-
-        cost: { eddies: 0, subroutines: 8, daemons: 9, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
-        built: false
-    },
-    chrome_clinic: { 
-
-        cost: { eddies: 8, subroutines: 0, daemons: 10, netrunners: 0, implants: 0, engrams: 0, data: 5, rare_materials: 0 },
-        built: false
-    },
-    soul_killer: { 
-
-        cost: { eddies: 5, subroutines: 8, daemons: 0, netrunners: 0, implants: 3, engrams: 0, data: 0, rare_materials: 0 },
-        built: false
-    },
-    construct: { 
-
-        cost: { eddies: 10, subroutines: 9, daemons: 7, netrunners: 0, implants: 3, engrams: 10, data: 0, rare_materials: 0 },
-        built: false
-    }
-};
 const black_market = {
     rare_materials: { eddies: 3, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
     subroutines: { eddies: 1, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
@@ -64,14 +85,10 @@ const CD = {
 /* for getElapsedTime */
 let start = performance.now();
 
-/* for update */
-let stamp = performance.now();
-let total_time = 0;
-
-const log = [];
-
 /* ------------------------------------------------------------ ENTRY POINT ------------------------------------------------------------ */
 window.onload = function () {
+
+    updateUI();
 
     total_disable(document.getElementById('log-box'));
     total_disable(document.getElementById('overlay'));
@@ -87,6 +104,8 @@ window.onload = function () {
     document.getElementById("log_btn").addEventListener("click", show_log);
 
     update();
+
+    window.addEventListener("beforeunload", save_game);
 }
 
 /* ------------------------------------------------------------ GENERATE EDDIE ------------------------------------------------------------ */
@@ -561,11 +580,13 @@ function update() {
 }
 
 function verbose(text) {
+
     let verbose = document.createElement("div");
     verbose.setAttribute("class", "verbose");
     verbose.appendChild(document.createTextNode(text));
     //log.push(`${log.length+1}: ${text} @(${Math.round(total_time) / 1000}s)`);
     log.push({
+
         order: log.length+1,
         text: text,
         time: `@${Math.round(total_time) / 1000}s`
@@ -590,11 +611,13 @@ function show_log() {
 
         // clear existing log entries
         while (logTable.children.length > 0) {
+
             logTable.removeChild(logTable.children[0]);
         }
 
         // add log entries
         log.forEach((entry) => {
+
             let logEntry = document.createElement('tr');
             for (const key in entry) {
                 let td = document.createElement('td');
@@ -616,4 +639,34 @@ function show_log() {
         total_disable(overlay);
         total_disable(logBox);
     }
+}
+
+function save_game() {
+
+    const save_file = JSON.stringify({
+        resource: resource,
+        building: building,
+        total_time: total_time,
+        log: log
+    }, null, 2);
+
+    localStorage.setItem('save_file', save_file);
+
+    console.log(localStorage.getItem('save_file'))
+
+    /*
+    Esto funciona, pero descarga en la carpeta que tenga seleccionada el navegador. JavaScript no tiene acceso.
+    // create a Blob (raw data container) with JSON data
+    const blob = new Blob([save_file], { type: "application/json" });
+
+    // create an anchor element and trigger download
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "save.json"; // File name
+
+    // append to document, click, then remove
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    */
 }
