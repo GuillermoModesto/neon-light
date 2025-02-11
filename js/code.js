@@ -2,9 +2,10 @@ let aux_resource;
 let aux_building;
 let aux_log;
 let saved_html = '';
+let loaded_html = false;
 let stamp = performance.now();
 let total_time = 0;
-localStorage.removeItem('save_file');
+//localStorage.removeItem('save_file');
 if (localStorage.getItem('save_file') != null) {
 
     const save_info = JSON.parse(localStorage.getItem('save_file'));
@@ -82,7 +83,6 @@ const resource = JSON.parse(JSON.stringify(aux_resource));
 const building = JSON.parse(JSON.stringify(aux_building));
 const log = JSON.parse(JSON.stringify(aux_log));
 
-
 const black_market = {
     rare_materials: { eddies: 3, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
     subroutines: { eddies: 1, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
@@ -119,21 +119,13 @@ window.onload = function () {
     
     check_enable_buildings();
 
-    for (const key in building) {
-
-        if (building[key]['saved']) {
-
-            add_option_and_function_to_panel(key);
-        }
-    }
-/*
-    if (saved_html != '') { 
-        
+     // Restore saved HTML
+     if (saved_html && !loaded_html) {
         document.getElementsByClassName("container")[0].innerHTML = saved_html;
-        saved_html = '';
-        console.log('Game loaded');
+        loaded_html = true;
+        reattachEventListeners();
     }
-*/
+
     update(); // start running total_time 'clock'
 }
 
@@ -446,11 +438,6 @@ function work_event() {
     
 }
 
-/* ------------------------------------------------------------ LOAD OPTIONS TO BUILDINGS PANEL ------------------------------------------------------------ */
-function load_options_to_buildings_panel() {
-    
-}
-
 /* ------------------------------------------------------------ HELPER FUNCTIONS ------------------------------------------------------------ */
 function check_enable_buildings() {
 
@@ -476,22 +463,30 @@ function check_enable_buildings() {
         document.getElementById("buttons").appendChild(building_btn);
 
         // building button event
-        building_btn.addEventListener("click", function () {
+        building_btn.addEventListener("click", building_btn_event);
+    }
+}
 
-            building_panel.setAttribute("class", "cyber_panel");
-            building_btn.style.zIndex = -1;
-            if (document.getElementById("work_btn") != null)
-                document.getElementById("work_btn").style.zIndex = -1;
-            if (document.getElementById("building_btn") != null)
-                document.getElementById("building_btn").style.zIndex = -1;
-            if (document.getElementById("black_market_btn") != null)
-                document.getElementById("black_market_btn").style.zIndex = -1;
-            document.getElementById("overlay").style.zIndex = 0;
-            for (const child of building_panel.children) {
+function building_btn_event() {
+    console.log("building_btn");
+    let building_panel = document.getElementById("buildings_panel");
+    let building_btn = document.getElementById("building_btn");
 
-                total_enable(child);
-            }
-        });
+    if (building_panel) {
+        building_panel.setAttribute("class", "cyber_panel");
+        building_btn.style.zIndex = -1;
+        if (document.getElementById("work_btn") != null)
+            document.getElementById("work_btn").style.zIndex = -1;
+        if (document.getElementById("building_btn") != null)
+            document.getElementById("building_btn").style.zIndex = -1;
+        if (document.getElementById("black_market_btn") != null)
+            document.getElementById("black_market_btn").style.zIndex = -1;
+        document.getElementById("overlay").style.zIndex = 0;
+        for (const child of building_panel.children) {
+            total_enable(child);
+        }
+    } else {
+        console.error("Building panel not found!");
     }
 }
 
@@ -502,24 +497,24 @@ function create_exit_panel_btn(panel) {
     exit_building.appendChild(document.createTextNode("X"));
     panel.appendChild(exit_building);
 
-    exit_building.addEventListener("click", function () {
+    exit_building.addEventListener("click", exit_building_func.bind(null, panel));
+}
 
-        panel.setAttribute("class", "cyber_panel--hidden cyber_panel--hidden--animation");
-        if (document.getElementById("building_btn") != null)
-            document.getElementById("building_btn").style.zIndex = 3;
-        if (document.getElementById("work_btn") != null)
-            document.getElementById("work_btn").style.zIndex = 3;
-        if (document.getElementById("building_btn") != null)
-            document.getElementById("building_btn").style.zIndex = 3;
-        if (document.getElementById("black_market_btn") != null)
-            document.getElementById("black_market_btn").style.zIndex = 3;
-        document.getElementById("overlay").style.zIndex = -1;
-        for (const child of panel.children) {
-
-            if (child.getAttribute("id") != "exit_building")
-                total_disable(child);
-        }
-    });
+function exit_building_func(panel) {
+    panel.setAttribute("class", "cyber_panel--hidden cyber_panel--hidden--animation");
+    if (document.getElementById("building_btn") != null)
+        document.getElementById("building_btn").style.zIndex = 3;
+    if (document.getElementById("work_btn") != null)
+        document.getElementById("work_btn").style.zIndex = 3;
+    if (document.getElementById("building_btn") != null)
+        document.getElementById("building_btn").style.zIndex = 3;
+    if (document.getElementById("black_market_btn") != null)
+        document.getElementById("black_market_btn").style.zIndex = 3;
+    document.getElementById("overlay").style.zIndex = -1;
+    for (const child of panel.children) {
+        if (child.getAttribute("id") != "exit_building")
+            total_disable(child);
+    }
 }
 
 function create_price_tag(element) {
@@ -701,6 +696,13 @@ function show_log() {
 
 function save_game() {
 
+    // remove verbose messages
+    let verbose_box = document.getElementById("verbose_box");
+    while (verbose_box.children.length > 0) {
+
+        verbose_box.removeChild(verbose_box.children[0]);
+    }
+
     const save_file = JSON.stringify({
         resource: resource,
         building: building,
@@ -710,20 +712,46 @@ function save_game() {
     }, null, 2);
 
     localStorage.setItem('save_file', save_file);
+}
 
-    /*
-    Esto funciona, pero descarga en la carpeta que tenga seleccionada el navegador. JavaScript es mierda.
-    // create a Blob (raw data container) with JSON data
-    const blob = new Blob([save_file], { type: "application/json" });
+// function to reattach event listeners
+function reattachEventListeners() {
 
-    // create an anchor element and trigger download
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "save.json"; // File name
+    // generate eddie event listener
+    if (document.getElementById("eddie-img")) {
+        let eddie_img = document.getElementById("eddie-img");
+        eddie_img.addEventListener("click", function () {
+            generate_eddie(eddie_img);
+        });
+    }
 
-    // append to document, click, then remove
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    */
+    // show log event listener
+    let log_btn = document.getElementById("log_btn");
+    if (log_btn) {
+        log_btn.addEventListener("click", show_log);
+    }
+
+    // add building option to panel event listener
+    for (const key in building) {
+        if (building[key]['saved']) {
+            add_option_and_function_to_panel(key);
+        }
+    }
+
+    // work event listener
+    if (document.getElementById("work_btn")) {
+        document.getElementById("work_btn").addEventListener("click", work_event);
+    }
+
+    // building button event listener
+    if (document.getElementById("building_btn")) {
+        document.getElementById("building_btn").addEventListener("click", building_btn_event);
+    }
+
+    if (document.getElementsByClassName("exit_button").length != 0) {
+        let exit_buttons = document.getElementsByClassName("exit_button");
+        for (const button of exit_buttons) {
+            button.addEventListener("click", exit_building_func.bind(null, button.parentElement));
+        }
+    }
 }
