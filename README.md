@@ -212,6 +212,8 @@ Hoy se me a ocurrido crear un **contenedor circular** que aparezca con **hover**
 
 ### Día 6:
 
+<img src="https://fotografias.larazon.es/clipping/cmsimages02/2019/08/22/B8541FD6-9A46-44D4-A045-F6724924490D/98.jpg?crop=377,212,x0,y0&width=1900&height=1069&optimize=low&format=webply" width="300px" height="200px">
+
 Pensamientos generales de suicidio. Deseos a nivel intermedio/avanzado.
 * ***JS***:
   * Refactorización. Recuerdas cuando dije que quería abstraer funciones? Y que era muy mala idea en este punto del desarrollo? Pues eso.
@@ -234,8 +236,6 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
   * Me doy cuenta de que tengo que actualizar visualmente el precio del netrunner den.
 
 ### Día 9:
-
-<img src="https://fotografias.larazon.es/clipping/cmsimages02/2019/08/22/B8541FD6-9A46-44D4-A045-F6724924490D/98.jpg?crop=377,212,x0,y0&width=1900&height=1069&optimize=low&format=webply" width="300px" height="200px">
 
 * ***JS***:
   * Arreglo el bug y el precio del netrunner den se actualiza correctamente.
