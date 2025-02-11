@@ -1,6 +1,6 @@
 const resource = { 
 
-    eddie: 20,
+    eddie: 2,
     subroutines: 100,
     daemons: 100,
     netrunners: 100,
@@ -564,7 +564,12 @@ function verbose(text) {
     let verbose = document.createElement("div");
     verbose.setAttribute("class", "verbose");
     verbose.appendChild(document.createTextNode(text));
-    log.push(`${log.length+1}: ${text} @(${Math.round(total_time) / 1000}s)`);
+    //log.push(`${log.length+1}: ${text} @(${Math.round(total_time) / 1000}s)`);
+    log.push({
+        order: log.length+1,
+        text: text,
+        time: `@${Math.round(total_time) / 1000}s`
+    });
     document.getElementById("verbose_box").appendChild(verbose);
     setTimeout(function() {
 
@@ -580,16 +585,23 @@ function show_log() {
         
     const overlay = document.getElementById('overlay');
     const logBox = document.getElementById('log-box');
+    const logTable = document.getElementById('log-box-table');
     if (overlay.style.zIndex == -1) {
 
         // clear existing log entries
-        logBox.innerText = '';
+        while (logTable.children.length > 0) {
+            logTable.removeChild(logTable.children[0]);
+        }
 
         // add log entries
         log.forEach((entry) => {
-            const logEntry = document.createElement('div');
-            logEntry.textContent = entry;
-            logBox.appendChild(logEntry);
+            let logEntry = document.createElement('tr');
+            for (const key in entry) {
+                let td = document.createElement('td');
+                td.innerText = entry[key];
+                logEntry.appendChild(td);
+            }
+            logTable.appendChild(logEntry);
         });
 
         // show the overlay and log box
