@@ -296,7 +296,16 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
   * Termino de implementar las funcionalidades del verbose y el log.
   * Empiezo a desarrollar una manera de guardar. JavaScript vanilla no tiene acceso a el sistema, por lo que crear un fichero queda descartado. Podría descargar un archivo JSON pero no tengo manera de mover ese fichero de forma automática a la carpeta correcta. Debido a eso, me voy a conformar con el localStorage. Por ahora voy a guardar los resources, buildings, tiempo total de juego y el log.
   * Aparece un bug. Tengo almacenada la propiedad 'built' de cada edificio, pero ninguna función que genere el DOM al cargar la partida.
-  * Arreglo que aparezca el botón de 'buildings' se estaba generado en el save_file.
+  * Arreglo que aparezca el botón de 'buildings' si estaba guardado en el save_file.
   * Debo arreglar que el estado de 'built' de cada edificio se mantenga y actualice el DOM.
 * ***CSS***:
   * Termino de implementar los estilos del verbose y el log.
+
+### Día 15:
+
+<img src="https://content.imageresizer.com/images/memes/Smg4-Oh-Shit-meme-5.jpg" width="200px" height="200px">
+<img src="https://content.imageresizer.com/images/memes/Smg4-Oh-Shit-meme-5.jpg" width="200px" height="200px">
+<img src="https://content.imageresizer.com/images/memes/Smg4-Oh-Shit-meme-5.jpg" width="200px" height="200px">
+
+* ***JS***:
+  * La funcionalidad de guardar la partida, en un html dinámico, sin backend, con JS vanilla, manteniendo todos los cambios realizados en el arbol DOM hasta el punto de guardado, está haciendo que me quiera meter una ortiga por la uretra, sin dilatar primero.
