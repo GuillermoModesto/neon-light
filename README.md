@@ -319,7 +319,7 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 
 ### Día 12:
 
---> darle click sin miedo ahí [![Cansionsilla wena](https://img.youtube.com/vi/O2F0oTqfL3E/default.jpg)](https://www.youtube.com/watch?v=O2F0oTqfL3E)
+(darle click sin miedo ahí) --> [![Cansionsilla wena](https://img.youtube.com/vi/O2F0oTqfL3E/default.jpg)](https://www.youtube.com/watch?v=O2F0oTqfL3E)
 
 - **_JS_**:
 
