@@ -224,7 +224,7 @@ Pensamientos generales de suicidio. Deseos a nivel intermedio/avanzado.
 
 ### Día 7:
 
-"Si quieres brillar como el sol, primero debes arder como él." -Adolf Hitler
+<i>"Si quieres brillar como el sol, primero debes arder como él."</i> -Adolf Hitler
 
 - **_JS_**:
   - Termino de crear y arreglar el boton y el panel del black market con su funcionalidad y animación de aparecer y desaparecer. Si tubiera que elegir entre perder un huevo en un ataque de jabalí salvaje con rabia o trabajar con CSS, ya sabes lo que eligiría.
