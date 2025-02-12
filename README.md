@@ -3,6 +3,7 @@
 <h3 align="center">
   <b>
     ◇◆◇◆◇◆◇◆◇◆◆◇◆◇◆◇◆◇◆◇
+  </b>
 </h3>
 <h3 align="center">
   <b>
