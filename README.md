@@ -332,7 +332,7 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 
 ### Día 13:
 
-[![Arriba Andalucía](https://img.youtube.com/vi/4xwwntp91XA/default.jpg)](https://www.youtube.com/watch?v=4xwwntp91XA)
+(darle click con miedo ahí) --> [![Arriba Andalucía](https://img.youtube.com/vi/4xwwntp91XA/default.jpg)](https://www.youtube.com/watch?v=4xwwntp91XA)
 
 - **_JS_**:
   - Toqueteo tiempos de intervalos para el botón de trabajo.
