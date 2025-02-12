@@ -152,7 +152,7 @@ El juego incluye varios resources que el jugador debe gestionar:
 Se pueden añadir funcionalidades adicionales como:
 
 - Contador de tiempo.
-- Opción de grabar y cargar partidas.
+- Opción de guardar y cargar partidas.
 - Zona informativa que muestra las acciones realizadas.
 - Efectos de sonido y música.
 
