@@ -248,7 +248,9 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 
 ### Día 10:
 
-<img src="https://www.esdip.com/wp-content/uploads/2023/01/historia-de-la-animacion_la-saga-shrek.jpg" width="200px" height="150px">
+<p align="center">
+  <img src="https://www.esdip.com/wp-content/uploads/2023/01/historia-de-la-animacion_la-saga-shrek.jpg" width="200px" height="150px">
+</p>
 
 - **_JS_**:
   - Modifico el código en base a los cambios de CSS reflejados en su sección.
