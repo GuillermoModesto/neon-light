@@ -266,7 +266,7 @@ function panel_option_func(option, panel_option) {
                         let tag = document.createElement("div");
                         tag.appendChild(document.createTextNode(material));
                         tag.setAttribute("class", "panel_option");
-                        tag.setAttribute("id", material);
+                        tag.setAttribute("id", `${material}_bm`);
                         black_market_panel.appendChild(tag);
                         verbose(`${material} material enabled`);
                         // price tag
@@ -275,7 +275,7 @@ function panel_option_func(option, panel_option) {
                         price_tag.appendChild(document.createTextNode(`eddies:${black_market[material]["eddies"]}`));
                         tag.appendChild(price_tag);
                         // functionality
-                        tag.addEventListener('click', black_market_material_func);
+                        tag.addEventListener('click', black_market_material_func.bind(null, material));
                     }
 
                     // check and enable black market button if possible
@@ -353,8 +353,9 @@ function black_market_btn_func() {
     }
 }
 
-function black_market_material_func() {
+function black_market_material_func(material) {
 
+    console.log(material)
     if (resource.eddie >= black_market[material]["eddies"]) {
         resource.eddie -= black_market[material]["eddies"];
         resource[material]++;
@@ -438,10 +439,13 @@ function save_game() {
         verbose_box.removeChild(verbose_box.children[0]);
     }
     
-    let work_container = document.getElementById("work_container");
-    while (work_container.children.length > 1) {
+    if (document.getElementById("work_container")) {
 
-        work_container.removeChild(verbose_box.children[1]);
+        let work_container = document.getElementById("work_container");
+        while (work_container.children.length > 1) {
+
+            work_container.removeChild(verbose_box.children[1]);
+        }
     }
 
     // generate and save inportant info
@@ -721,13 +725,15 @@ function reattachEventListeners() {
         }
     }
 
-    // add buildings option to panel event listener
-    for (const option of document.getElementById('buildings_panel').children) {
-        if (option.className != "exit_button") {
-            option.addEventListener("click", panel_option_func.bind(null, option.id, option));
+    // add event listener to building panel options
+    if(document.getElementById('buildings_panel')) {
+        for (const option of document.getElementById('buildings_panel').children) {
+            if (option.className != "exit_button") {
+                option.addEventListener("click", panel_option_func.bind(null, option.id, option));
+            }
         }
     }
-
+        
     // work event listener
     if (document.getElementById("work_btn"))
         document.getElementById("work_btn").addEventListener("click", work_event);
@@ -744,6 +750,14 @@ function reattachEventListeners() {
         }
     }
 
+    // black market button event listener
     if (document.getElementById("black_market_btn"))
         document.getElementById("black_market_btn").addEventListener("click", black_market_btn_func);
+
+    // black market materials
+    for (const material in black_market) {
+
+        console.log(document.getElementById(`${material}_bm`))
+        document.getElementById(`${material}_bm`).addEventListener('click', black_market_material_func.bind(null, material));
+    }
 }

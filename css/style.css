@@ -569,14 +569,14 @@
 
 .exit_button {
   position: absolute;
-  top: -10px;
-  right: -10px;
+  top: -13px;
+  right: -13px;
   background: var(--color-pink);
   color: var(--color-white);
   font-family: 'Cyber2', sans-serif;
   font-size: 18px;
-  width: 30px;
-  height: 30px;
+  width: 31px;
+  height: 31px;
   border: none;
   cursor: pointer;
   box-shadow: 0 0 10px var(--color-black), 0 0 15px var(--color-pink);
