@@ -17,7 +17,7 @@
 
 <hr>
 
-0. ### Prefacio:
+0. ## Prefacio:
 
 Trabajo opcional de la asignatura de desarrollo en entorno cliente (2025). JavaScript fué un error.
 
@@ -156,6 +156,9 @@ Se pueden añadir funcionalidades adicionales como:
 - Efectos de sonido y música.
 
 <hr>
+
+## DIARIO DE DESARROLLO
+
 <hr>
 
 ### Día 1:
