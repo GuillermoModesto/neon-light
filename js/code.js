@@ -35,44 +35,37 @@ else {
         warehouse: {
     
             cost: { eddies: 2, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 }, 
-            saved: false,
             built: false 
         },
         netrunner_den: { 
     
             cost: { eddies: 6, subroutines: 6, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
-            saved: false,
             built: false,
             amount: 0 
         },
         data_farm: { 
     
             cost: { eddies: 8, subroutines: 9, daemons: 5, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
-            saved: false,
             built: false
         },
         black_market: { 
     
             cost: { eddies: 0, subroutines: 8, daemons: 9, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
-            saved: false,
             built: false
         },
         chrome_clinic: { 
     
             cost: { eddies: 8, subroutines: 0, daemons: 10, netrunners: 0, implants: 0, engrams: 0, data: 5, rare_materials: 0 },
-            saved: false,
             built: false
         },
         soul_killer: { 
     
             cost: { eddies: 5, subroutines: 8, daemons: 0, netrunners: 0, implants: 3, engrams: 0, data: 0, rare_materials: 0 },
-            saved: false,
             built: false
         },
         construct: { 
     
             cost: { eddies: 10, subroutines: 9, daemons: 7, netrunners: 0, implants: 3, engrams: 10, data: 0, rare_materials: 0 },
-            saved: false,
             built: false
         }
     }; 
@@ -102,6 +95,8 @@ let start = performance.now();
 /* ------------------------------------------------------------ ENTRY POINT ------------------------------------------------------------ */
 window.onload = function () {
 
+    verbose(` --- game started --- `);
+
     updateUI();
 
     total_disable(document.getElementById('log-box'));
@@ -121,6 +116,7 @@ window.onload = function () {
 
      // Restore saved HTML
      if (saved_html && !loaded_html) {
+
         document.getElementsByClassName("container")[0].innerHTML = saved_html;
         loaded_html = true;
         reattachEventListeners();
@@ -147,7 +143,7 @@ function generate_eddie(button) {
     }, CD.eddie);
 }
 
-/* ------------------------------------------------------------ ADD OPTION AND FUNCTION TO PANEL ------------------------------------------------------------ */
+/* ------------------------------------------------------------ ADD OPTION TO PANEL ------------------------------------------------------------ */
 function add_option_and_function_to_panel(option) {
 
     // create and append new option
@@ -156,131 +152,106 @@ function add_option_and_function_to_panel(option) {
     panel_option.setAttribute("class", "panel_option");
     panel_option.appendChild(document.createTextNode(option));
     document.getElementById("buildings_panel").appendChild(panel_option);
+    panel_option.addEventListener("click", panel_option_func.bind(null, option, panel_option));
+}
 
-    /*
-    This dreadful switch case is the result of a bad design decision that I made at the beginning of the project, then was too lazy to fix. Sorry.
-    Its purpose is to enable the correct building panel option (such as warehouse, black_market...) and its functionality when the player has enough resources to build them.
-    */
-    panel_option.addEventListener("click", function() {
+/* ------------------------------------------------------------ EVENT HANDDLER FUNCTIONS ------------------------------------------------------------ */
 
-        let selectedBuilding = building[option];
-        if ((enough_resources(selectedBuilding) && !selectedBuilding.built) || selectedBuilding.saved) {
+/* ------------------------------------------------------------ ADD ACTION EVENT HANDLER TO OPTION PANEL ------------------------------------------------------------ */
+function panel_option_func(option, panel_option) {
 
-            if (selectedBuilding.saved)
-                selectedBuilding.saved = false;
-            else {
-                
-                selectedBuilding.saved = true;
-                substract_resources(selectedBuilding);
-            }
+    let selectedBuilding = building[option];
+    if (enough_resources(selectedBuilding) && !selectedBuilding.built) {
+        substract_resources(selectedBuilding);
 
-            if (option !== "netrunner_den") {
+        if (option !== "netrunner_den") {
+            selectedBuilding.built = true;
+            visual_disable(panel_option);
+        }
 
-                selectedBuilding.built = true;
-                visual_disable(panel_option);
-            }
-
-            switch (option) {
-
-                case "warehouse":
-
-                console.log("warehouse");
-                    // check and enable resources panel if possible
-                    if (document.getElementById("resource_list").hidden && building.warehouse.built) {
-
-                        document.getElementById("resource_list").hidden = false;
+        /*
+        This dreadful switch case is the result of a bad design decision that I made at the beginning of the project, then was too lazy to fix. Sorry.
+        Its purpose is to enable the correct building panel option (such as warehouse, black_market...) and its functionality when the player has enough resources to build them.
+        */
+        switch (option) {
+            case "warehouse":
+                if (document.getElementById("resource_list").hidden && building.warehouse.built) {
+                    document.getElementById("resource_list").hidden = false;
+                }
+                if (document.getElementById("work_btn") == null) {
+                    let work_container = document.createElement("div");
+                    work_container.setAttribute("class", "work_container");
+                    work_container.setAttribute("id", "work_container");
+                    let work_btn = document.createElement("div");
+                    work_btn.setAttribute("class", "cyber_btn");
+                    work_btn.setAttribute("id", "work_btn");
+                    work_btn.style.zIndex = -1;
+                    work_btn.appendChild(document.createTextNode("work"));
+                    document.getElementById("buttons").appendChild(work_container);
+                    work_container.appendChild(work_btn);
+                    work_btn.addEventListener("click", work_event);
+                    verbose("work enabled");
+                }
+                verbose("warehouse building enabled");
+                add_option_and_function_to_panel("netrunner_den");
+                create_price_tag(document.getElementById("netrunner_den"));
+                verbose("netrunner_den building enabled");
+                add_option_and_function_to_panel("data_farm");
+                create_price_tag(document.getElementById("data_farm"));
+                verbose("data_farm building enabled");
+                add_option_and_function_to_panel("black_market");
+                create_price_tag(document.getElementById("black_market"));
+                verbose("black_market building enabled");
+                break;
+            case "netrunner_den":
+                resource.netrunners += 5;
+                building.netrunner_den.cost.eddies += 5;
+                building.netrunner_den.cost.subroutines += 5;
+                building.netrunner_den.amount++;
+                verbose("+5 netrunners");
+                let price_tag = document.getElementById("netrunner_den").childNodes[1];
+                let cost_text = "";
+                let element_cost = building["netrunner_den"]["cost"];
+                for (const resource in element_cost) {
+                    if (element_cost[resource] != 0) {
+                        cost_text = `${cost_text}\n${resource}:${element_cost[resource]}`;
                     }
-                    
-                    // check and enable work button if possible
-                    if (document.getElementById("work_btn") == null) {
-
-                        let work_container = document.createElement("div");
-                        work_container.setAttribute("class", "work_container");
-                        work_container.setAttribute("id", "work_container");
-                        let work_btn = document.createElement("div");
-                        work_btn.setAttribute("class", "cyber_btn");
-                        work_btn.setAttribute("id", "work_btn");
-                        work_btn.style.zIndex = -1;
-                        work_btn.appendChild(document.createTextNode("work"));
-                        document.getElementById("buttons").appendChild(work_container);
-                        work_container.appendChild(work_btn);
-                        work_btn.addEventListener("click", work_event);
-                        verbose("work enabled");
-                    }
-
-                    verbose("warehouse building enabled");
-
-                    add_option_and_function_to_panel("netrunner_den");
-                    create_price_tag(document.getElementById("netrunner_den"));
-                    verbose("netrunner_den building enabled");
-
-                    add_option_and_function_to_panel("data_farm");
-                    create_price_tag(document.getElementById("data_farm"));
-                    verbose("data_farm building enabled");
-
-                    add_option_and_function_to_panel("black_market");
-                    create_price_tag(document.getElementById("black_market"));
-                    verbose("black_market building enabled");
-                    break;
-                case "netrunner_den":
-                    resource.netrunners += 5;
-                    building.netrunner_den.cost.eddies += 5;
-                    building.netrunner_den.cost.subroutines += 5;
-                    building.netrunner_den.amount++;
-                    verbose("+5 netrunners");
-
-                    //update price tag
-                    let price_tag = document.getElementById("netrunner_den").childNodes[1];
-
-                    let cost_text = "";
-                    let element_cost = building["netrunner_den"]["cost"];
-                    for (const resource in element_cost) {
-                        if (element_cost[resource] != 0) {
-                            cost_text = `${cost_text}\n${resource}:${element_cost[resource]}`;
+                }
+                price_tag.innerText = cost_text;
+                break;
+            case "data_farm":
+                setInterval(function() {
+                    resource.data++;
+                    updateUI();
+                }, CD.data);
+                add_option_and_function_to_panel("chrome_clinic");
+                create_price_tag(document.getElementById("chrome_clinic"));
+                verbose("chrome_clinic building enabled");
+                break;
+            case "chrome_clinic":
+                add_option_and_function_to_panel("soul_killer");
+                create_price_tag(document.getElementById("soul_killer"));
+                verbose("soul_killer building enabled");
+                if (document.getElementById("sublimate_btn") == null) {
+                    let sublimate_btn = document.createElement("div");
+                    sublimate_btn.setAttribute("class", "cyber_btn");
+                    sublimate_btn.setAttribute("id", "sublimate_btn");
+                    sublimate_btn.style.zIndex = 1;
+                    sublimate_btn.appendChild(document.createTextNode("Sublimate"));
+                    document.getElementById("buttons").appendChild(sublimate_btn);
+                    verbose("sublimate button enabled");
+                    sublimate_btn.addEventListener('click', function() {
+                        if (resource.data >= 2) {
+                            resource.data -= 2;
+                            resource.engrams++;
+                            updateUI();
+                            verbose("1 engram sublimated");
+                        } else {
+                            verbose("failed to sublimate engram");
                         }
-                    }
-                    price_tag.innerText = cost_text;
-                    break;
-                case "data_farm":
-                    setInterval(function() {
-
-                        resource.data++;
-                        updateUI();
-                    }, CD.data);
-                    add_option_and_function_to_panel("chrome_clinic");
-                    create_price_tag(document.getElementById("chrome_clinic"));
-                    verbose("chrome_clinic building enabled");
-                    break;
-                case "chrome_clinic":
-                    add_option_and_function_to_panel("soul_killer");
-                    create_price_tag(document.getElementById("soul_killer"));
-                    verbose("soul_killer building enabled");
-
-                    // Sublimate button
-                    if (document.getElementById("sublimate_btn") == null) {
-
-                        let sublimate_btn = document.createElement("div");
-                        sublimate_btn.setAttribute("class", "cyber_btn");
-                        sublimate_btn.setAttribute("id", "sublimate_btn");
-                        sublimate_btn.style.zIndex = 1;
-                        sublimate_btn.appendChild(document.createTextNode("Sublimate"));
-                        document.getElementById("buttons").appendChild(sublimate_btn);
-                        verbose("sublimate button enabled");
-
-                        sublimate_btn.addEventListener('click', function() {
-
-                            if (resource.data >= 2) {
-                                resource.data -= 2;
-                                resource.engrams++;
-                                updateUI();
-                                verbose("1 engram sublimated");
-                            }
-                            else {
-                                verbose("failed to sublimate engram");
-                            }
-                        });
-                    }
-                    break;
+                    });
+                }
+                break;
                 case "black_market":
                     // black market panel
                     let black_market_panel = document.createElement("div");
@@ -304,18 +275,7 @@ function add_option_and_function_to_panel(option) {
                         price_tag.appendChild(document.createTextNode(`eddies:${black_market[material]["eddies"]}`));
                         tag.appendChild(price_tag);
                         // functionality
-                        tag.addEventListener('click', function() {
-
-                            if (resource.eddie >= black_market[material]["eddies"]) {
-                                resource.eddie -= black_market[material]["eddies"];
-                                resource[material]++;
-                                verbose(`${material} bought`);
-                            }
-                            else {
-                                verbose(`failed to buy ${material}`);
-                            }
-                            updateUI();
-                        });
+                        tag.addEventListener('click', black_market_material_func);
                     }
 
                     // check and enable black market button if possible
@@ -328,23 +288,7 @@ function add_option_and_function_to_panel(option) {
                         black_market_btn.appendChild(document.createTextNode("black_market"));
                         document.getElementById("buttons").appendChild(black_market_btn);
                 
-                        black_market_btn.addEventListener("click", function() {
-                            
-                            let panel = document.getElementById("black_market_panel");
-                            document.getElementById("black_market_panel").setAttribute("class", "cyber_panel");
-                            black_market_btn.style.zIndex = 1;
-                            if (document.getElementById("work_btn") != null)
-                                document.getElementById("work_btn").style.zIndex = 1;
-                            if (document.getElementById("building_btn") != null)
-                                document.getElementById("building_btn").style.zIndex = 1;
-                            if (document.getElementById("black_market_btn") != null)
-                                document.getElementById("black_market_btn").style.zIndex = 1;
-                            document.getElementById("overlay").style.zIndex = 0;
-                            for (const child of panel.children) {
-                
-                                total_enable(child);
-                            }
-                        });
+                        black_market_btn.addEventListener("click", black_market_btn_func);
                     }
                     break;
                 case "soul_killer":
@@ -371,10 +315,57 @@ function add_option_and_function_to_panel(option) {
         else {
             verbose(`failed to build ${option}`);
         }
-    });
 }
 
-/* ------------------------------------------------------------ WORK EVENT ------------------------------------------------------------ */
+function exit_building_func(panel) {
+    panel.setAttribute("class", "cyber_panel--hidden cyber_panel--hidden--animation");
+    if (document.getElementById("building_btn") != null)
+        document.getElementById("building_btn").style.zIndex = 3;
+    if (document.getElementById("work_btn") != null)
+        document.getElementById("work_btn").style.zIndex = 3;
+    if (document.getElementById("building_btn") != null)
+        document.getElementById("building_btn").style.zIndex = 3;
+    if (document.getElementById("black_market_btn") != null)
+        document.getElementById("black_market_btn").style.zIndex = 3;
+    document.getElementById("overlay").style.zIndex = -1;
+    for (const child of panel.children) {
+        if (child.getAttribute("id") != "exit_building")
+            total_disable(child);
+    }
+}
+
+function black_market_btn_func() {
+
+    let black_market_btn = document.getElementById("black_market_btn");
+    let panel = document.getElementById("black_market_panel");
+    document.getElementById("black_market_panel").setAttribute("class", "cyber_panel");
+    black_market_btn.style.zIndex = 1;
+    if (document.getElementById("work_btn") != null)
+        document.getElementById("work_btn").style.zIndex = 1;
+    if (document.getElementById("building_btn") != null)
+        document.getElementById("building_btn").style.zIndex = 1;
+    if (document.getElementById("black_market_btn") != null)
+        document.getElementById("black_market_btn").style.zIndex = 1;
+    document.getElementById("overlay").style.zIndex = 0;
+    for (const child of panel.children) {
+
+        total_enable(child);
+    }
+}
+
+function black_market_material_func() {
+
+    if (resource.eddie >= black_market[material]["eddies"]) {
+        resource.eddie -= black_market[material]["eddies"];
+        resource[material]++;
+        verbose(`${material} bought`);
+    }
+    else {
+        verbose(`failed to buy ${material}`);
+    }
+    updateUI();
+}
+
 function work_event() {
 
     updateUI();
@@ -438,6 +429,32 @@ function work_event() {
     
 }
 
+function save_game() {
+
+    // remove verbose messages
+    let verbose_box = document.getElementById("verbose_box");
+    while (verbose_box.children.length > 0) {
+
+        verbose_box.removeChild(verbose_box.children[0]);
+    }
+    
+    let work_container = document.getElementById("work_container");
+    while (work_container.children.length > 1) {
+
+        work_container.removeChild(verbose_box.children[1]);
+    }
+
+    // generate and save inportant info
+    const save_file = JSON.stringify({
+        resource: resource,
+        building: building,
+        total_time: total_time,
+        log: log,
+        html: document.getElementsByClassName("container")[0].innerHTML
+    }, null, 2);
+    localStorage.setItem('save_file', save_file);
+}
+
 /* ------------------------------------------------------------ HELPER FUNCTIONS ------------------------------------------------------------ */
 function check_enable_buildings() {
 
@@ -468,7 +485,7 @@ function check_enable_buildings() {
 }
 
 function building_btn_event() {
-    console.log("building_btn");
+
     let building_panel = document.getElementById("buildings_panel");
     let building_btn = document.getElementById("building_btn");
 
@@ -500,22 +517,7 @@ function create_exit_panel_btn(panel) {
     exit_building.addEventListener("click", exit_building_func.bind(null, panel));
 }
 
-function exit_building_func(panel) {
-    panel.setAttribute("class", "cyber_panel--hidden cyber_panel--hidden--animation");
-    if (document.getElementById("building_btn") != null)
-        document.getElementById("building_btn").style.zIndex = 3;
-    if (document.getElementById("work_btn") != null)
-        document.getElementById("work_btn").style.zIndex = 3;
-    if (document.getElementById("building_btn") != null)
-        document.getElementById("building_btn").style.zIndex = 3;
-    if (document.getElementById("black_market_btn") != null)
-        document.getElementById("black_market_btn").style.zIndex = 3;
-    document.getElementById("overlay").style.zIndex = -1;
-    for (const child of panel.children) {
-        if (child.getAttribute("id") != "exit_building")
-            total_disable(child);
-    }
-}
+
 
 function create_price_tag(element) {
 
@@ -694,25 +696,7 @@ function show_log() {
     }
 }
 
-function save_game() {
 
-    // remove verbose messages
-    let verbose_box = document.getElementById("verbose_box");
-    while (verbose_box.children.length > 0) {
-
-        verbose_box.removeChild(verbose_box.children[0]);
-    }
-
-    const save_file = JSON.stringify({
-        resource: resource,
-        building: building,
-        total_time: total_time,
-        log: log,
-        html: document.getElementsByClassName("container")[0].innerHTML
-    }, null, 2);
-
-    localStorage.setItem('save_file', save_file);
-}
 
 // function to reattach event listeners
 function reattachEventListeners() {
@@ -727,9 +711,8 @@ function reattachEventListeners() {
 
     // show log event listener
     let log_btn = document.getElementById("log_btn");
-    if (log_btn) {
+    if (log_btn)
         log_btn.addEventListener("click", show_log);
-    }
 
     // add building option to panel event listener
     for (const key in building) {
@@ -738,21 +721,29 @@ function reattachEventListeners() {
         }
     }
 
-    // work event listener
-    if (document.getElementById("work_btn")) {
-        document.getElementById("work_btn").addEventListener("click", work_event);
+    // add buildings option to panel event listener
+    for (const option of document.getElementById('buildings_panel').children) {
+        if (option.className != "exit_button") {
+            option.addEventListener("click", panel_option_func.bind(null, option.id, option));
+        }
     }
+
+    // work event listener
+    if (document.getElementById("work_btn"))
+        document.getElementById("work_btn").addEventListener("click", work_event);
 
     // building button event listener
-    if (document.getElementById("building_btn")) {
+    if (document.getElementById("building_btn"))
         document.getElementById("building_btn").addEventListener("click", building_btn_event);
-    }
 
     // exit building button event listener
-    if (document.getElementsByClassName("exit_button").length != 0) {
+    if (document.getElementsByClassName("exit_button")) {
         let exit_buttons = document.getElementsByClassName("exit_button");
         for (const button of exit_buttons) {
             button.addEventListener("click", exit_building_func.bind(null, button.parentElement));
         }
     }
+
+    if (document.getElementById("black_market_btn"))
+        document.getElementById("black_market_btn").addEventListener("click", black_market_btn_func);
 }
