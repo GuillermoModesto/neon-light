@@ -366,3 +366,4 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
   - He tenido que ir evento a evento extrayendo de funciones anónimas a funciones con nombre para que, cuando se genere el HTML al recargar, pueda reenganchar todos los eventos que hagan falta.
   - Arreglo un bug en el que las cajas de elementos generados por el trabajo se mantenían al recargar si se cerraba el juego con cajas todavía en el DOM.
   - Arreglo un bug en el que los recursos del juego tenían el mismo id que los carteles de compra de los mismos en el black market.
+  - Acabo de detectar un bug en el que el timeOut que se encarga de generar los data cada X tiempo no funciona al recargar la página.

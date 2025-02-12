@@ -155,9 +155,7 @@ function add_option_and_function_to_panel(option) {
     panel_option.addEventListener("click", panel_option_func.bind(null, option, panel_option));
 }
 
-/* ------------------------------------------------------------ EVENT HANDDLER FUNCTIONS ------------------------------------------------------------ */
-
-/* ------------------------------------------------------------ ADD ACTION EVENT HANDLER TO OPTION PANEL ------------------------------------------------------------ */
+/* ------------------------------------------------------------ ADD EVENT HANDLER TO BUILDING PANEL OPTION ------------------------------------------------------------ */
 function panel_option_func(option, panel_option) {
 
     let selectedBuilding = building[option];
@@ -222,6 +220,7 @@ function panel_option_func(option, panel_option) {
             case "data_farm":
                 setInterval(function() {
                     resource.data++;
+                    verbose("+1 data");
                     updateUI();
                 }, CD.data);
                 add_option_and_function_to_panel("chrome_clinic");
@@ -317,6 +316,7 @@ function panel_option_func(option, panel_option) {
         }
 }
 
+/* ------------------------------------------------------------ EXIT BUILDING BUTTON EVENT ------------------------------------------------------------ */
 function exit_building_func(panel) {
     panel.setAttribute("class", "cyber_panel--hidden cyber_panel--hidden--animation");
     if (document.getElementById("building_btn") != null)
@@ -334,6 +334,7 @@ function exit_building_func(panel) {
     }
 }
 
+/* ------------------------------------------------------------ BLACK MARKET BUTTON EVENT ------------------------------------------------------------ */
 function black_market_btn_func() {
 
     let black_market_btn = document.getElementById("black_market_btn");
@@ -353,6 +354,7 @@ function black_market_btn_func() {
     }
 }
 
+/* ------------------------------------------------------------ BLACK MARKET MATERIAL FUNCTION ------------------------------------------------------------ */
 function black_market_material_func(material) {
 
     console.log(material)
@@ -367,6 +369,7 @@ function black_market_material_func(material) {
     updateUI();
 }
 
+/* ------------------------------------------------------------ WORK EVENT ------------------------------------------------------------ */
 function work_event() {
 
     updateUI();
@@ -430,6 +433,7 @@ function work_event() {
     
 }
 
+/* ------------------------------------------------------------ SAVE GAME ------------------------------------------------------------ */
 function save_game() {
 
     // remove verbose messages
@@ -459,7 +463,7 @@ function save_game() {
     localStorage.setItem('save_file', save_file);
 }
 
-/* ------------------------------------------------------------ HELPER FUNCTIONS ------------------------------------------------------------ */
+/* ------------------------------------------------------------ CHECK ENABLE BUILDINGS ------------------------------------------------------------ */
 function check_enable_buildings() {
 
     if (document.getElementById("building_btn") == null && (resource.eddie >= 2 || building.enabled)) {
@@ -488,6 +492,7 @@ function check_enable_buildings() {
     }
 }
 
+/* ------------------------------------------------------------ BUILDING BUTTON EVENT ------------------------------------------------------------ */
 function building_btn_event() {
 
     let building_panel = document.getElementById("buildings_panel");
@@ -511,6 +516,7 @@ function building_btn_event() {
     }
 }
 
+/* ------------------------------------------------------------ CREATE EXIT PANEL BUTTON ------------------------------------------------------------ */
 function create_exit_panel_btn(panel) {
 
     let exit_building = document.createElement("button");
@@ -521,8 +527,7 @@ function create_exit_panel_btn(panel) {
     exit_building.addEventListener("click", exit_building_func.bind(null, panel));
 }
 
-
-
+/* ------------------------------------------------------------ CREATE PRICE TAG ------------------------------------------------------------ */
 function create_price_tag(element) {
 
     let price_tag = document.createElement("div");
