@@ -6,7 +6,7 @@
 </h3>
 <h3 align="center">
   <b>
-    ◆◇◆◇◆◇◆ NEON LIGHTS ◆◇◆◇◆◇◆
+    ◆◇◆◇◆ NEON LIGHTS ◆◇◆◇◆
   </b>
 </h3>
 <h3 align="center">
