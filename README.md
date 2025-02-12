@@ -5,7 +5,7 @@
 </h2>
 <h2 align="center">
   <b>
-    ◆◇◆◇◆◇◆◇◆◇ NEON LIGHTS ◇◆◇◆◇◆◇◆◇◆
+    ◆◇◆◇◆◇◆◇◆◇◆ NEON LIGHTS ◆◇◆◇◆◇◆◇◆◇◆
   </b>
 </h2>
 <h2 align="center">
