@@ -165,6 +165,8 @@ Empecé creando los archivos HTML, CSS y JavaScript con su estructura básica.
   - **Actualización de la UI**: Después de cada clic, la función updateUI actualiza el contenido de los elementos HTML que tienen un id correspondiente al nombre de los recursos.
   - **Función para obtener tiempo de juego total y tiempo desde última llamada**: usando performance.now() y almacenando el tiempo de inicio una vez, o en cada llamada, respectivamente.
 
+<hr>
+
 ### Día 2:
 
 - **_HTML_**:
@@ -185,12 +187,16 @@ Empecé creando los archivos HTML, CSS y JavaScript con su estructura básica.
 
 La mayor complejidad de hoy ha sido encontrar las opacidades, z-index y positions adecuados para poner trabajar y mover varios elementos (botón de buildings, panel de buildings con sus elementos internos y su botón de cerrar, además del overlay negro para el fondo desenfocado) unos encima de otros con fluidez e independencia.
 
+<hr>
+
 ### Día 3:
 
 - **_JS_**:
   - Habilito la aparición del **botón Work** e implemento su funcionalidad.
   - Intento abstraer las funciones del programa con funciones como "enough_resources", "substract_resources", "create_building_btn" con la intención de facilitar el desarrollo. El 99% de las veces que hago esto, termino dedicando mas tiempo a modificar las funciones que a desarrollar la aplicación, al final NO uso las funciones porque malinterpreto la especificidad de las acciones y me siento chiquitito y estúpido. Lo mejor es hacer un boceto del programa rápido y feo pero funcional, y una vez se sabe mas o menos la forma que va a tener, se hace bien con todas estas pijadas y tal. No voy a hacer lo mejor y me conformaré con la mediocridad, como de costumbre.
   - Surge un bug que no tengo tiempo de arreglar. Necesito controlar la correcta habilitación de los edificios Netrunner den, Data Farm y Black Market en el panel de edificios cuando se construye el warehouse.
+
+<hr>
 
 ### Día 4:
 
@@ -205,12 +211,16 @@ Hoy se me a ocurrido crear un **contenedor circular** que aparezca con **hover**
 - **_CSS_**:
   - Modifico un poco la posición de los botones de edificios y trabajo.
 
+<hr>
+
 ### Día 5:
 
 - **_JS_**:
   - Abstraigo mas la generación y el almacenamiento de los CC. Esto es totalmente innecesario, pero lo hago igualmente.
 - **_CSS_**:
   - Muevo un poco los botones de trabajo y edificios. Esta frase va a ser repetida muy a menudo.
+
+<hr>
 
 ### Día 6:
 
@@ -221,6 +231,8 @@ Pensamientos generales de suicidio. Deseos a nivel intermedio/avanzado.
 
 - **_JS_**:
   - Refactorización. Recuerdas cuando dije que quería abstraer funciones? Y que era muy mala idea en este punto del desarrollo? Pues eso.
+
+<hr>
 
 ### Día 7:
 
@@ -233,6 +245,8 @@ Pensamientos generales de suicidio. Deseos a nivel intermedio/avanzado.
 - **_CSS_**:
   - Tube que crear una nueva clase para los precios de los elementos. Siento ira y sufrimiento.
 
+<hr>
+
 ### Día 8:
 
 Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de carrocero, una manguera larga y flexible, un sitio tranquilo y apartado.
@@ -241,10 +255,14 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
   - Termino de implementar el black market con sus precios.
   - Me doy cuenta de que tengo que actualizar visualmente el precio del netrunner den.
 
+<hr>
+
 ### Día 9:
 
 - **_JS_**:
   - Arreglo el bug y el precio del netrunner den se actualiza correctamente.
+
+<hr>
 
 ### Día 10:
 
@@ -257,6 +275,8 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
   - Introduzco el nuevo elemento soul_killer, y lo habilito y genero visualmente con los métodos pertinentes.
 - **_CSS_**:
   - Me di cuenta de que voy a tener que hacer muchos botones, y en vez de ir poniendolos de forma manual, creé un contenedor para irlos metiendo ahí. ~~(pronto todo acabará)~~
+
+<hr>
 
 ### Día 11:
 
@@ -274,6 +294,8 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
   - Creo una nueva paleta de colores y la uso de una nueva manera. Podríamos decir que estoy refactorizando estilos. Sin comentarios.
   - Creo nuevas clases y estilos para el texto de la chamba (trabajo).
 
+<hr>
+
 ### Día 12:
 
 [![Cansionsilla wena](https://img.youtube.com/vi/O2F0oTqfL3E/default.jpg)](https://www.youtube.com/watch?v=O2F0oTqfL3E)
@@ -284,6 +306,8 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 
 - **_CSS_**:
   - Toqueteo los estilos, posiciones, colores y distribución general del documento para que encaje mejor en más tamaños (especialmete los mas pequeños).
+
+<hr>
 
 ### Día 13:
 
@@ -296,6 +320,8 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 - **_CSS_**:
   - Toqueteo las animaciones, posiciones, colores y distribución general de los elementos del documento, especialmente del botón de transmute.
   - Empiezo a crear los estilos del método verbose. Idealmente, quiero que aparezca en la parte inferior, centrado, con texto pequeño, y un máximo de 5 mensajes a la vez, uno encima del otro, el mas nuevo por encima.
+
+<hr>
 
 ### Día 14:
 
@@ -311,6 +337,8 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
   - Debo arreglar que el estado de 'built' de cada edificio se mantenga y actualice el DOM.
 - **_CSS_**:
   - Termino de implementar los estilos del verbose y el log.
+
+<hr>
 
 ### Día 15:
 
