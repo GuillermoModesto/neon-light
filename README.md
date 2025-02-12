@@ -214,7 +214,7 @@ Hoy se me a ocurrido crear un **contenedor circular** que aparezca con **hover**
 
 ### Día 6:
 
-<img src="https://fotografias.larazon.es/clipping/cmsimages02/2019/08/22/B8541FD6-9A46-44D4-A045-F6724924490D/98.jpg?crop=377,212,x0,y0&width=1900&height=1069&optimize=low&format=webply" width="200px" height="100px">
+<img src="https://fotografias.larazon.es/clipping/cmsimages02/2019/08/22/B8541FD6-9A46-44D4-A045-F6724924490D/98.jpg?crop=377,212,x0,y0&width=1900&height=1069&optimize=low&format=webply" width="250px" height="200px">
 
 Pensamientos generales de suicidio. Deseos a nivel intermedio/avanzado.
 
@@ -247,7 +247,7 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 
 ### Día 10:
 
-<img src="https://www.esdip.com/wp-content/uploads/2023/01/historia-de-la-animacion_la-saga-shrek.jpg" width="150px" height="100px">
+<img src="https://www.esdip.com/wp-content/uploads/2023/01/historia-de-la-animacion_la-saga-shrek.jpg" width="200px" height="150px">
 
 - **_JS_**:
   - Modifico el código en base a los cambios de CSS reflejados en su sección.
