@@ -4,7 +4,7 @@
 
 0. ### Prefacio:
 
-Trabajo opcional de la asignatura de desarrollo en entorno cliente (2025). Quiero pensar que soy mejor programador que este proyecto. Odio JavaScript y CSS. Dame C#, Java, C, incluso Python. Pero esto no por favor. Ten piedad.
+Trabajo opcional de la asignatura de desarrollo en entorno cliente (2025). JavaScript fué un error.
 
 1. ## Funcionamiento del Juego:
 
