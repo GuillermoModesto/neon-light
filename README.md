@@ -247,7 +247,7 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 
 ### Día 10:
 
-<img src="https://www.esdip.com/wp-content/uploads/2023/01/historia-de-la-animacion_la-saga-shrek.jpg" width="300px" height="200px">
+<img src="https://www.esdip.com/wp-content/uploads/2023/01/historia-de-la-animacion_la-saga-shrek.jpg" width="200px" height="100px">
 
 - **_JS_**:
   - Modifico el código en base a los cambios de CSS reflejados en su sección.
@@ -258,7 +258,10 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 ### Día 11:
 
 "Llega un momento en que es necesario abandonar la ropa usada que ya tiene la forma de nuestro cuerpo y olvidar los caminos que nos llevan siempre a los mismos lugares. Es el momento de la travesía. Y, si no osamos emprenderla, habremos quedado, para siempre, al margen de nosotros mismos." - Albert Camus
-<img src="https://i.gifer.com/S8JC.gif" width="300px" height="200px">
+
+<p align="center">
+  <img src="https://i.gifer.com/S8JC.gif" width="300px" height="200px">
+</p>
 
 - **_JS_**:
   - Arreglo un bug en el que el z-index del boton de work no se instanciaba corretamente por primera vez.
