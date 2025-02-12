@@ -157,7 +157,9 @@ Se pueden añadir funcionalidades adicionales como:
 
 <hr>
 
-## DIARIO DE DESARROLLO
+<p align="center">
+  <b> DIARIO DE DESARROLLO </b>
+</p>
 
 <hr>
 
