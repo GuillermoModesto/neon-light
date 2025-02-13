@@ -229,12 +229,7 @@ function panel_option_func(option, panel_option) {
                 price_tag.innerText = cost_text;
                 break;
             case "data_farm":
-                setInterval(function() {
-
-                    resource.data++;
-                    verbose("+1 data");
-                    updateUI();
-                }, CD.data);
+                setInterval(generate_datta, CD.data);
 
                 add_option_and_function_to_panel("chrome_clinic");
                 create_price_tag(document.getElementById("chrome_clinic"));
@@ -349,6 +344,14 @@ function exit_building_func(panel) {
         if (child.getAttribute("id") != "exit_building")
             total_disable(child);
     }
+}
+
+/* ------------------------------------------------------------ GENERATE DATA ------------------------------------------------------------ */
+function generate_datta() {
+
+    resource.data++;
+    verbose("+1 data");
+    updateUI();
 }
 
 /* ------------------------------------------------------------ BLACK MARKET BUTTON EVENT ------------------------------------------------------------ */

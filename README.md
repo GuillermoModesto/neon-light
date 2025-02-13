@@ -20,7 +20,7 @@
 
 0. ## Prefacio:
 
-Trabajo opcional de la asignatura de desarrollo en entorno cliente (2025). JavaScript fué un error.
+Trabajo opcional de la asignatura de desarrollo web en entorno cliente (2025). Primer proyecto 'grande' hecho con JavaScript. JavaScript fué un error.
 
 1. ## Funcionamiento del Juego:
 
