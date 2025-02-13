@@ -77,6 +77,7 @@ const building = JSON.parse(JSON.stringify(aux_building));
 const log = JSON.parse(JSON.stringify(aux_log));
 
 const black_market = {
+
     rare_materials: { eddies: 3, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
     subroutines: { eddies: 1, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
     daemons: { eddies: 1, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 }
@@ -85,7 +86,7 @@ const CD = {
 
     eddie: get_eddieCD(),
     work: get_workCD(),
-    data: 20000,
+    data: 2000,
     verbose: 5000
 };
 
@@ -152,6 +153,7 @@ function add_option_and_function_to_panel(option) {
     panel_option.setAttribute("class", "panel_option");
     panel_option.appendChild(document.createTextNode(option));
     document.getElementById("buildings_panel").appendChild(panel_option);
+
     panel_option.addEventListener("click", panel_option_func.bind(null, option, panel_option));
 }
 
@@ -163,6 +165,7 @@ function panel_option_func(option, panel_option) {
         substract_resources(selectedBuilding);
 
         if (option !== "netrunner_den") {
+
             selectedBuilding.built = true;
             visual_disable(panel_option);
         }
@@ -172,31 +175,39 @@ function panel_option_func(option, panel_option) {
         Its purpose is to enable the correct building panel option (such as warehouse, black_market...) and its functionality when the player has enough resources to build them.
         */
         switch (option) {
+
             case "warehouse":
                 if (document.getElementById("resource_list").hidden && building.warehouse.built) {
+
                     document.getElementById("resource_list").hidden = false;
                 }
                 if (document.getElementById("work_btn") == null) {
+
                     let work_container = document.createElement("div");
                     work_container.setAttribute("class", "work_container");
                     work_container.setAttribute("id", "work_container");
+
                     let work_btn = document.createElement("div");
                     work_btn.setAttribute("class", "cyber_btn");
                     work_btn.setAttribute("id", "work_btn");
                     work_btn.style.zIndex = -1;
                     work_btn.appendChild(document.createTextNode("work"));
+                    
                     document.getElementById("buttons").appendChild(work_container);
                     work_container.appendChild(work_btn);
                     work_btn.addEventListener("click", work_event);
                     verbose("work enabled");
                 }
                 verbose("warehouse building enabled");
+
                 add_option_and_function_to_panel("netrunner_den");
                 create_price_tag(document.getElementById("netrunner_den"));
                 verbose("netrunner_den building enabled");
+
                 add_option_and_function_to_panel("data_farm");
                 create_price_tag(document.getElementById("data_farm"));
                 verbose("data_farm building enabled");
+                
                 add_option_and_function_to_panel("black_market");
                 create_price_tag(document.getElementById("black_market"));
                 verbose("black_market building enabled");
@@ -219,10 +230,12 @@ function panel_option_func(option, panel_option) {
                 break;
             case "data_farm":
                 setInterval(function() {
+
                     resource.data++;
                     verbose("+1 data");
                     updateUI();
                 }, CD.data);
+
                 add_option_and_function_to_panel("chrome_clinic");
                 create_price_tag(document.getElementById("chrome_clinic"));
                 verbose("chrome_clinic building enabled");
@@ -232,6 +245,7 @@ function panel_option_func(option, panel_option) {
                 create_price_tag(document.getElementById("soul_killer"));
                 verbose("soul_killer building enabled");
                 if (document.getElementById("sublimate_btn") == null) {
+
                     let sublimate_btn = document.createElement("div");
                     sublimate_btn.setAttribute("class", "cyber_btn");
                     sublimate_btn.setAttribute("id", "sublimate_btn");
@@ -241,11 +255,13 @@ function panel_option_func(option, panel_option) {
                     verbose("sublimate button enabled");
                     sublimate_btn.addEventListener('click', function() {
                         if (resource.data >= 2) {
+
                             resource.data -= 2;
                             resource.engrams++;
                             updateUI();
                             verbose("1 engram sublimated");
-                        } else {
+                        }
+                        else {
                             verbose("failed to sublimate engram");
                         }
                     });
@@ -261,6 +277,7 @@ function panel_option_func(option, panel_option) {
 
                     // black market elements and costs
                     for (const material in black_market) {
+                        
                         // element
                         let tag = document.createElement("div");
                         tag.appendChild(document.createTextNode(material));
