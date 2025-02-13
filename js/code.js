@@ -86,7 +86,7 @@ const CD = {
 
     eddie: get_eddieCD(),
     work: get_workCD(),
-    data: 2000,
+    data: 20000,
     verbose: 5000
 };
 
@@ -99,6 +99,7 @@ window.onload = function () {
     verbose(` --- game started --- `);
 
     updateUI();
+    update(); // start running total_time 'clock'
 
     total_disable(document.getElementById('log-box'));
     total_disable(document.getElementById('overlay'));
@@ -110,20 +111,23 @@ window.onload = function () {
         generate_eddie(eddie_img);
     });
 
+    // Horrible fix to a stupid problem
+    if (building.data_farm.built) {
+        setInterval(generate_datta, CD.data);
+    }
+
     document.getElementById("log_btn").addEventListener("click", show_log); // open log screen over everything
     window.addEventListener("beforeunload", save_game); // save important info before closing window
     
     check_enable_buildings();
 
-     // Restore saved HTML
-     if (saved_html && !loaded_html) {
+    // Restore saved HTML
+    if (saved_html && !loaded_html) {
 
         document.getElementsByClassName("container")[0].innerHTML = saved_html;
         loaded_html = true;
         reattachEventListeners();
     }
-
-    update(); // start running total_time 'clock'
 }
 
 /* ------------------------------------------------------------ GENERATE EDDIE ------------------------------------------------------------ */
@@ -780,9 +784,10 @@ function reattachEventListeners() {
         document.getElementById("black_market_btn").addEventListener("click", black_market_btn_func);
 
     // black market materials
-    for (const material in black_market) {
+    if (document.getElementById('black_market_panel')) {
+        for (const material in black_market) {
 
-        console.log(document.getElementById(`${material}_bm`))
-        document.getElementById(`${material}_bm`).addEventListener('click', black_market_material_func.bind(null, material));
+            document.getElementById(`${material}_bm`).addEventListener('click', black_market_material_func.bind(null, material));
+        }
     }
 }
