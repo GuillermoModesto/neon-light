@@ -370,7 +370,7 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 
 ### Día 15:
 
-<img src="https://cdn.costumewall.com/wp-content/uploads/2018/09/carlton-banks.jpg" width="200px" height="200px">
+<img src="https://cdn.costumewall.com/wp-content/uploads/2018/09/carlton-banks.jpg" width="220px" height="200px">
 
 - **_JS_**:
   - Arreglo el bug del timeOut de data_farm que no funcionaba. Fué un arreglo feo a un problema estúpido, pero funciona. 
