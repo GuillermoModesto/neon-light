@@ -367,3 +367,10 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
   - Arreglo un bug en el que las cajas de elementos generados por el trabajo se mantenían al recargar si se cerraba el juego con cajas todavía en el DOM.
   - Arreglo un bug en el que los recursos del juego tenían el mismo id que los carteles de compra de los mismos en el black market.
   - Acabo de detectar un bug en el que el timeOut que se encarga de generar los data cada X tiempo no funciona al recargar la página.
+
+### Día 15:
+
+<img src="https://cdn.costumewall.com/wp-content/uploads/2018/09/carlton-banks.jpg" width="200px" height="200px">
+
+- **_JS_**:
+  - Arreglo el bug del timeOut de data_farm que no funcionaba. Fué un arreglo feo a un problema estúpido, pero funciona. 
