@@ -5,7 +5,7 @@ let saved_html = '';
 let loaded_html = false;
 let stamp = performance.now();
 let total_time = 0;
-//localStorage.removeItem('save_file');
+localStorage.removeItem('save_file');
 if (localStorage.getItem('save_file') != null) {
 
     const save_info = JSON.parse(localStorage.getItem('save_file'));
@@ -95,6 +95,12 @@ let start = performance.now();
 
 /* ------------------------------------------------------------ ENTRY POINT ------------------------------------------------------------ */
 window.onload = function () {
+
+    /*
+    document.getElementById('test').addEventListener('click', function() {
+        console.log(get_formated_time())
+    });
+    */
 
     verbose(` --- game started --- `);
 
@@ -320,7 +326,7 @@ function panel_option_func(option, panel_option) {
 
                         transcend_btn.addEventListener('click', function() {
 
-                            alert(`Tiempo de juego -> ${total_time / 1000} segundos`);
+                            alert(`Tiempo de juego -> ${get_formated_time()}`);
                         });
                     }
                     break;
@@ -667,6 +673,36 @@ function update() {
     requestAnimationFrame(update);
 }
 
+function get_formated_time() {
+
+    let seg = Math.round(total_time / 1000);
+    let min = 0;
+    let h = 0;
+
+    while (seg >= 60) {
+
+        seg -= 60;
+        min++;
+        if (min >= 60) {
+
+            min = 0;
+            h++;
+        }
+    }
+
+    // I know, dont tell me
+    if (seg < 10)
+        seg = `0${seg}`;
+
+    if (min < 10)
+        min = `0${min}`;
+
+    if (h < 10)
+        h = `0${h}`;
+    
+    return (`@${h}h:${min}m:${seg}s`);
+}
+
 function verbose(text) {
 
     let verbose = document.createElement("div");
@@ -677,7 +713,7 @@ function verbose(text) {
 
         order: log.length+1,
         text: text,
-        time: `@${Math.round(total_time) / 1000}s`
+        time: `${get_formated_time()}`
     });
     document.getElementById("verbose_box").appendChild(verbose);
     setTimeout(function() {
