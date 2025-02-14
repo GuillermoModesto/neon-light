@@ -316,7 +316,7 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 
 ### Día 12:
 
-(darle click sin miedo ahí) --> [![Cansionsilla wena](https://img.youtube.com/vi/O2F0oTqfL3E/default.jpg)](https://www.youtube.com/watch?v=O2F0oTqfL3E)
+(darle click sin miedo aín) --> [![Cansionsilla wena](https://img.youtube.com/vi/O2F0oTqfL3E/default.jpg)](https://www.youtube.com/watch?v=O2F0oTqfL3E)
 
 - **_JS_**:
 
@@ -329,7 +329,7 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 
 ### Día 13:
 
-(darle click con miedo ahí) --> [![Arriba Andalucía](https://img.youtube.com/vi/4xwwntp91XA/default.jpg)](https://www.youtube.com/watch?v=4xwwntp91XA)
+(darle click con miedo aín) --> [![Arriba Andalucía](https://img.youtube.com/vi/4xwwntp91XA/default.jpg)](https://www.youtube.com/watch?v=4xwwntp91XA)
 
 - **_JS_**:
   - Toqueteo tiempos de intervalos para el botón de trabajo.
