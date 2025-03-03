@@ -381,4 +381,9 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 
 ### Día 18:
 
-TODO: Arreglar boton de sublimate y de transcend al cargar partida.
+- **_JS_**:
+  - Arreglo bug de boton de sublimate y de transcend al cargar partida.
+  - Implemento una variable que almacena el mejor tiempo (mas rápido) entre partidas.
+  - Implemento el reseteo del juego cuando se llega al final.
+
+Con esto el tormento terminó.

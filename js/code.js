@@ -5,6 +5,8 @@ let saved_html = '';
 let loaded_html = false;
 let stamp = performance.now();
 let total_time = 0;
+let best_time;
+
 //localStorage.removeItem('save_file');
 if (localStorage.getItem('save_file') != null) {
 
@@ -14,6 +16,7 @@ if (localStorage.getItem('save_file') != null) {
     total_time = save_info['total_time'];
     aux_log = save_info['log'];
     saved_html = save_info['html'];
+    best_time = save_info['best_time'];
 }
 else {
 
@@ -70,6 +73,15 @@ else {
         }
     }; 
     aux_log = [];
+    if (localStorage.getItem('best_time') != null) {
+
+        best_time = JSON.parse(localStorage.getItem('best_time'))['best_time']
+    }
+    else {
+
+        best_time = Number.MAX_SAFE_INTEGER;
+    }
+    
 }
 
 const resource = JSON.parse(JSON.stringify(aux_resource));
@@ -98,7 +110,8 @@ window.onload = function () {
 
     /*
     document.getElementById('test').addEventListener('click', function() {
-        console.log(get_formated_time())
+        
+        console.log(best_time);
     });
     */
 
@@ -258,18 +271,7 @@ function panel_option_func(option, panel_option) {
                     sublimate_btn.appendChild(document.createTextNode("Sublimate"));
                     document.getElementById("buttons").appendChild(sublimate_btn);
                     verbose("sublimate button enabled");
-                    sublimate_btn.addEventListener('click', function() {
-                        if (resource.data >= 2) {
-
-                            resource.data -= 2;
-                            resource.engrams++;
-                            updateUI();
-                            verbose("1 engram sublimated");
-                        }
-                        else {
-                            verbose("failed to sublimate engram");
-                        }
-                    });
+                    sublimate_btn.addEventListener('click', sublimate_fn);
                 }
                 break;
                 case "black_market":
@@ -324,10 +326,7 @@ function panel_option_func(option, panel_option) {
                         document.getElementById("buttons").appendChild(transcend_btn);
                         verbose("TRANSCEND button enabled");
 
-                        transcend_btn.addEventListener('click', function() {
-
-                            alert(`Tiempo de juego -> ${get_formated_time()}`);
-                        });
+                        transcend_btn.addEventListener('click', transcend_fn);
                     }
                     break;
             }
@@ -463,6 +462,30 @@ function work_event() {
     
 }
 
+function sublimate_fn() {
+    if (resource.data >= 2) {
+
+        resource.data -= 2;
+        resource.engrams++;
+        updateUI();
+        verbose("1 engram sublimated");
+    }
+    else {
+        verbose("failed to sublimate engram");
+    }
+}
+
+function transcend_fn() {
+
+    if (total_time < best_time)
+        best_time = total_time;
+    alert(`Game time -> ${get_formated_time(total_time)}\nBest time -> ${get_formated_time(best_time)}`);
+
+    window.removeEventListener("beforeunload", save_game);
+    reset();
+
+}
+
 /* ------------------------------------------------------------ SAVE GAME ------------------------------------------------------------ */
 function save_game() {
 
@@ -473,6 +496,7 @@ function save_game() {
         verbose_box.removeChild(verbose_box.children[0]);
     }
     
+    // remove work info messages
     if (document.getElementById("work_container")) {
 
         let work_container = document.getElementById("work_container");
@@ -482,15 +506,23 @@ function save_game() {
         }
     }
 
-    // generate and save inportant info
+    // generate and save important info
     const save_file = JSON.stringify({
         resource: resource,
         building: building,
         total_time: total_time,
         log: log,
-        html: document.getElementsByClassName("container")[0].innerHTML
+        html: document.getElementsByClassName("container")[0].innerHTML,
+        best_time: best_time
     }, null, 2);
     localStorage.setItem('save_file', save_file);
+}
+
+function reset() {
+
+    localStorage.setItem('best_time', JSON.stringify({ best_time: best_time }));
+    localStorage.removeItem('save_file');
+    window.location.reload();
 }
 
 /* ------------------------------------------------------------ CHECK ENABLE BUILDINGS ------------------------------------------------------------ */
@@ -673,9 +705,9 @@ function update() {
     requestAnimationFrame(update);
 }
 
-function get_formated_time() {
+function get_formated_time(time) {
 
-    let seg = Math.round(total_time / 1000);
+    let seg = Math.round(time / 1000);
     let min = 0;
     let h = 0;
 
@@ -690,7 +722,7 @@ function get_formated_time() {
         }
     }
 
-    // I know, dont tell me
+    // I know, dont @ me
     if (seg < 10)
         seg = `0${seg}`;
 
@@ -700,7 +732,7 @@ function get_formated_time() {
     if (h < 10)
         h = `0${h}`;
     
-    return (`@${h}h:${min}m:${seg}s`);
+    return (`${h}h:${min}m:${seg}s`);
 }
 
 function verbose(text) {
@@ -713,7 +745,7 @@ function verbose(text) {
 
         order: log.length+1,
         text: text,
-        time: `${get_formated_time()}`
+        time: `${get_formated_time(total_time)}`
     });
     document.getElementById("verbose_box").appendChild(verbose);
     setTimeout(function() {
@@ -826,4 +858,10 @@ function reattachEventListeners() {
             document.getElementById(`${material}_bm`).addEventListener('click', black_market_material_func.bind(null, material));
         }
     }
+
+    if (document.getElementById("sublimate_btn"))
+        document.getElementById("sublimate_btn").addEventListener('click', sublimate_fn);
+
+    if (document.getElementById("transcend_btn"))
+        document.getElementById("transcend_btn").addEventListener('click', transcend_fn);
 }
