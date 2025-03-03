@@ -19,7 +19,7 @@
   --color-red: #ff0040; /* Rojo neón */
   --color-cyan: #00fffff8; /* Cian brillante */
   --color-purple: #9c59b6fa; /* Morado vibrante */
-  --color-blue: #3498dbf5; /* Azul claro */
+  --color-blue: #48aef3f5; /* Azul claro */
   --color-yellow: #f1c40f; /* Amarillo neón */
   --color-green: #2ecc71; /* Verde neón */
   --color-orange: #e67e22; /* Naranja vibrante */
@@ -65,6 +65,40 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+#start_game {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  padding: 20px;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  vertical-align: middle;
+  background: rgb(0, 0, 0);
+  font-family: 'Cyber1', sans-serif;
+  color: var(--color-black);
+  text-shadow: 1px 3px 12px var(--color-black);
+  box-shadow: 0px 0px 25px var(--color-pink);
+  text-transform: uppercase;
+  border-radius: 35%;
+  cursor: pointer;
+  -webkit-border-radius: 35%;
+  -moz-border-radius: 35%;
+  -ms-border-radius: 35%;
+  -o-border-radius: 35%;
+  transition: all 200ms;
+  -webkit-transition: all 200ms;
+  -moz-transition: all 200ms;
+  -ms-transition: all 200ms;
+  -o-transition: all 200ms;
+  z-index: 1000;
+  animation: cambioColor 7s ease-in-out infinite;
+  -webkit-animation: cambioColor 7s ease-in-out infinite;
+}
+
+#start_game:hover {
+  background: var(--color-black);
 }
 
 .resources {
@@ -298,81 +332,6 @@
   }
 }
 
-/*
-@keyframes glitchEffect {
-  0% {
-    text-shadow: 
-      0 0 10px var(--color-yellow), 
-      0 0 20px var(--color-yellow), 
-      0 0 30px var(--color-pink);
-    transform: translate(0);
-  }
-  10% {
-    text-shadow: 
-      1px 1px 5px var(--color-red), 
-      -1px -1px 5px var(--color-blue);
-    transform: translate(-3px, -2px);
-  }
-  20% {
-    text-shadow: 
-      -1px -1px 5px var(--color-green), 
-      1px 1px 5px var(--color-purple);
-    transform: translate(2px, 3px);
-  }
-  30% {
-    text-shadow: 
-      1px 1px 5px var(--color-cyan), 
-      -1px -1px 5px var(--color-yellow);
-    transform: translate(-2px, 1px);
-  }
-  40% {
-    text-shadow: 
-      0 0 10px var(--color-yellow), 
-      0 0 20px var(--color-yellow), 
-      0 0 30px var(--color-pink);
-    transform: translate(1px, -1px);
-  }
-  50% {
-    text-shadow: 
-      2px 2px 5px var(--color-red), 
-      -2px -2px 5px var(--color-blue);
-    transform: translate(-1px, 2px);
-  }
-  60% {
-    text-shadow: 
-      -2px -2px 5px var(--color-green), 
-      2px 2px 5px var(--color-purple);
-    transform: translate(3px, -3px);
-  }
-  70% {
-    text-shadow: 
-      1px 1px 5px var(--color-cyan), 
-      -1px -1px 5px var(--color-yellow);
-    transform: translate(-2px, 2px);
-  }
-  80% {
-    text-shadow: 
-      0 0 10px var(--color-yellow), 
-      0 0 20px var(--color-pink), 
-      0 0 30px var(--color-red);
-    transform: translate(1px, 1px);
-  }
-  90% {
-    text-shadow: 
-      -1px -1px 5px var(--color-blue), 
-      1px 1px 5px var(--color-green);
-    transform: translate(-1px, -2px);
-  }
-  100% {
-    text-shadow: 
-      0 0 10px var(--color-yellow), 
-      0 0 20px var(--color-yellow), 
-      0 0 30px var(--color-pink);
-    transform: translate(0);
-  }
-}
-*/
-
 #buttons {
   position: absolute;
   top: 45%;
@@ -472,9 +431,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: -1;
-  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 500;
+  pointer-events: auto;
 }
 
 .cyber_panel {
@@ -680,7 +639,7 @@
   background-color: var(--color-black);
   font-size: 12px;
   cursor: pointer;
-  z-index: 500;
+  z-index: 300;
 }
 
 #log_btn:hover {

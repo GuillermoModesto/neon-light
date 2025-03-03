@@ -3,9 +3,10 @@ let aux_building;
 let aux_log;
 let saved_html = '';
 let loaded_html = false;
-let stamp = performance.now();
+let stamp;
 let total_time = 0;
 let best_time;
+let reattach_start_btn = false;
 
 //localStorage.removeItem('save_file');
 if (localStorage.getItem('save_file') != null) {
@@ -17,19 +18,20 @@ if (localStorage.getItem('save_file') != null) {
     aux_log = save_info['log'];
     saved_html = save_info['html'];
     best_time = save_info['best_time'];
+    reattach_start_btn = true;
 }
 else {
 
     aux_resource = { 
 
         eddie: 0,
-        subroutines: 100,
-        daemons: 100,
-        netrunners: 100,
-        implants: 100,
-        engrams: 100,
-        data: 100,
-        rare_materials: 100
+        subroutines: 0,
+        daemons: 0,
+        netrunners: 0,
+        implants: 0,
+        engrams: 0,
+        data: 0,
+        rare_materials: 0
     };
     aux_building = {
     
@@ -108,21 +110,24 @@ let start = performance.now();
 /* ------------------------------------------------------------ ENTRY POINT ------------------------------------------------------------ */
 window.onload = function () {
 
+    setTimeout(() => {
+        if (reattach_start_btn) {
+
+            document.getElementById('start_game').hidden = false;
+            document.getElementById('start_game').disabled = false;
+            document.getElementById('start_game').style.display = "";
+            document.getElementById('start_game').style.zIndex = 1000;
+            total_enable(document.getElementById('overlay'));
+            document.getElementById('overlay').style.zIndex = 500;
+            reattach_start_btn = false;
+        }
+    }, 5);
     /*
-    document.getElementById('test').addEventListener('click', function() {
-        
-        console.log(best_time);
-    });
+     document.getElementById('test').addEventListener('click', function() {
+
+     });
     */
-
-    verbose(` --- game started --- `);
-
-    updateUI();
-    update(); // start running total_time 'clock'
-
-    total_disable(document.getElementById('log-box'));
-    total_disable(document.getElementById('overlay'));
-    document.getElementById('overlay').style.zIndex = -1;
+    document.getElementById('start_game').addEventListener('click', start_game);
 
     let eddie_img = document.getElementById("eddie-img");
     eddie_img.addEventListener("click", function () {
@@ -135,7 +140,6 @@ window.onload = function () {
         setInterval(generate_datta, CD.data);
     }
 
-    document.getElementById("log_btn").addEventListener("click", show_log); // open log screen over everything
     window.addEventListener("beforeunload", save_game); // save important info before closing window
     
     check_enable_buildings();
@@ -147,6 +151,29 @@ window.onload = function () {
         loaded_html = true;
         reattachEventListeners();
     }
+}
+
+function start_game() {
+
+    updateUI();
+    stamp = performance.now();
+    update(); // start running total_time 'clock'
+
+    total_disable(document.getElementById('log-box'));
+    total_disable(document.getElementById('overlay'));
+    document.getElementById('overlay').style.zIndex = -1;
+
+    document.getElementById("log_btn").addEventListener("click", show_log); // open log screen over everything
+
+    document.getElementById("bg_music").volume = 0.5;
+    document.getElementById("bg_music").play();
+
+    document.getElementById('log-box').hidden = false;
+    document.getElementById('eddie-img').disabled = false;
+
+    verbose(` --- game started --- `);
+
+    total_disable(document.getElementById('start_game'));
 }
 
 /* ------------------------------------------------------------ GENERATE EDDIE ------------------------------------------------------------ */
@@ -165,6 +192,13 @@ function generate_eddie(button) {
         updateUI();
         visual_enable(button);
     }, CD.eddie);
+
+    document.getElementById("click_sound").play();
+
+    // if (document.getElementById("bg_music").paused) {
+    //     document.getElementById("bg_music").play();
+    //     document.getElementById("bg_music").volume = 0.3;
+    // }
 }
 
 /* ------------------------------------------------------------ ADD OPTION TO PANEL ------------------------------------------------------------ */
@@ -801,6 +835,9 @@ function show_log() {
 
 // function to reattach event listeners
 function reattachEventListeners() {
+
+    if (document.getElementById('start_game'))
+        document.getElementById('start_game').addEventListener('click', start_game);
 
     // generate eddie event listener
     if (document.getElementById("eddie-img")) {

@@ -385,5 +385,14 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
   - Arreglo bug de boton de sublimate y de transcend al cargar partida.
   - Implemento una variable que almacena el mejor tiempo (mas rápido) entre partidas.
   - Implemento el reseteo del juego cuando se llega al final.
+  - Implemento un botón de iniciar juego. A dado muchos problemas con el método que uso para guardar la partida, y he sentido pánico constante al tener que bailar con los zIndex, hidden, disabled y displays de las cosas. Por ahora, parece, Dios quiera, que funciona bien.
+  - Implemento algo de música y sonidos.
+- **_HTML_**:
+  - He tenido que crear una caja nueva para empezar partida.
+- **_CSS_**:
+  - He tenido que crear un estilo para el botón de empezar partida.
 
-Con esto el tormento terminó.
+Con esto, la tortura llegó a su clímax, y la realidad finalmente se derrumbó en mil pedazos, dejando solo la sensación de haber malgastado otra tarde en el abismo digital. En verdad no fue tan horrible. Lo horrible fue, exclusivamente, consecuencia de mi incapacidad para mantener cierta coherencia en un proyecto de este tamaño, con estas tecnologías, con mi experiencia actual en las mismas, que no me gustan y que son más bien pocas. Podría estar muchísimo mejor y tengo más ideas que aportar, pero por ahora se acabó lo que se daba.
+<p align="center">
+  <img src="https://i.pinimg.com/originals/cc/d8/0c/ccd80c02b8336ae77047c608493c4e03.gif" width="300px" height="200px">
+</p>

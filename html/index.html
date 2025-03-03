@@ -6,13 +6,16 @@
     <title>NEON LIGHTS</title>
     <link rel="stylesheet" href="../css/reset-style.css">
     <link rel="stylesheet" href="../css/style.css">
-    <script src="../js/code.js" type="module"></script>
+    <script src="../js/code.js" type="module" defer></script>
 </head>
 <body>
+    <audio id="bg_music" src="../audio/background_music.mp3" loop></audio>
+    <audio id="click_sound" src="../audio/click01.mp3"></audio>
     <div class="container">
         <div class="game-wrapper">
             <div id="overlay"></div>
             <div class="game-area">
+                <div id="start_game">e n t e r &nbsp; g r i d</div>
                 <h2 id="title">N E O N &nbsp; L I G H T S</h2>
                 <div class="resources">
                     <div id="top_info">
@@ -20,7 +23,7 @@
                             <div id="eddie-img-wrapper">
                                 <div id="loading_full neon-container">
                                     <div id="loading_empty">
-                                        <button type="button" id="eddie-img">
+                                        <button type="button" id="eddie-img" disabled>
                                             <img src="../img/eddie.jpg" alt="">
                                         </button>
                                     </div>
@@ -44,7 +47,7 @@
                 <div id="buttons"></div>
                 <div id="verbose_box"></div>
                 <div id="log_btn">log</div>
-                <div id="log-box">
+                <div id="log-box" hidden>
                     <table id="log-box-table"></table>
                 </div>
             </div>
