@@ -5,7 +5,7 @@ let saved_html = '';
 let loaded_html = false;
 let stamp = performance.now();
 let total_time = 0;
-localStorage.removeItem('save_file');
+//localStorage.removeItem('save_file');
 if (localStorage.getItem('save_file') != null) {
 
     const save_info = JSON.parse(localStorage.getItem('save_file'));

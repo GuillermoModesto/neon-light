@@ -378,3 +378,7 @@ Ingredientes: un coche antiguo de gasolina con el tanque lleno, mucha cinta de c
 
 - **_JS_**:
   - Creo una función que toma el tiempo global de juego y lo devuelve con un formato mas aceptable.
+
+### Día 18:
+
+TODO: Arreglar boton de sublimate y de transcend al cargar partida.
