@@ -9,6 +9,7 @@ let best_time;
 let reattach_start_btn = false;
 
 //localStorage.removeItem('save_file');
+//localStorage.removeItem('best_time');
 if (localStorage.getItem('save_file') != null) {
 
     const save_info = JSON.parse(localStorage.getItem('save_file'));
@@ -24,14 +25,14 @@ else {
 
     aux_resource = { 
 
-        eddie: 0,
-        subroutines: 0,
-        daemons: 0,
-        netrunners: 0,
-        implants: 0,
-        engrams: 0,
-        data: 0,
-        rare_materials: 0
+        eddie: 20,
+        subroutines: 100,
+        daemons: 100,
+        netrunners: 100,
+        implants: 100,
+        engrams: 100,
+        data: 100,
+        rare_materials: 100
     };
     aux_building = {
     
@@ -77,7 +78,7 @@ else {
     aux_log = [];
     if (localStorage.getItem('best_time') != null) {
 
-        best_time = JSON.parse(localStorage.getItem('best_time'))['best_time']
+        best_time = JSON.parse(localStorage.getItem('best_time'))['best_time'];
     }
     else {
 
@@ -166,6 +167,8 @@ function start_game() {
     document.getElementById("log_btn").addEventListener("click", show_log); // open log screen over everything
 
     document.getElementById("bg_music").volume = 0.5;
+    document.getElementById("nope_sound").volume = 0.5;
+    document.getElementById('close_sound').volume = 0.7;
     document.getElementById("bg_music").play();
 
     document.getElementById('log-box').hidden = false;
@@ -193,12 +196,64 @@ function generate_eddie(button) {
         visual_enable(button);
     }, CD.eddie);
 
-    document.getElementById("click_sound").play();
+    document.getElementById("click_sound1").play();
 
     // if (document.getElementById("bg_music").paused) {
     //     document.getElementById("bg_music").play();
     //     document.getElementById("bg_music").volume = 0.3;
     // }
+}
+
+/* ------------------------------------------------------------ CHECK ENABLE BUILDINGS ------------------------------------------------------------ */
+function check_enable_buildings() {
+
+    if (document.getElementById("building_btn") == null && (resource.eddie >= 2 || building.enabled)) {
+
+        building.enabled = true;
+        // create building panel
+        let building_panel = document.createElement("div");
+        building_panel.setAttribute("class", "cyber_panel--hidden");
+        building_panel.setAttribute("id", "buildings_panel");
+        document.getElementsByClassName("resources")[0].appendChild(building_panel);
+        verbose("buildings enabled");
+
+        add_option_and_function_to_panel("warehouse");
+        create_price_tag(document.getElementById("warehouse"));
+        create_exit_panel_btn(document.getElementById("buildings_panel"));
+
+        // create building button
+        let building_btn = document.createElement("div");
+        building_btn.appendChild(document.createTextNode("Buildings"));
+        building_btn.setAttribute("id", "building_btn");
+        building_btn.setAttribute("class", "cyber_btn");
+        document.getElementById("buttons").appendChild(building_btn);
+
+        // building button event
+        building_btn.addEventListener("click", building_btn_event);
+    }
+}
+
+/* ------------------------------------------------------------ BUILDING BUTTON EVENT ------------------------------------------------------------ */
+function building_btn_event() {
+
+    let building_panel = document.getElementById("buildings_panel");
+    let building_btn = document.getElementById("building_btn");
+
+    if (building_panel) {
+        building_panel.setAttribute("class", "cyber_panel");
+        building_btn.style.zIndex = -1;
+        if (document.getElementById("work_btn") != null)
+            document.getElementById("work_btn").style.zIndex = -1;
+        if (document.getElementById("building_btn") != null)
+            document.getElementById("building_btn").style.zIndex = -1;
+        if (document.getElementById("black_market_btn") != null)
+            document.getElementById("black_market_btn").style.zIndex = -1;
+        document.getElementById("overlay").style.zIndex = 0;
+        for (const child of building_panel.children) {
+            total_enable(child);
+        }
+        document.getElementById("click_sound2").play();
+    }
 }
 
 /* ------------------------------------------------------------ ADD OPTION TO PANEL ------------------------------------------------------------ */
@@ -229,7 +284,7 @@ function panel_option_func(option, panel_option) {
 
         /*
         This dreadful switch case is the result of a bad design decision that I made at the beginning of the project, then was too lazy to fix. Sorry.
-        Its purpose is to enable the correct building panel option (such as warehouse, black_market...) and its functionality when the player has enough resources to build them.
+        Its main purpose is to enable the correct building panel option (such as warehouse, black_market...) and its functionality when the player has enough resources to build them.
         */
         switch (option) {
 
@@ -254,6 +309,7 @@ function panel_option_func(option, panel_option) {
                     work_container.appendChild(work_btn);
                     work_btn.addEventListener("click", work_event);
                     verbose("work enabled");
+                    document.getElementById("click_sound2").play();
                 }
                 verbose("warehouse building enabled");
 
@@ -284,6 +340,7 @@ function panel_option_func(option, panel_option) {
                     }
                 }
                 price_tag.innerText = cost_text;
+                document.getElementById("click_sound2").play();
                 break;
             case "data_farm":
                 setInterval(generate_datta, CD.data);
@@ -291,6 +348,7 @@ function panel_option_func(option, panel_option) {
                 add_option_and_function_to_panel("chrome_clinic");
                 create_price_tag(document.getElementById("chrome_clinic"));
                 verbose("chrome_clinic building enabled");
+                document.getElementById("click_sound2").play();
                 break;
             case "chrome_clinic":
                 add_option_and_function_to_panel("soul_killer");
@@ -307,6 +365,7 @@ function panel_option_func(option, panel_option) {
                     verbose("sublimate button enabled");
                     sublimate_btn.addEventListener('click', sublimate_fn);
                 }
+                document.getElementById("click_sound2").play();
                 break;
                 case "black_market":
                     // black market panel
@@ -347,6 +406,7 @@ function panel_option_func(option, panel_option) {
                 
                         black_market_btn.addEventListener("click", black_market_btn_func);
                     }
+                    document.getElementById("click_sound2").play();
                     break;
                 case "soul_killer":
                     // transcend button
@@ -362,12 +422,14 @@ function panel_option_func(option, panel_option) {
 
                         transcend_btn.addEventListener('click', transcend_fn);
                     }
+                    document.getElementById("click_sound2").play();
                     break;
             }
             updateUI();
         }
         else {
             verbose(`failed to build ${option}`);
+            document.getElementById("nope_sound").play();
         }
 }
 
@@ -387,6 +449,7 @@ function exit_building_func(panel) {
         if (child.getAttribute("id") != "exit_building")
             total_disable(child);
     }
+    document.getElementById('close_sound').play();
 }
 
 /* ------------------------------------------------------------ GENERATE DATA ------------------------------------------------------------ */
@@ -415,6 +478,7 @@ function black_market_btn_func() {
 
         total_enable(child);
     }
+    document.getElementById("click_sound2").play();
 }
 
 /* ------------------------------------------------------------ BLACK MARKET MATERIAL FUNCTION ------------------------------------------------------------ */
@@ -425,6 +489,7 @@ function black_market_material_func(material) {
         resource.eddie -= black_market[material]["eddies"];
         resource[material]++;
         verbose(`${material} bought`);
+        document.getElementById("click_sound2").play();
     }
     else {
         verbose(`failed to buy ${material}`);
@@ -493,7 +558,7 @@ function work_event() {
             }, 800);
         }, 1500);
     }, CD.work);
-    
+    document.getElementById("click_sound1").play();
 }
 
 function sublimate_fn() {
@@ -503,6 +568,7 @@ function sublimate_fn() {
         resource.engrams++;
         updateUI();
         verbose("1 engram sublimated");
+        document.getElementById("click_sound2").play();
     }
     else {
         verbose("failed to sublimate engram");
@@ -557,59 +623,6 @@ function reset() {
     localStorage.setItem('best_time', JSON.stringify({ best_time: best_time }));
     localStorage.removeItem('save_file');
     window.location.reload();
-}
-
-/* ------------------------------------------------------------ CHECK ENABLE BUILDINGS ------------------------------------------------------------ */
-function check_enable_buildings() {
-
-    if (document.getElementById("building_btn") == null && (resource.eddie >= 2 || building.enabled)) {
-
-        building.enabled = true;
-        // create building panel
-        let building_panel = document.createElement("div");
-        building_panel.setAttribute("class", "cyber_panel--hidden");
-        building_panel.setAttribute("id", "buildings_panel");
-        document.getElementsByClassName("resources")[0].appendChild(building_panel);
-        verbose("buildings enabled");
-
-        add_option_and_function_to_panel("warehouse");
-        create_price_tag(document.getElementById("warehouse"));
-        create_exit_panel_btn(document.getElementById("buildings_panel"));
-
-        // create building button
-        let building_btn = document.createElement("div");
-        building_btn.appendChild(document.createTextNode("Buildings"));
-        building_btn.setAttribute("id", "building_btn");
-        building_btn.setAttribute("class", "cyber_btn");
-        document.getElementById("buttons").appendChild(building_btn);
-
-        // building button event
-        building_btn.addEventListener("click", building_btn_event);
-    }
-}
-
-/* ------------------------------------------------------------ BUILDING BUTTON EVENT ------------------------------------------------------------ */
-function building_btn_event() {
-
-    let building_panel = document.getElementById("buildings_panel");
-    let building_btn = document.getElementById("building_btn");
-
-    if (building_panel) {
-        building_panel.setAttribute("class", "cyber_panel");
-        building_btn.style.zIndex = -1;
-        if (document.getElementById("work_btn") != null)
-            document.getElementById("work_btn").style.zIndex = -1;
-        if (document.getElementById("building_btn") != null)
-            document.getElementById("building_btn").style.zIndex = -1;
-        if (document.getElementById("black_market_btn") != null)
-            document.getElementById("black_market_btn").style.zIndex = -1;
-        document.getElementById("overlay").style.zIndex = 0;
-        for (const child of building_panel.children) {
-            total_enable(child);
-        }
-    } else {
-        console.error("Building panel not found!");
-    }
 }
 
 /* ------------------------------------------------------------ CREATE EXIT PANEL BUTTON ------------------------------------------------------------ */
