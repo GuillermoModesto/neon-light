@@ -707,3 +707,75 @@
   background-color: #0d0d0d;
   color: white;
 }
+
+#lluvia {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.gota1 {
+  position: absolute;
+  background: rgba(112, 255, 255, 0.1);
+  width: 2px;
+  height: 10px;
+  animation: fall1 1200ms linear infinite;
+}
+.gota2 {
+  position: absolute;
+  background: rgba(154, 255, 255, 0.2);
+  width: 2px;
+  height: 10px;
+  animation: fall2 1300ms linear infinite;
+}
+.gota3 {
+  position: absolute;
+  background: rgba(139, 250, 250, 0.3);
+  width: 2px;
+  height: 10px;
+  animation: fall3 1400ms linear infinite;
+}
+.gota4 {
+  position: absolute;
+  background: rgba(148, 255, 255, 0.4);
+  width: 2px;
+  height: 10px;
+  animation: fall4 1500ms linear infinite;
+}
+
+@keyframes fall1 {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+@keyframes fall2 {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+@keyframes fall3 {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+@keyframes fall4 {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}

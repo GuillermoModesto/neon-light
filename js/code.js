@@ -122,7 +122,12 @@ window.onload = function () {
             document.getElementById('overlay').style.zIndex = 500;
             reattach_start_btn = false;
         }
-    }, 5);
+    }, 10);
+
+    setTimeout(() => {
+        make_it_rain();
+    }, 100);
+
     /*
      document.getElementById('test').addEventListener('click', function() {
 
@@ -143,7 +148,7 @@ window.onload = function () {
 
     window.addEventListener("beforeunload", save_game); // save important info before closing window
     
-    check_enable_buildings();
+    // check_enable_buildings();
 
     // Restore saved HTML
     if (saved_html && !loaded_html) {
@@ -606,6 +611,13 @@ function save_game() {
         }
     }
 
+    // remove rain drops
+    let lluvia = document.getElementById("lluvia");
+    while (lluvia.children.length > 0) {
+
+        lluvia.removeChild(lluvia.children[0]);
+    }
+
     // generate and save important info
     const save_file = JSON.stringify({
         resource: resource,
@@ -914,4 +926,39 @@ function reattachEventListeners() {
 
     if (document.getElementById("transcend_btn"))
         document.getElementById("transcend_btn").addEventListener('click', transcend_fn);
+}
+
+function make_it_rain() {
+
+    let game_area = document.getElementsByClassName('game-area')[0];
+    let game_area_style = window.getComputedStyle(game_area);
+
+    setInterval(function() {
+        let cosa = document.createElement('div');
+        cosa.setAttribute('class', `gota${Math.floor(Math.random() * 4 + 1)}`);
+
+        cosa.style.left = `${Math.floor(Math.random() * parseInt(game_area_style.width) + 1)}px`;
+        cosa.style.width = `${Math.floor((Math.random() * 2) + 1)}px`;
+        cosa.style.height = `${Math.floor((Math.random() * 9) + 7)}px`;
+        document.getElementById('lluvia').appendChild(cosa);
+
+        switch(cosa.className) {
+            case 'gota1':
+                setTimeout(() => {
+                    document.getElementById('lluvia').removeChild(cosa);
+                }, 900);
+            case 'gota2':
+                setTimeout(() => {
+                    document.getElementById('lluvia').removeChild(cosa);
+                }, 1000);
+            case 'gota3':
+                setTimeout(() => {
+                    document.getElementById('lluvia').removeChild(cosa);
+                }, 1200);
+            case 'gota4':
+                setTimeout(() => {
+                    document.getElementById('lluvia').removeChild(cosa);
+                }, 1400);
+        }
+    }, 10);
 }
