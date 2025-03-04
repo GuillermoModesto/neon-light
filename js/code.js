@@ -8,8 +8,8 @@ let total_time = 0;
 let best_time;
 let reattach_start_btn = false;
 
-//localStorage.removeItem('save_file');
-//localStorage.removeItem('best_time');
+localStorage.removeItem('save_file');
+localStorage.removeItem('best_time');
 if (localStorage.getItem('save_file') != null) {
 
     const save_info = JSON.parse(localStorage.getItem('save_file'));
@@ -25,14 +25,14 @@ else {
 
     aux_resource = { 
 
-        eddie: 20,
-        subroutines: 100,
-        daemons: 100,
-        netrunners: 100,
-        implants: 100,
-        engrams: 100,
-        data: 100,
-        rare_materials: 100
+        eddie: 0,
+        subroutines: 50,
+        daemons: 50,
+        netrunners: 50,
+        implants: 50,
+        engrams: 50,
+        data: 50,
+        rare_materials: 0
     };
     aux_building = {
     
@@ -95,13 +95,14 @@ const black_market = {
 
     rare_materials: { eddies: 3, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
     subroutines: { eddies: 1, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
-    daemons: { eddies: 1, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 }
+    daemons: { eddies: 1, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
+    engrams: { eddies: 5, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 5, rare_materials: 0 }
 };
 const CD = {
 
     eddie: get_eddieCD(),
     work: get_workCD(),
-    data: 20000,
+    data: 10000,
     verbose: 5000
 };
 
@@ -359,16 +360,16 @@ function panel_option_func(option, panel_option) {
                 add_option_and_function_to_panel("soul_killer");
                 create_price_tag(document.getElementById("soul_killer"));
                 verbose("soul_killer building enabled");
-                if (document.getElementById("sublimate_btn") == null) {
+                if (document.getElementById("compute_btn") == null) {
 
-                    let sublimate_btn = document.createElement("div");
-                    sublimate_btn.setAttribute("class", "cyber_btn");
-                    sublimate_btn.setAttribute("id", "sublimate_btn");
-                    sublimate_btn.style.zIndex = 1;
-                    sublimate_btn.appendChild(document.createTextNode("Sublimate"));
-                    document.getElementById("buttons").appendChild(sublimate_btn);
-                    verbose("sublimate button enabled");
-                    sublimate_btn.addEventListener('click', sublimate_fn);
+                    let compute_btn = document.createElement("div");
+                    compute_btn.setAttribute("class", "cyber_btn");
+                    compute_btn.setAttribute("id", "compute_btn");
+                    compute_btn.style.zIndex = 1;
+                    compute_btn.appendChild(document.createTextNode("Compute"));
+                    document.getElementById("buttons").appendChild(compute_btn);
+                    verbose("compute button enabled");
+                    compute_btn.addEventListener('click', compute_fn);
                 }
                 document.getElementById("click_sound2").play();
                 break;
@@ -393,7 +394,10 @@ function panel_option_func(option, panel_option) {
                         // price tag
                         let price_tag = document.createElement("div");
                         price_tag.setAttribute("class", "price_tag_button");
-                        price_tag.appendChild(document.createTextNode(`eddies:${black_market[material]["eddies"]}`));
+                        if (material != 'engrams')
+                            price_tag.appendChild(document.createTextNode(`eddies:${black_market[material]["eddies"]}`));
+                        else
+                            price_tag.appendChild(document.createTextNode(`eddies:${black_market[material]["eddies"]}\ndata:${black_market[material]["data"]}`));
                         tag.appendChild(price_tag);
                         // functionality
                         tag.addEventListener('click', black_market_material_func.bind(null, material));
@@ -489,15 +493,28 @@ function black_market_btn_func() {
 /* ------------------------------------------------------------ BLACK MARKET MATERIAL FUNCTION ------------------------------------------------------------ */
 function black_market_material_func(material) {
 
-    console.log(material)
-    if (resource.eddie >= black_market[material]["eddies"]) {
-        resource.eddie -= black_market[material]["eddies"];
-        resource[material]++;
-        verbose(`${material} bought`);
-        document.getElementById("click_sound2").play();
+    if (material != 'engrams') {
+        if (resource.eddie >= black_market[material]["eddies"]) {
+            resource.eddie -= black_market[material]["eddies"];
+            resource[material]++;
+            verbose(`${material} bought`);
+            document.getElementById("click_sound2").play();
+        }
+        else {
+            verbose(`failed to buy ${material}`);
+        }
     }
     else {
-        verbose(`failed to buy ${material}`);
+        if (resource.eddie >= black_market[material]["eddies"] && resource.data >= black_market[material]["data"]) {
+            resource.eddie -= black_market[material]["eddies"];
+            resource.data -= black_market[material]["data"];
+            resource[material]++;
+            verbose(`${material} bought`);
+            document.getElementById("click_sound2").play();
+        }
+        else {
+            verbose(`failed to buy ${material}`);
+        }
     }
     updateUI();
 }
@@ -550,6 +567,7 @@ function work_event() {
         loading.setAttribute("class", "cyber_text--no_anim");
         loading.innerText = `generated:\n${subroutine_generated} subroutines\n${daemons_generated} daemons`;
         verbose("finished working");
+        verbose(`added ${subroutine_generated} subroutines and ${daemons_generated} daemons`);
         updateUI();
         clearInterval(timer);
 
@@ -566,28 +584,39 @@ function work_event() {
     document.getElementById("click_sound1").play();
 }
 
-function sublimate_fn() {
+function compute_fn() {
     if (resource.data >= 2) {
 
         resource.data -= 2;
-        resource.engrams++;
+        resource.implants++;
         updateUI();
-        verbose("1 engram sublimated");
+        verbose("1 implant computed");
         document.getElementById("click_sound2").play();
     }
     else {
-        verbose("failed to sublimate engram");
+        verbose("failed to compute implant");
     }
 }
 
 function transcend_fn() {
 
-    if (total_time < best_time)
-        best_time = total_time;
-    alert(`Game time -> ${get_formated_time(total_time)}\nBest time -> ${get_formated_time(best_time)}`);
-
-    window.removeEventListener("beforeunload", save_game);
-    reset();
+    if (resource.eddie >= 10 && resource.daemons >= 7 && resource.subroutines >= 9 && resource.implants >= 3 && resource.engrams >= 10) {
+        if (total_time < best_time)
+            best_time = total_time;
+        alert(`Game time -> ${get_formated_time(total_time)}\nBest time -> ${get_formated_time(best_time)}`);
+    
+        window.removeEventListener("beforeunload", save_game);
+        reset();
+    }
+    else {
+        verbose(`Not enough resources, need:
+            ${((10 - resource.eddie) > 0) ? `${(10 - resource.eddie)} eddies` : ''}
+            ${((7 - resource.daemons) > 0) ? `${(7 - resource.daemons)} daemons` : ''}
+            ${((9 - resource.subroutines) > 0) ? `${(9 - resource.subroutines)} subroutines` : ''}
+            ${((3 - resource.implants) > 0) ? `${(3 - resource.implants)} implants` : ''}
+            ${((10 - resource.engrams) > 0) ? `${(10 - resource.engrams)} engrams` : ''}
+        `)
+    }
 
 }
 
@@ -674,7 +703,7 @@ function get_eddieCD() {
 
 function get_workCD() {
 
-    return (45 - resource.netrunners) * 1000; //- ------------------------------------------------------------------------------------------------------------------------------
+    return (((30 - resource.netrunners) * 1000) >= 0) ? ((30 - resource.netrunners) * 1000) : 0; //- ------------------------------------------------------------------------------------------------------------------------------
 }
 
 function random(min, max) {
@@ -921,8 +950,8 @@ function reattachEventListeners() {
         }
     }
 
-    if (document.getElementById("sublimate_btn"))
-        document.getElementById("sublimate_btn").addEventListener('click', sublimate_fn);
+    if (document.getElementById("compute_btn"))
+        document.getElementById("compute_btn").addEventListener('click', compute_fn);
 
     if (document.getElementById("transcend_btn"))
         document.getElementById("transcend_btn").addEventListener('click', transcend_fn);
