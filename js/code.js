@@ -8,8 +8,8 @@ let total_time = 0;
 let best_time;
 let reattach_start_btn = false;
 
-localStorage.removeItem('save_file');
-localStorage.removeItem('best_time');
+//localStorage.removeItem('save_file');
+//localStorage.removeItem('best_time');
 if (localStorage.getItem('save_file') != null) {
 
     const save_info = JSON.parse(localStorage.getItem('save_file'));
@@ -26,12 +26,12 @@ else {
     aux_resource = { 
 
         eddie: 0,
-        subroutines: 50,
-        daemons: 50,
-        netrunners: 50,
-        implants: 50,
-        engrams: 50,
-        data: 50,
+        subroutines: 0,
+        daemons: 0,
+        netrunners: 0,
+        implants: 0,
+        engrams: 0,
+        data: 0,
         rare_materials: 0
     };
     aux_building = {
@@ -426,6 +426,7 @@ function panel_option_func(option, panel_option) {
                         transcend_btn.setAttribute("id", "transcend_btn");
                         transcend_btn.style.zIndex = 1;
                         transcend_btn.appendChild(document.createTextNode("_transcend_"));
+                        //transcend_cost_container.appendChild(document.createTextNode(`eddies: 10\ndaemons: 7\nsubroutines: 9\nimplants: 3\nengram: 10`));
                         document.getElementById("buttons").appendChild(transcend_btn);
                         verbose("TRANSCEND button enabled");
 
@@ -600,7 +601,7 @@ function compute_fn() {
 
 function transcend_fn() {
 
-    if (resource.eddie >= 10 && resource.daemons >= 7 && resource.subroutines >= 9 && resource.implants >= 3 && resource.engrams >= 10) {
+    if (resource.eddie >= 10 && resource.daemons >= 7 && resource.subroutines >= 9 && resource.implants >= 3 && resource.engrams >= 5) {
         if (total_time < best_time)
             best_time = total_time;
         alert(`Game time -> ${get_formated_time(total_time)}\nBest time -> ${get_formated_time(best_time)}`);
@@ -609,13 +610,7 @@ function transcend_fn() {
         reset();
     }
     else {
-        verbose(`Not enough resources, need:
-            ${((10 - resource.eddie) > 0) ? `${(10 - resource.eddie)} eddies` : ''}
-            ${((7 - resource.daemons) > 0) ? `${(7 - resource.daemons)} daemons` : ''}
-            ${((9 - resource.subroutines) > 0) ? `${(9 - resource.subroutines)} subroutines` : ''}
-            ${((3 - resource.implants) > 0) ? `${(3 - resource.implants)} implants` : ''}
-            ${((10 - resource.engrams) > 0) ? `${(10 - resource.engrams)} engrams` : ''}
-        `)
+        verbose(`Not enough resources, need:\n${((10 - resource.eddie) > 0) ? ` | ${(10 - resource.eddie)} eddies | ` : ''}${((7 - resource.daemons) > 0) ? `${(7 - resource.daemons)} daemons | ` : ''}${((9 - resource.subroutines) > 0) ? `${(9 - resource.subroutines)} subroutines | ` : ''}${((3 - resource.implants) > 0) ? `${(3 - resource.implants)} implants | ` : ''}${((10 - resource.engrams) > 0) ? `${(10 - resource.engrams)} engrams | ` : ''}`);
     }
 
 }
