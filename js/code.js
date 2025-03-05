@@ -8,8 +8,8 @@ let total_time = 0;
 let best_time;
 let reattach_start_btn = false;
 
-//localStorage.removeItem('save_file');
-//localStorage.removeItem('best_time');
+localStorage.removeItem('save_file');
+localStorage.removeItem('best_time');
 if (localStorage.getItem('save_file') != null) {
 
     const save_info = JSON.parse(localStorage.getItem('save_file'));
@@ -25,9 +25,9 @@ else {
 
     aux_resource = { 
 
-        eddie: 0,
-        subroutines: 0,
-        daemons: 0,
+        eddie: 50,
+        subroutines: 50,
+        daemons: 50,
         netrunners: 0,
         implants: 0,
         engrams: 0,
@@ -136,14 +136,14 @@ window.onload = function () {
     */
     document.getElementById('start_game').addEventListener('click', start_game);
 
-    let eddie_img = document.getElementById("eddie-img");
-    eddie_img.addEventListener("click", function () {
+    document.getElementById('eddie-img').addEventListener("click", function () {
 
-        generate_eddie(eddie_img);
+        generate_eddie(document.getElementById('eddie-img'));
     });
 
     // Horrible fix to a stupid problem
     if (building.data_farm.built) {
+
         setInterval(generate_datta, CD.data);
     }
 
@@ -203,11 +203,6 @@ function generate_eddie(button) {
     }, CD.eddie);
 
     document.getElementById("click_sound1").play();
-
-    // if (document.getElementById("bg_music").paused) {
-    //     document.getElementById("bg_music").play();
-    //     document.getElementById("bg_music").volume = 0.3;
-    // }
 }
 
 /* ------------------------------------------------------------ CHECK ENABLE BUILDINGS ------------------------------------------------------------ */
@@ -216,6 +211,7 @@ function check_enable_buildings() {
     if (document.getElementById("building_btn") == null && (resource.eddie >= 2 || building.enabled)) {
 
         building.enabled = true;
+
         // create building panel
         let building_panel = document.createElement("div");
         building_panel.setAttribute("class", "cyber_panel--hidden");
@@ -578,7 +574,8 @@ function work_event() {
 
             setTimeout(function() {
 
-                document.getElementById("work_container").removeChild(loading);
+                if (document.getElementById("work_container").contains(loading))
+                    document.getElementById("work_container").removeChild(loading);
             }, 800);
         }, 1500);
     }, CD.work);
@@ -586,6 +583,7 @@ function work_event() {
 }
 
 function compute_fn() {
+
     if (resource.data >= 2) {
 
         resource.data -= 2;
@@ -610,7 +608,7 @@ function transcend_fn() {
         reset();
     }
     else {
-        verbose(`Not enough resources, need:\n${((10 - resource.eddie) > 0) ? ` | ${(10 - resource.eddie)} eddies | ` : ''}${((7 - resource.daemons) > 0) ? `${(7 - resource.daemons)} daemons | ` : ''}${((9 - resource.subroutines) > 0) ? `${(9 - resource.subroutines)} subroutines | ` : ''}${((3 - resource.implants) > 0) ? `${(3 - resource.implants)} implants | ` : ''}${((10 - resource.engrams) > 0) ? `${(10 - resource.engrams)} engrams | ` : ''}`);
+        verbose(`Not enough, need:\n${((10 - resource.eddie) > 0) ? ` | ${(10 - resource.eddie)} eddies | ` : ''}${((7 - resource.daemons) > 0) ? `${(7 - resource.daemons)} daemons | ` : ''}${((9 - resource.subroutines) > 0) ? `${(9 - resource.subroutines)} subroutines | ` : ''}${((3 - resource.implants) > 0) ? `${(3 - resource.implants)} implants | ` : ''}${((5 - resource.engrams) > 0) ? `${(5 - resource.engrams)} engrams | ` : ''}`);
     }
 
 }
@@ -622,7 +620,8 @@ function save_game() {
     let verbose_box = document.getElementById("verbose_box");
     while (verbose_box.children.length > 0) {
 
-        verbose_box.removeChild(verbose_box.children[0]);
+        if (verbose_box.contains(verbose_box.children[0]))
+            verbose_box.removeChild(verbose_box.children[0]);
     }
     
     // remove work info messages
@@ -631,7 +630,8 @@ function save_game() {
         let work_container = document.getElementById("work_container");
         while (work_container.children.length > 1) {
 
-            work_container.removeChild(verbose_box.children[1]);
+            if (work_container.contains(verbose_box.children[1]))
+                work_container.removeChild(verbose_box.children[1]);
         }
     }
 
@@ -639,7 +639,8 @@ function save_game() {
     let lluvia = document.getElementById("lluvia");
     while (lluvia.children.length > 0) {
 
-        lluvia.removeChild(lluvia.children[0]);
+        if (lluvia.contains(lluvia.children[0]))
+            lluvia.removeChild(lluvia.children[0]);
     }
 
     // generate and save important info
@@ -836,7 +837,8 @@ function verbose(text) {
         verbose.setAttribute("class", "verbose--fadeout");
         setTimeout(function() {
 
-            document.getElementById("verbose_box").removeChild(verbose);
+            if (document.getElementById("verbose_box").contains.verbose)
+                document.getElementById("verbose_box").removeChild(verbose);
         }, 150);
     }, CD.verbose);
 }
@@ -851,7 +853,8 @@ function show_log() {
         // clear existing log entries
         while (logTable.children.length > 0) {
 
-            logTable.removeChild(logTable.children[0]);
+            if (logTable.contains(logTable.children[0]))
+                logTable.removeChild(logTable.children[0]);
         }
 
         // add log entries
@@ -880,9 +883,7 @@ function show_log() {
     }
 }
 
-
-
-// function to reattach event listeners
+// function to reattach event listeners when loading save
 function reattachEventListeners() {
 
     if (document.getElementById('start_game'))
@@ -969,20 +970,24 @@ function make_it_rain() {
         switch(cosa.className) {
             case 'gota1':
                 setTimeout(() => {
-                    document.getElementById('lluvia').removeChild(cosa);
-                }, 900);
+                    if (document.getElementById('lluvia').contains(cosa))
+                        document.getElementById('lluvia').removeChild(cosa);
+                }, 800);
             case 'gota2':
                 setTimeout(() => {
-                    document.getElementById('lluvia').removeChild(cosa);
-                }, 1000);
+                    if (document.getElementById('lluvia').contains(cosa))
+                        document.getElementById('lluvia').removeChild(cosa);
+                }, 950);
             case 'gota3':
                 setTimeout(() => {
-                    document.getElementById('lluvia').removeChild(cosa);
-                }, 1200);
+                    if (document.getElementById('lluvia').contains(cosa))
+                        document.getElementById('lluvia').removeChild(cosa);
+                }, 1100);
             case 'gota4':
                 setTimeout(() => {
-                    document.getElementById('lluvia').removeChild(cosa);
-                }, 1400);
+                    if (document.getElementById('lluvia').contains(cosa))
+                        document.getElementById('lluvia').removeChild(cosa);
+                }, 1250);
         }
     }, 10);
 }
