@@ -25,9 +25,9 @@ else {
 
     aux_resource = { 
 
-        eddie: 50,
-        subroutines: 50,
-        daemons: 50,
+        eddie: 0,
+        subroutines: 0,
+        daemons: 0,
         netrunners: 0,
         implants: 0,
         engrams: 0,
@@ -991,3 +991,26 @@ function make_it_rain() {
         }
     }, 10);
 }
+
+/*
+document.getElementById('start-mini-game').addEventListener('click', () => {
+    // show mini-game canvas with animation
+    const miniGameContainer = document.querySelector('.mini-game-container');
+    miniGameContainer.classList.add('active');
+
+    // Run the mini-game function
+    startMiniGame();
+});
+
+// Simulated Mini-Game function
+function startMiniGame() {
+    const canvas = document.getElementById('mini-game');
+    const ctx = canvas.getContext('2d');
+
+    // Simple mini-game: Draw a random number
+    const randomValue = Math.floor(Math.random() * 100);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.font = '30px Arial';
+    ctx.fillText(`Value: ${randomValue}`, 50, 50);
+}
+*/

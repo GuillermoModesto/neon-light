@@ -816,3 +816,20 @@
     transform: translateY(100vh);
   }
 }
+/*
+.mini-game-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 1s ease-in-out;
+}
+
+.mini-game-container.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+  */
