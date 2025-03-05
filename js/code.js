@@ -7,6 +7,7 @@ let stamp;
 let total_time = 0;
 let best_time;
 let reattach_start_btn = false;
+let data_farm_interval = null;
 
 localStorage.removeItem('save_file');
 localStorage.removeItem('best_time');
@@ -25,13 +26,13 @@ else {
 
     aux_resource = { 
 
-        eddie: 0,
-        subroutines: 0,
-        daemons: 0,
+        eddie: 26,
+        subroutines: 26,
+        daemons: 30,
         netrunners: 0,
         implants: 0,
         engrams: 0,
-        data: 0,
+        data: 50,
         rare_materials: 0
     };
     aux_building = {
@@ -93,16 +94,16 @@ const log = JSON.parse(JSON.stringify(aux_log));
 
 const black_market = {
 
-    rare_materials: { eddies: 3, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
     subroutines: { eddies: 1, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
     daemons: { eddies: 1, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 },
-    engrams: { eddies: 5, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 5, rare_materials: 0 }
+    engrams: { eddies: 5, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 5, rare_materials: 0 },
+    data: { eddies: 15, subroutines: 0, daemons: 0, netrunners: 0, implants: 0, engrams: 0, data: 0, rare_materials: 0 }
 };
 const CD = {
 
     eddie: get_eddieCD(),
     work: get_workCD(),
-    data: 10000,
+    data: get_dataCD(),
     verbose: 5000
 };
 
@@ -144,7 +145,8 @@ window.onload = function () {
     // Horrible fix to a stupid problem
     if (building.data_farm.built) {
 
-        setInterval(generate_datta, CD.data);
+        CD.data = get_dataCD();
+        setInterval(generate_data, CD.data);
     }
 
     window.addEventListener("beforeunload", save_game); // save important info before closing window
@@ -172,7 +174,7 @@ function start_game() {
 
     document.getElementById("log_btn").addEventListener("click", show_log); // open log screen over everything
 
-    document.getElementById("bg_music").volume = 0.5;
+    document.getElementById("bg_music").volume = 0.45;
     document.getElementById("nope_sound").volume = 0.5;
     document.getElementById('close_sound').volume = 0.7;
     document.getElementById("bg_music").play();
@@ -302,7 +304,7 @@ function panel_option_func(option, panel_option) {
                     work_container.setAttribute("id", "work_container");
 
                     let work_btn = document.createElement("div");
-                    work_btn.setAttribute("class", "cyber_btn");
+                    work_btn.setAttribute("class", "cyber_btn2");
                     work_btn.setAttribute("id", "work_btn");
                     work_btn.style.zIndex = -1;
                     work_btn.appendChild(document.createTextNode("work"));
@@ -332,6 +334,13 @@ function panel_option_func(option, panel_option) {
                 building.netrunner_den.cost.eddies += 5;
                 building.netrunner_den.cost.subroutines += 5;
                 building.netrunner_den.amount++;
+                if (data_farm_interval != null) {
+
+                    clearInterval(data_farm_interval);
+                    data_farm_interval = null;
+                    CD.data = get_dataCD();
+                    data_farm_interval = setInterval(generate_data, CD.data);
+                }
                 verbose("+5 netrunners");
                 let price_tag = document.getElementById("netrunner_den").childNodes[1];
                 let cost_text = "";
@@ -345,7 +354,8 @@ function panel_option_func(option, panel_option) {
                 document.getElementById("click_sound2").play();
                 break;
             case "data_farm":
-                setInterval(generate_datta, CD.data);
+                CD.data = get_dataCD();
+                data_farm_interval = setInterval(generate_data, CD.data);
 
                 add_option_and_function_to_panel("chrome_clinic");
                 create_price_tag(document.getElementById("chrome_clinic"));
@@ -359,7 +369,7 @@ function panel_option_func(option, panel_option) {
                 if (document.getElementById("compute_btn") == null) {
 
                     let compute_btn = document.createElement("div");
-                    compute_btn.setAttribute("class", "cyber_btn");
+                    compute_btn.setAttribute("class", "cyber_btn2");
                     compute_btn.setAttribute("id", "compute_btn");
                     compute_btn.style.zIndex = 1;
                     compute_btn.appendChild(document.createTextNode("Compute"));
@@ -459,7 +469,7 @@ function exit_building_func(panel) {
 }
 
 /* ------------------------------------------------------------ GENERATE DATA ------------------------------------------------------------ */
-function generate_datta() {
+function generate_data() {
 
     resource.data++;
     verbose("+1 data");
@@ -499,6 +509,7 @@ function black_market_material_func(material) {
         }
         else {
             verbose(`failed to buy ${material}`);
+            document.getElementById("nope_sound").play();
         }
     }
     else {
@@ -594,6 +605,7 @@ function compute_fn() {
     }
     else {
         verbose("failed to compute implant");
+        document.getElementById("nope_sound").play();
     }
 }
 
@@ -609,6 +621,7 @@ function transcend_fn() {
     }
     else {
         verbose(`Not enough, need:\n${((10 - resource.eddie) > 0) ? ` | ${(10 - resource.eddie)} eddies | ` : ''}${((7 - resource.daemons) > 0) ? `${(7 - resource.daemons)} daemons | ` : ''}${((9 - resource.subroutines) > 0) ? `${(9 - resource.subroutines)} subroutines | ` : ''}${((3 - resource.implants) > 0) ? `${(3 - resource.implants)} implants | ` : ''}${((5 - resource.engrams) > 0) ? `${(5 - resource.engrams)} engrams | ` : ''}`);
+        document.getElementById("nope_sound").play();
     }
 
 }
@@ -699,7 +712,13 @@ function get_eddieCD() {
 
 function get_workCD() {
 
-    return (((30 - resource.netrunners) * 1000) >= 0) ? ((30 - resource.netrunners) * 1000) : 0; //- ------------------------------------------------------------------------------------------------------------------------------
+    return (((30 - resource.netrunners) * 1000) >= 0) ? ((30 - resource.netrunners) * 1000) : 0; //-------------------------------------------------------------------------------------------------------------------------------
+}
+
+function get_dataCD() {
+
+    let res = Math.round((20 - (Math.log1p(resource.netrunners) * 3)));
+    return ((res >= 0) ? (res * 1000) : 0); //-------------------------------------------------------------------------------------------------------------------------------
 }
 
 function random(min, max) {
@@ -953,6 +972,7 @@ function reattachEventListeners() {
         document.getElementById("transcend_btn").addEventListener('click', transcend_fn);
 }
 
+// This underworld demon stabilizes at around 100 "raindrops"
 function make_it_rain() {
 
     let game_area = document.getElementsByClassName('game-area')[0];
@@ -988,7 +1008,18 @@ function make_it_rain() {
                     if (document.getElementById('lluvia').contains(cosa))
                         document.getElementById('lluvia').removeChild(cosa);
                 }, 1250);
+            default:
+                setTimeout(() => {
+                    if (document.getElementById('lluvia').contains(cosa))
+                        document.getElementById('lluvia').removeChild(cosa);
+                }, 1300);
         }
+        setTimeout(() => {
+            
+            cosa.remove();
+        }, 1500);
+
+        // console.log(document.getElementById('lluvia').children.length)
     }, 10);
 }
 
